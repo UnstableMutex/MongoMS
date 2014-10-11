@@ -15,17 +15,24 @@ namespace MongoMS
     /// </summary>
     public partial class App : Application
     {
+        private MainViewModel mwm;
         protected override void OnStartup(StartupEventArgs e)
         {
             MVVMTemplateSelection.TypeSource.AddAssembly(Assembly.GetExecutingAssembly());
             base.OnStartup(e);
-           MainViewModel mwm=new MainViewModel();
+            mwm=new MainViewModel();
          
             var mw = new MainWindow();
             mw.DataContext = mwm;
             mw.Show();
 
 
+        }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            base.OnExit(e);
+            mwm.Save();
         }
     }
 }
