@@ -19,6 +19,8 @@ namespace MongoMS.ViewModel
 
 
             Content = new ConnectionsViewModel();
+            SimpleIoc.Default.Register<DatabaseExplorerViewModel>();
+           Explorer = SimpleIoc.Default.GetInstance<DatabaseExplorerViewModel>();
         }
 
 
@@ -60,5 +62,6 @@ namespace MongoMS.ViewModel
         {
             SaveContent();
         }
+        public DatabaseExplorerViewModel Explorer { get; private set; }
     }
 }

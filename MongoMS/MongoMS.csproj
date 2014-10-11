@@ -83,13 +83,14 @@
     <Compile Include="ObservableDictionary.cs" />
     <Compile Include="ViewModel\ConnectionsViewModel.cs" />
     <Compile Include="ViewModel\DatabaseExplorerDBViewModel.cs" />
+    <Compile Include="ViewModel\DatabaseExplorerServerViewModel.cs" />
     <Compile Include="ViewModel\DatabaseExplorerViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\ConnectionsView.xaml.cs">
       <DependentUpon>ConnectionsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DatabaseExplorerDBView.xaml.cs">
-      <DependentUpon>DatabaseExplorerDBView.xaml</DependentUpon>
+    <Compile Include="View\DatabaseExplorerServerView.xaml.cs">
+      <DependentUpon>DatabaseExplorerServerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DatabaseExplorerView.xaml.cs">
       <DependentUpon>DatabaseExplorerView.xaml</DependentUpon>
@@ -113,7 +114,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DatabaseExplorerDBView.xaml">
+    <Page Include="View\DatabaseExplorerServerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

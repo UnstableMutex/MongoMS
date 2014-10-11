@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Xml.Serialization;
+using GalaSoft.MvvmLight.Ioc;
 using MongoDB.Driver;
 using MVVMLight.Extras;
 
@@ -67,9 +68,14 @@ namespace MongoMS.ViewModel
 
 
         public ObservableDictionary<string, string> Connections { get; private set; }
-
+        public ICommand DeleteConnectionCommand { get; private set; }
         public ICommand AddNewConnectionCommand { get; private set; }
 
+        void DeleteConnection()
+        {
+            Connections.Remove(Selected);
+            Selected = default(KeyValuePair<string, string>);
+        }
         void AddNewConnection()
         {
             MongoConnectionStringBuilder sb = new MongoConnectionStringBuilder();
@@ -92,8 +98,15 @@ namespace MongoMS.ViewModel
 
         private void OnSelectedChanged()
         {
-            MongoConnectionStringBuilder sb = new MongoConnectionStringBuilder(Selected.Value);
-            NewCSServer = sb.Server.Host;
+            if (Selected.Equals( default(KeyValuePair<string, string>)))
+            {
+                NewCSServer = null;
+            }
+            else
+            {
+                MongoConnectionStringBuilder sb = new MongoConnectionStringBuilder(Selected.Value);
+                NewCSServer = sb.Server.Host;
+            }
         }
 
         public ICommand SelectCommand { get; private set; }
@@ -101,7 +114,8 @@ namespace MongoMS.ViewModel
         void Select()
         {
             MessageBox.Show("selected" + Selected.ToString());
-
+            var exp = SimpleIoc.Default.GetInstance<DatabaseExplorerViewModel>();
+            exp.Servers.Add(new DatabaseExplorerServerViewModel(Selected.Key,  Selected.Value));
         }
     }
     [Serializable]

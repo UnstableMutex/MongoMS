@@ -5,7 +5,20 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+    <!--<TreeView ItemsSource="{Binding Servers}">
+        <TreeView.ItemTemplate>
+            <DataTemplate>
+                <TextBlock Text="{Binding Name}"/></TextBlock>
+            </DataTemplate>
+        </TreeView.ItemTemplate>
+    </TreeView>-->
+    <ItemsControl ItemsSource="{Binding Servers}">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Expander Header="{Binding Name}">
+                    <ItemsControl DisplayMemberPath="Name" ItemsSource="{Binding Databases}"></ItemsControl>
+                </Expander>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
 </UserControl>

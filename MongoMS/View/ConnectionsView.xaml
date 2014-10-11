@@ -19,6 +19,11 @@
                     <command:EventToCommand Command="{Binding Path=SelectCommand, Mode=OneWay}"/>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{Binding DeleteConnectionCommand}" Header="del"/>
+                </ContextMenu>
+            </ListBox.ContextMenu>
         </ListBox>
         
         

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace MongoMS.View
 {
     /// <summary>
-    /// Логика взаимодействия для DatabaseExplorerDBView.xaml
+    /// Логика взаимодействия для DatabaseExplorerServerView.xaml
     /// </summary>
-    public partial class DatabaseExplorerDBView : UserControl
+    public partial class DatabaseExplorerServerView : UserControl
     {
-        public DatabaseExplorerDBView()
+        public DatabaseExplorerServerView()
         {
             InitializeComponent();
         }
