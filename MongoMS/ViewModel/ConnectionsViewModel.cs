@@ -113,7 +113,7 @@ namespace MongoMS.ViewModel
 
         void Select()
         {
-            MessageBox.Show("selected" + Selected.ToString());
+            
             var exp = SimpleIoc.Default.GetInstance<DatabaseExplorerViewModel>();
             exp.Servers.Add(new DatabaseExplorerServerViewModel(Selected.Key,  Selected.Value));
         }
