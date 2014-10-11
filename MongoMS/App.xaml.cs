@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
+using MongoMS.ViewModel;
 
 namespace MongoMS
 {
@@ -18,6 +19,12 @@ namespace MongoMS
         {
             MVVMTemplateSelection.TypeSource.AddAssembly(Assembly.GetExecutingAssembly());
             base.OnStartup(e);
+           MainViewModel mwm=new MainViewModel();
+         
+            var mw = new MainWindow();
+            mw.DataContext = mwm;
+            mw.Show();
+
 
         }
     }
