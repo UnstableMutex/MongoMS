@@ -67,7 +67,8 @@ namespace MongoMS.ViewModel
 
             new MongoClient(_cs).GetServer().GetDatabase(_db).CreateCollection(Name, b);
 
-
+            var a = new MongoClient(_cs).GetServer().GetDatabase(_db);
+         
 
             DatabaseExplorerCollectionViewModel coll=new DatabaseExplorerCollectionViewModel(Name,_cs,_db);
             MessengerInstance.Send(new NotificationMessage<DatabaseExplorerCollectionViewModel>(this,coll,"added"));

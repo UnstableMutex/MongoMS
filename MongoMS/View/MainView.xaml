@@ -21,7 +21,7 @@
         </Menu>
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar Header="File">
-              <Button>connect</Button>
+              <Button Command="{Binding NewConnectionCommand}">connect</Button>
             </ToolBar>
         </ToolBarTray>
         <Grid>
@@ -30,7 +30,14 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="367*"/>
             </Grid.ColumnDefinitions>
-            <GridSplitter Background="LightBlue" Grid.Column="1"  Width="3" ShowsPreview="True"/>
+           
+            <GridSplitter Grid.Column="1"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Stretch"
+              Background="LightBlue" 
+              ShowsPreview="True"
+              Width="3"
+              />
             <view:DatabaseExplorerView DataContext="{Binding Explorer}"/>
             <!--Explorer ItemTemplateSelector="{StaticResource cts}" -->
             <TabControl SelectedItem="{Binding Selected}" ContentTemplateSelector="{StaticResource cts}" ItemsSource="{Binding Content}" Grid.Column="2" >

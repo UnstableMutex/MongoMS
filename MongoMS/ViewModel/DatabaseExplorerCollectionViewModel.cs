@@ -1,3 +1,4 @@
+using System.Data;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.CSharp.RuntimeBinder;
@@ -21,6 +22,18 @@ namespace MongoMS.ViewModel
         void Find()
         {
             SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add( new FindViewModel(_cs,_db,Name));
+        }
+        public ICommand StatsCommand { get; private set; }
+
+        void Stats()
+        {
+             SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add( new CollectionStatsViewModel(_cs,_db,Name));
+        }
+        public ICommand AddDocumentCommand { get; private set; }
+
+        void AddDocument()
+        {
+             SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add( new AddDocumentViewModel(_cs,_db,Name));
         }
     }
 }

@@ -44,6 +44,8 @@ namespace MVVMLight.Extras
         }
         protected sealed override void RaisePropertyChanged([CallerMemberName]string propertyName = null)
         {
+            if (propertyName==null)
+                return;
             base.RaisePropertyChanged(propertyName);
             SaveQuery(propertyName);
         }
@@ -318,6 +320,11 @@ namespace MVVMLight.Extras
         readonly Dictionary<string, VError> _errorsDictionary = new Dictionary<string, VError>();
         public IEnumerable GetErrors(string propertyName)
         {
+            if (propertyName == null)
+            {
+                return null;
+            }
+
             if (_errorsDictionary.ContainsKey(propertyName))
                 return _errorsDictionary[propertyName];
             else
@@ -344,6 +351,10 @@ namespace MVVMLight.Extras
 
     internal class VError:IEnumerable
     {
+        public VError()
+        {
+            Errors=new List<string>();
+        }
         public List<string> Errors { get; set; }
         public IEnumerator GetEnumerator()
         {

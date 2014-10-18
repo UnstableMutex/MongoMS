@@ -39,6 +39,8 @@ namespace MongoMS
 
                 case ItemType.Collection:
                     cm.Items.Add(FindInCollMI());
+                    cm.Items.Add(CollectionStatsMI());
+                    cm.Items.Add(AddDocMI());
                     f.SetValue(FrameworkElement.ContextMenuProperty, cm);
                     break;
                    
@@ -48,6 +50,22 @@ namespace MongoMS
 
             dt.VisualTree = f;
             return dt;
+        }
+
+        private MenuItem AddDocMI()
+        {
+               MenuItem mi = new MenuItem();
+            mi.Header = "add doc";
+            mi.SetBinding(MenuItem.CommandProperty, new Binding("AddDocumentCommand"));
+            return mi;
+        }
+
+        private MenuItem CollectionStatsMI()
+        {
+              MenuItem mi = new MenuItem();
+            mi.Header = "stats";
+            mi.SetBinding(MenuItem.CommandProperty, new Binding("StatsCommand"));
+            return mi;
         }
 
         private MenuItem FindInCollMI()

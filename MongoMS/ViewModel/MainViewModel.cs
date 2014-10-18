@@ -5,12 +5,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
 {
-    class MainViewModel : ViewModelBase, INotifyPropertyChanging, ISaveable
+    class MainViewModel : VMB, INotifyPropertyChanging, ISaveable
     {
         private ObservableCollection<object> _content;
         private object _selected;
@@ -19,13 +21,26 @@ namespace MongoMS.ViewModel
         {
             Content = new ObservableCollection<object>();
             Content.CollectionChanged += Content_CollectionChanged;
-            Content.Add( new ConnectionsViewModel());
+           // Content.Add( new ConnectionsViewModel());
             SimpleIoc.Default.Register<DatabaseExplorerViewModel>();
            
             Explorer = SimpleIoc.Default.GetInstance<DatabaseExplorerViewModel>();
+            AssignCommands<NoWeakRelayCommand>();
 
         }
+        public ICommand NewConnectionCommand { get; private set; }
 
+        void NewConnection()
+        {
+            if (Content.OfType<ConnectionsViewModel>().Count() == 0)
+            {
+                Content.Add(new ConnectionsViewModel());
+            }
+            else if (Content.OfType<ConnectionsViewModel>().Count() == 1)
+            {
+                Selected = Content.OfType<ConnectionsViewModel>().Single();
+            }
+        }
         void Content_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
@@ -52,7 +67,7 @@ namespace MongoMS.ViewModel
             set
             {
                 _selected = value;
-                RaisePropertyChanged();
+                RaisePropertyChangedNoSave();
             }
         }
 
@@ -63,7 +78,7 @@ namespace MongoMS.ViewModel
             {
                 SaveContent();
                 _content = value;
-                RaisePropertyChanged();
+                RaisePropertyChangedNoSave();
             }
         }
 

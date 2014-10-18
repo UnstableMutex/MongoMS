@@ -82,6 +82,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BsonDocumentValidator.cs" />
     <Compile Include="HeaderAttribute.cs" />
     <Compile Include="HeaderConverter.cs" />
     <Compile Include="ISaveable.cs" />
@@ -89,6 +90,8 @@
     <Compile Include="TreeViewTemplateSelector.cs" />
     <Compile Include="ViewModel\AddCollectionViewModel.cs" />
     <Compile Include="ViewModel\AddDatabaseViewModel.cs" />
+    <Compile Include="ViewModel\AddDocumentViewModel.cs" />
+    <Compile Include="ViewModel\CollectionStatsViewModel.cs" />
     <Compile Include="ViewModel\ConnectionsViewModel.cs" />
     <Compile Include="ViewModel\DatabaseDetailsViewModel.cs" />
     <Compile Include="ViewModel\DatabaseExplorerCollectionViewModel.cs" />
@@ -104,6 +107,12 @@
     </Compile>
     <Compile Include="View\AddDatabaseView.xaml.cs">
       <DependentUpon>AddDatabaseView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddDocumentView.xaml.cs">
+      <DependentUpon>AddDocumentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CollectionStatsView.xaml.cs">
+      <DependentUpon>CollectionStatsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ConnectionsView.xaml.cs">
       <DependentUpon>ConnectionsView.xaml</DependentUpon>
@@ -137,6 +146,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddDatabaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddDocumentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CollectionStatsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
