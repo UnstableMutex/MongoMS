@@ -14,6 +14,7 @@ using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
 {
+    [Header("Соединиться")]
     class ConnectionsViewModel : VMB, ISaveable
     {
         private KeyValuePair<string, string> _selected;
@@ -122,7 +123,7 @@ namespace MongoMS.ViewModel
             if (exp.Servers.All(x => x.Name != Selected.Key))
             {
                 exp.Servers.Add(new DatabaseExplorerServerViewModel(Selected.Key, Selected.Value));
-                SimpleIoc.Default.GetInstance<MainViewModel>().Content = null;
+                SimpleIoc.Default.GetInstance<MainViewModel>().Content.Remove(this);
             }
             // exp.Servers.Add(new DatabaseExplorerServerViewModel(Selected.Key,  Selected.Value));
         }

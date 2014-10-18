@@ -82,6 +82,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="HeaderAttribute.cs" />
+    <Compile Include="HeaderConverter.cs" />
     <Compile Include="ISaveable.cs" />
     <Compile Include="ObservableDictionary.cs" />
     <Compile Include="TreeViewTemplateSelector.cs" />

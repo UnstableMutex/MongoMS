@@ -13,6 +13,7 @@ using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
 {
+    [Header("Новая коллекция")]
     class AddCollectionViewModel:VMB
     {
         private readonly string _cs;
@@ -72,7 +73,7 @@ namespace MongoMS.ViewModel
             MessengerInstance.Send(new NotificationMessage<DatabaseExplorerCollectionViewModel>(this,coll,"added"));
 
 
-            SimpleIoc.Default.GetInstance<MainViewModel>().Content = null;
+            SimpleIoc.Default.GetInstance<MainViewModel>().Content.Remove(this);
         }
     }
 }

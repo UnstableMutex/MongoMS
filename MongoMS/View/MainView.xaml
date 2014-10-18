@@ -5,10 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mvvmTemplateSelection="clr-namespace:MVVMTemplateSelection;assembly=MVVMTemplateSelection"
              xmlns:view="clr-namespace:MongoMS.View"
+             xmlns:mongoMs="clr-namespace:MongoMS"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <mvvmTemplateSelection:ConventionTemplateSelector x:Key="cts"/>
+        <mongoMs:HeaderConverter x:Key="hc"/>
+        
     </UserControl.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
@@ -29,8 +32,18 @@
             </Grid.ColumnDefinitions>
             <GridSplitter Background="LightBlue" Grid.Column="1"  Width="3" ShowsPreview="True"/>
             <view:DatabaseExplorerView DataContext="{Binding Explorer}"/>
-            <!--Explorer -->
-            <ContentControl Grid.Column="2" Content="{Binding Content}"  ContentTemplateSelector="{StaticResource cts}"/>
+            <!--Explorer ItemTemplateSelector="{StaticResource cts}" -->
+            <TabControl SelectedItem="{Binding Selected}" ContentTemplateSelector="{StaticResource cts}" ItemsSource="{Binding Content}" Grid.Column="2" >
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="3" VerticalAlignment="Center" Text="{Binding Converter={StaticResource hc}, Path=.}" />
+                        <Button VerticalAlignment="Center" FontSize="6">x</Button></StackPanel>
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+
+            </TabControl>
+           
         </Grid>
     </DockPanel>
 </UserControl>

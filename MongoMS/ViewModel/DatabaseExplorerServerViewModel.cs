@@ -36,7 +36,7 @@ namespace MongoMS.ViewModel
 
         void AddDB()
         {
-            SimpleIoc.Default.GetInstance<MainViewModel>().Content = new AddDatabaseViewModel(_cs);
+            SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new AddDatabaseViewModel(_cs));
         }
     }
 }

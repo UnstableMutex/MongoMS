@@ -41,7 +41,7 @@ namespace MongoMS
                     cm.Items.Add(FindInCollMI());
                     f.SetValue(FrameworkElement.ContextMenuProperty, cm);
                     break;
-                    break;
+                   
 
 
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -11,19 +12,51 @@ namespace MongoMS.ViewModel
 {
     class MainViewModel : ViewModelBase, INotifyPropertyChanging, ISaveable
     {
-        private object _content;
+        private ObservableCollection<object> _content;
+        private object _selected;
 
         public MainViewModel()
         {
-            Content = new ConnectionsViewModel();
+            Content = new ObservableCollection<object>();
+            Content.CollectionChanged += Content_CollectionChanged;
+            Content.Add( new ConnectionsViewModel());
             SimpleIoc.Default.Register<DatabaseExplorerViewModel>();
            
             Explorer = SimpleIoc.Default.GetInstance<DatabaseExplorerViewModel>();
 
         }
 
+        void Content_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                var c = e.NewItems.Count;
+                if (c > 0)
+                {
+                    Selected = e.NewItems[0];
+                }
+            }
+            else
+            {
+                if (e.OldItems.Contains(Selected))
+                {
+                    Selected = null;
+                }
+            }
+        }
 
-        public object Content
+        public object Selected
+
+        {
+            get { return _selected; }
+            set
+            {
+                _selected = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public ObservableCollection<object> Content
         {
             get { return _content; }
             set

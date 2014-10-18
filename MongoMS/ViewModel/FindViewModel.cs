@@ -7,6 +7,7 @@ using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
 {
+   [Header("Поиск")]
     class FindViewModel:VMB
     {
         private readonly string _cs;

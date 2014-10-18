@@ -20,7 +20,7 @@ namespace MongoMS.ViewModel
 
         void Find()
         {
-            SimpleIoc.Default.GetInstance<MainViewModel>().Content = new FindViewModel(_cs,_db,Name);
+            SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add( new FindViewModel(_cs,_db,Name));
         }
     }
 }
