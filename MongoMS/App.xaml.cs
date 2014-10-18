@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
+using GalaSoft.MvvmLight.Ioc;
 using MongoMS.ViewModel;
 
 namespace MongoMS
@@ -20,8 +21,8 @@ namespace MongoMS
         {
             MVVMTemplateSelection.TypeSource.AddAssembly(Assembly.GetExecutingAssembly());
             base.OnStartup(e);
-            mwm=new MainViewModel();
-         
+           SimpleIoc.Default.Register<MainViewModel>();
+            mwm = SimpleIoc.Default.GetInstance<MainViewModel>();
             var mw = new MainWindow();
             mw.DataContext = mwm;
             mw.Show();

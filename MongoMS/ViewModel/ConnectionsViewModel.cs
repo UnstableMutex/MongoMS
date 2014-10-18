@@ -115,6 +115,7 @@ namespace MongoMS.ViewModel
         {
             
             var exp = SimpleIoc.Default.GetInstance<DatabaseExplorerViewModel>();
+            exp.Servers.Add(new DatabaseExplorerServerViewModel(Selected.Key,Selected.Value));
            // exp.Servers.Add(new DatabaseExplorerServerViewModel(Selected.Key,  Selected.Value));
         }
     }

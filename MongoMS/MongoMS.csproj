@@ -85,6 +85,8 @@
     <Compile Include="ISaveable.cs" />
     <Compile Include="ObservableDictionary.cs" />
     <Compile Include="TreeViewTemplateSelector.cs" />
+    <Compile Include="ViewModel\AddCollectionViewModel.cs" />
+    <Compile Include="ViewModel\AddDatabaseViewModel.cs" />
     <Compile Include="ViewModel\ConnectionsViewModel.cs" />
     <Compile Include="ViewModel\DatabaseExplorerCollectionViewModel.cs" />
     <Compile Include="ViewModel\DatabaseExplorerDatabaseViewModel.cs" />
@@ -93,6 +95,12 @@
     <Compile Include="ViewModel\DatabaseExplorerViewModel.cs" />
     <Compile Include="ViewModel\ItemType.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="View\AddCollectionView.xaml.cs">
+      <DependentUpon>AddCollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddDatabaseView.xaml.cs">
+      <DependentUpon>AddDatabaseView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ConnectionsView.xaml.cs">
       <DependentUpon>ConnectionsView.xaml</DependentUpon>
     </Compile>
@@ -114,6 +122,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AddCollectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddDatabaseView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ConnectionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -9,18 +9,17 @@ using GalaSoft.MvvmLight.Ioc;
 
 namespace MongoMS.ViewModel
 {
-    class MainViewModel : ViewModelBase, INotifyPropertyChanging,ISaveable
+    class MainViewModel : ViewModelBase, INotifyPropertyChanging, ISaveable
     {
         private object _content;
 
         public MainViewModel()
         {
-
-
-
             Content = new ConnectionsViewModel();
             SimpleIoc.Default.Register<DatabaseExplorerViewModel>();
-           Explorer = SimpleIoc.Default.GetInstance<DatabaseExplorerViewModel>();
+           
+            Explorer = SimpleIoc.Default.GetInstance<DatabaseExplorerViewModel>();
+
         }
 
 
