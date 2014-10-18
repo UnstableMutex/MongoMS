@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
 {
@@ -12,7 +13,7 @@ namespace MongoMS.ViewModel
   
 
 
-   public class DatabaseExplorerTreeItemBase
+   public class DatabaseExplorerTreeItemBase:VMB
     {
        private readonly ItemType _itemType;
 

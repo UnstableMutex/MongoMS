@@ -30,16 +30,20 @@ namespace MongoMS.ViewModel
             if (File.Exists(SettingsFileName))
             {
                 XmlSerializer ser = new XmlSerializer(typeof(List<Entry>));
-                var dic = (List<Entry>)ser.Deserialize(new StreamReader(SettingsFileName));
-
-
-
-                var d = new ObservableDictionary<string, string>();
-                foreach (var entry in dic)
+                using (var sr = new StreamReader(SettingsFileName))
                 {
-                    d.Add(entry.Name, entry.ConnectionString);
+                    var dic = (List<Entry>)ser.Deserialize(sr);
+
+
+
+                    var d = new ObservableDictionary<string, string>();
+                    foreach (var entry in dic)
+                    {
+                        d.Add(entry.Name, entry.ConnectionString);
+                    }
+                    Connections = d;
                 }
-                Connections = d;
+
             }
         }
         const string SettingsFileName = "settings.xml";
@@ -98,7 +102,7 @@ namespace MongoMS.ViewModel
 
         private void OnSelectedChanged()
         {
-            if (Selected.Equals( default(KeyValuePair<string, string>)))
+            if (Selected.Equals(default(KeyValuePair<string, string>)))
             {
                 NewCSServer = null;
             }
@@ -113,10 +117,14 @@ namespace MongoMS.ViewModel
 
         void Select()
         {
-            
+
             var exp = SimpleIoc.Default.GetInstance<DatabaseExplorerViewModel>();
-            exp.Servers.Add(new DatabaseExplorerServerViewModel(Selected.Key,Selected.Value));
-           // exp.Servers.Add(new DatabaseExplorerServerViewModel(Selected.Key,  Selected.Value));
+            if (exp.Servers.All(x => x.Name != Selected.Key))
+            {
+                exp.Servers.Add(new DatabaseExplorerServerViewModel(Selected.Key, Selected.Value));
+                SimpleIoc.Default.GetInstance<MainViewModel>().Content = null;
+            }
+            // exp.Servers.Add(new DatabaseExplorerServerViewModel(Selected.Key,  Selected.Value));
         }
     }
     [Serializable]

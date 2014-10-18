@@ -5,7 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+    <DockPanel>
+        <StackPanel HorizontalAlignment="Right" DockPanel.Dock="Bottom">
+            <Button Margin="3" Padding="15,3" Command="{Binding OKCommand}">OK</Button>
+        </StackPanel>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="63*"/>
+            </Grid.ColumnDefinitions>
+<Label> coll name</Label><TextBox Text="{Binding Name}" Grid.Column="1"></TextBox>
+        </Grid>
+    </DockPanel>
+
 </UserControl>

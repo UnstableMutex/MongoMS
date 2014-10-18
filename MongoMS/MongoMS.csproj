@@ -88,6 +88,7 @@
     <Compile Include="ViewModel\AddCollectionViewModel.cs" />
     <Compile Include="ViewModel\AddDatabaseViewModel.cs" />
     <Compile Include="ViewModel\ConnectionsViewModel.cs" />
+    <Compile Include="ViewModel\DatabaseDetailsViewModel.cs" />
     <Compile Include="ViewModel\DatabaseExplorerCollectionViewModel.cs" />
     <Compile Include="ViewModel\DatabaseExplorerDatabaseViewModel.cs" />
     <Compile Include="ViewModel\DatabaseExplorerServerViewModel.cs" />
@@ -103,6 +104,9 @@
     </Compile>
     <Compile Include="View\ConnectionsView.xaml.cs">
       <DependentUpon>ConnectionsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DatabaseDetailsView.xaml.cs">
+      <DependentUpon>DatabaseDetailsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DatabaseExplorerView.xaml.cs">
       <DependentUpon>DatabaseExplorerView.xaml</DependentUpon>
@@ -131,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ConnectionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DatabaseDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

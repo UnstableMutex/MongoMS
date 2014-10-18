@@ -1,4 +1,8 @@
-﻿using MongoDB.Driver;
+﻿using System.Windows.Input;
+using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Messaging;
+using MongoDB.Driver;
+using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
 {
@@ -10,6 +14,16 @@ namespace MongoMS.ViewModel
         {
             _cs = cs;
             GetCollections();
+            MessengerInstance.Register(this,(NotificationMessage<DatabaseExplorerCollectionViewModel> x)=> AddedColl(x));
+            AssignCommands<NoWeakRelayCommand>();
+        }
+
+        private void AddedColl(NotificationMessage<DatabaseExplorerCollectionViewModel> notificationMessage)
+        {
+         Children.Add(notificationMessage.Content);
+
+
+
         }
 
         private void GetCollections()
@@ -19,8 +33,12 @@ namespace MongoMS.ViewModel
             {
                 Children.Add(new DatabaseExplorerCollectionViewModel(coll,_cs,Name));
             }
+        }
+        public ICommand AddCollectionCommand { get; private set; }
 
-
+        void AddCollection()
+        {
+            SimpleIoc.Default.GetInstance<MainViewModel>().Content = new AddCollectionViewModel(_cs,Name);
         }
     }
 }
