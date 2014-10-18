@@ -31,7 +31,9 @@ namespace MongoMS.ViewModel
 
         void OK()
         {
+           
     
+         
            DatabaseExplorerDatabaseViewModel db=new DatabaseExplorerDatabaseViewModel(Name,_cs);
             MessengerInstance.Send(new NotificationMessage<DatabaseExplorerDatabaseViewModel>(this, db, "added"));
         }

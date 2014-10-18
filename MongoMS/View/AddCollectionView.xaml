@@ -23,7 +23,13 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="63*"/>
             </Grid.ColumnDefinitions>
-<Label> coll name</Label><TextBox Text="{Binding Name}" Grid.Column="1"></TextBox>
+            <Label>coll name</Label>
+            <TextBox Text="{Binding Name}" Grid.Column="1"></TextBox>
+            <CheckBox Grid.Column="1" IsChecked="{Binding Capped}" Grid.Row="1">capped</CheckBox>
+            <Label IsEnabled="{Binding Capped}" Grid.Row="2">size</Label>
+            <Label IsEnabled="{Binding Capped}"  Grid.Row="3">maxdocs</Label>
+            <TextBox IsEnabled="{Binding Capped}"  Grid.Column="1" Grid.Row="2" Text="{Binding MaxSize}" />
+            <TextBox IsEnabled="{Binding Capped}"  Grid.Column="1" Grid.Row="3" Text="{Binding MaxDocuments}"  />
         </Grid>
     </DockPanel>
 

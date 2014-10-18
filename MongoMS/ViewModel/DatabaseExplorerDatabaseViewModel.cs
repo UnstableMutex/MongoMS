@@ -10,17 +10,18 @@ namespace MongoMS.ViewModel
     {
         private readonly string _cs;
 
-        public DatabaseExplorerDatabaseViewModel(string name,string cs):base(name, ItemType.Database)
+        public DatabaseExplorerDatabaseViewModel(string name, string cs)
+            : base(name, ItemType.Database)
         {
             _cs = cs;
             GetCollections();
-            MessengerInstance.Register(this,(NotificationMessage<DatabaseExplorerCollectionViewModel> x)=> AddedColl(x));
+            MessengerInstance.Register(this, (NotificationMessage<DatabaseExplorerCollectionViewModel> x) => AddedColl(x));
             AssignCommands<NoWeakRelayCommand>();
         }
 
         private void AddedColl(NotificationMessage<DatabaseExplorerCollectionViewModel> notificationMessage)
         {
-         Children.Add(notificationMessage.Content);
+            Children.Add(notificationMessage.Content);
 
 
 
@@ -31,14 +32,14 @@ namespace MongoMS.ViewModel
             var colls = new MongoClient(_cs).GetServer().GetDatabase(Name).GetCollectionNames();
             foreach (var coll in colls)
             {
-                Children.Add(new DatabaseExplorerCollectionViewModel(coll,_cs,Name));
+                Children.Add(new DatabaseExplorerCollectionViewModel(coll, _cs, Name));
             }
         }
         public ICommand AddCollectionCommand { get; private set; }
 
         void AddCollection()
         {
-            SimpleIoc.Default.GetInstance<MainViewModel>().Content = new AddCollectionViewModel(_cs,Name);
+            SimpleIoc.Default.GetInstance<MainViewModel>().Content = new AddCollectionViewModel(_cs, Name);
         }
     }
 }
