@@ -84,19 +84,17 @@
     </ApplicationDefinition>
     <Compile Include="ISaveable.cs" />
     <Compile Include="ObservableDictionary.cs" />
+    <Compile Include="TreeViewTemplateSelector.cs" />
     <Compile Include="ViewModel\ConnectionsViewModel.cs" />
-    <Compile Include="ViewModel\DatabaseExplorerDBViewModel.cs" />
+    <Compile Include="ViewModel\DatabaseExplorerCollectionViewModel.cs" />
+    <Compile Include="ViewModel\DatabaseExplorerDatabaseViewModel.cs" />
     <Compile Include="ViewModel\DatabaseExplorerServerViewModel.cs" />
+    <Compile Include="ViewModel\DatabaseExplorerTreeItemBase.cs" />
     <Compile Include="ViewModel\DatabaseExplorerViewModel.cs" />
+    <Compile Include="ViewModel\ItemType.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="View\ConnectionsView.xaml.cs">
       <DependentUpon>ConnectionsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\DatabaseExplorerDBView.xaml.cs">
-      <DependentUpon>DatabaseExplorerDBView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\DatabaseExplorerServerView.xaml.cs">
-      <DependentUpon>DatabaseExplorerServerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DatabaseExplorerView.xaml.cs">
       <DependentUpon>DatabaseExplorerView.xaml</DependentUpon>
@@ -117,14 +115,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\ConnectionsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\DatabaseExplorerDBView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\DatabaseExplorerServerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

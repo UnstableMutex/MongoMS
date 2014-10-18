@@ -11,8 +11,14 @@ namespace MongoMS.ViewModel
     {
         public DatabaseExplorerViewModel()
         {
-            Servers=new ObservableCollection<DatabaseExplorerServerViewModel>();
+            Servers=new ObservableCollection<DatabaseExplorerTreeItemBase>();
+            var i = new DatabaseExplorerTreeItemBase("1", ItemType.Server);
+            i.Children.Add(new DatabaseExplorerTreeItemBase("11", ItemType.Database));
+            Servers.Add(new DatabaseExplorerTreeItemBase("2",ItemType.Server));
+            Servers.Add(i);
+            Servers.Add(new DatabaseExplorerTreeItemBase("3",ItemType.Server));
+
         }
-        public ObservableCollection<DatabaseExplorerServerViewModel> Servers { get; private set; } 
+        public ObservableCollection<DatabaseExplorerTreeItemBase> Servers { get; private set; } 
     }
 }
