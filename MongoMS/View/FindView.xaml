@@ -6,6 +6,35 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="71*"/>
+            <RowDefinition Height="79*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="34*"/>
+                <ColumnDefinition Width="37*"/>
+                <ColumnDefinition Width="29*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Resources>
+                <Style TargetType="DockPanel">
+                    <Setter Property="Margin" Value="3"/>
+                </Style>
+            </Grid.Resources>
+            <DockPanel>
+                <Label DockPanel.Dock="Top">find</Label>
+                <TextBox></TextBox>
+            </DockPanel>
+            <DockPanel Grid.Column="1">
+                <Label DockPanel.Dock="Top">sort</Label>
+                <TextBox></TextBox>
+            </DockPanel>
+            <DockPanel Grid.Column="2">
+                <Label DockPanel.Dock="Top">fields</Label>
+                <TextBox></TextBox>
+            </DockPanel>
+        </Grid>
+        <Rectangle Fill="LightGray" Grid.Row="1"/>
+        <TextBlock Grid.Row="1" Text="results" HorizontalAlignment="Center" VerticalAlignment="Center"  />
     </Grid>
 </UserControl>

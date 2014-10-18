@@ -38,6 +38,9 @@ namespace MongoMS
                     break;
 
                 case ItemType.Collection:
+                    cm.Items.Add(FindInCollMI());
+                    f.SetValue(FrameworkElement.ContextMenuProperty, cm);
+                    break;
                     break;
 
 
@@ -47,6 +50,13 @@ namespace MongoMS
             return dt;
         }
 
+        private MenuItem FindInCollMI()
+        {
+            MenuItem mi = new MenuItem();
+            mi.Header = "find";
+            mi.SetBinding(MenuItem.CommandProperty, new Binding("FindCommand"));
+            return mi;
+        }
         private MenuItem AddDBMI()
         {
             MenuItem mi = new MenuItem();

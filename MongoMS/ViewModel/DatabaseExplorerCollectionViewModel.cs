@@ -1,3 +1,8 @@
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Ioc;
+using Microsoft.CSharp.RuntimeBinder;
+using MVVMLight.Extras;
+
 namespace MongoMS.ViewModel
 {
     class DatabaseExplorerCollectionViewModel : DatabaseExplorerTreeItemBase
@@ -9,6 +14,13 @@ namespace MongoMS.ViewModel
         {
             _cs = cs;
             _db = db;
+            AssignCommands<NoWeakRelayCommand>();
+        }
+        public ICommand FindCommand { get; private set; }
+
+        void Find()
+        {
+            SimpleIoc.Default.GetInstance<MainViewModel>().Content = new FindViewModel(_cs,_db,Name);
         }
     }
 }
