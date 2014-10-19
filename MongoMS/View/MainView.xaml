@@ -40,12 +40,16 @@
               />
             <view:DatabaseExplorerView DataContext="{Binding Explorer}"/>
             <!--Explorer ItemTemplateSelector="{StaticResource cts}" -->
-            <TabControl SelectedItem="{Binding Selected}" ContentTemplateSelector="{StaticResource cts}" ItemsSource="{Binding Content}" Grid.Column="2" >
+            <TabControl SelectedItem="{Binding Selected}" Name="tc" ContentTemplateSelector="{StaticResource cts}" ItemsSource="{Binding Content}" Grid.Column="2" >
                 <TabControl.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel MouseUp="UIElement_OnMouseUp" Orientation="Horizontal">
                         <TextBlock Margin="3" VerticalAlignment="Center" Text="{Binding Converter={StaticResource hc}, Path=.}" />
-                        <Button VerticalAlignment="Center" FontSize="6">x</Button></StackPanel>
+                        <Button VerticalAlignment="Center"  CommandParameter="{Binding}" Command="{Binding ElementName=tc, Path=DataContext.CloseTabCommand}">x</Button></StackPanel>
+
+                        <!--Command={Binding ElementName=level1Lister,
+                       Path=DataContext.MyLevel1Command}-->
+
                     </DataTemplate>
                 </TabControl.ItemTemplate>
 

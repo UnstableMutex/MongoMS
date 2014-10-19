@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using MVVMLight.Extras;
 
@@ -21,11 +22,12 @@ namespace MongoMS.ViewModel
         {
             Content = new ObservableCollection<object>();
             Content.CollectionChanged += Content_CollectionChanged;
-           // Content.Add( new ConnectionsViewModel());
+            // Content.Add( new ConnectionsViewModel());
             SimpleIoc.Default.Register<DatabaseExplorerViewModel>();
-           
+
             Explorer = SimpleIoc.Default.GetInstance<DatabaseExplorerViewModel>();
             AssignCommands<NoWeakRelayCommand>();
+            CloseTabCommand = new RelayCommand<object>(ct);
 
         }
         public ICommand NewConnectionCommand { get; private set; }
@@ -61,7 +63,6 @@ namespace MongoMS.ViewModel
         }
 
         public object Selected
-
         {
             get { return _selected; }
             set
@@ -70,7 +71,12 @@ namespace MongoMS.ViewModel
                 RaisePropertyChangedNoSave();
             }
         }
+        public ICommand CloseTabCommand { get; private set; }
 
+        void ct(object o)
+        {
+            Content.Remove(o);
+        }
         public ObservableCollection<object> Content
         {
             get { return _content; }

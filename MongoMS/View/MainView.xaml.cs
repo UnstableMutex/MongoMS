@@ -24,5 +24,18 @@ namespace MongoMS.View
         {
             InitializeComponent();
         }
+
+        private void UIElement_OnMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Middle & e.ButtonState == MouseButtonState.Released)
+            {
+                var p = sender as Panel;
+             var b=   p.Children.OfType<Button>().First();
+                b.Command.Execute(b.CommandParameter);
+
+
+            }
+           
+        }
     }
 }

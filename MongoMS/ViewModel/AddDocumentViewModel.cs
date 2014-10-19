@@ -10,6 +10,7 @@ using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
 {
+    [Header("Новый документ")]
     class AddDocumentViewModel : VMBValidated
     {
         private readonly string _cs;
