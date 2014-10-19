@@ -15,13 +15,17 @@ namespace MongoMS.View
        protected override void OnItemsSourceChanged(IEnumerable oldValue, IEnumerable newValue)
        {
            base.OnItemsSourceChanged(oldValue, newValue);
+           if (newValue != null)
+           {
            this.Columns.Clear();
            var doc = (newValue as IEnumerable<BsonDocument>).First();
            for (int i = 0; i < doc.Names.Count(); i++)
            {
                 this.Columns.Add(new DataGridTextColumn() { Header = doc.Names.ElementAt(i), Binding = new Binding(string.Format("Elements[{0}].Value",i)) });
            }
-
+    
+           }
+           
           
        }
     }

@@ -87,6 +87,7 @@
     <Compile Include="HeaderConverter.cs" />
     <Compile Include="ISaveable.cs" />
     <Compile Include="ObservableDictionary.cs" />
+    <Compile Include="QRToStringConverter.cs" />
     <Compile Include="TreeViewTemplateSelector.cs" />
     <Compile Include="ViewModel\AddCollectionViewModel.cs" />
     <Compile Include="ViewModel\AddDatabaseViewModel.cs" />

@@ -23,6 +23,7 @@ namespace MongoMS.ViewModel
             _db = db;
             _coll = coll;
             QueryResults = new MongoClient(_cs).GetServer().GetDatabase(_db).GetCollection(_coll).FindAll().SetLimit(100).ToList();
+           
         }
 
        public IEnumerable<BsonDocument> QueryResults
