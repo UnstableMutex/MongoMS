@@ -117,6 +117,7 @@
     <Compile Include="View\ConnectionsView.xaml.cs">
       <DependentUpon>ConnectionsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CustomDataGrid.cs" />
     <Compile Include="View\DatabaseDetailsView.xaml.cs">
       <DependentUpon>DatabaseDetailsView.xaml</DependentUpon>
     </Compile>

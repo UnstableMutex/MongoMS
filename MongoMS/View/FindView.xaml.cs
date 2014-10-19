@@ -24,5 +24,9 @@ namespace MongoMS.View
         {
             InitializeComponent();
         }
+
+       
     }
+   
+   
 }
