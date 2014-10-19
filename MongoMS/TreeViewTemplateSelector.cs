@@ -27,8 +27,8 @@ namespace MongoMS
             f.AddHandler(Label.MouseDoubleClickEvent, new MouseButtonEventHandler(tb_MouseUp));
             ContextMenu cm = new ContextMenu();
 
-       
-           
+
+
             switch (i.Type)
             {
                 case ItemType.Server:
@@ -45,6 +45,8 @@ namespace MongoMS
                     cm.Items.Add(FindInCollMI());
                     cm.Items.Add(CollectionStatsMI());
                     cm.Items.Add(AddDocMI());
+                    cm.Items.Add(AggregateMI());
+ cm.Items.Add(DropMI());
                     f.SetValue(Label.ContextMenuProperty, cm);
                     break;
 
@@ -55,13 +57,26 @@ namespace MongoMS
             dt.VisualTree = f;
             return dt;
         }
-        // delegate void del(object sender, System.Windows.Input.MouseButtonEventArgs e );
-        //void tb_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        //{
-        //    var tb = (TextBlock) sender;
-        //  var mi=  tb.ContextMenu.Items.OfType<MenuItem>().Where(x => x.FontWeight == FontWeights.Bold).First();
-        //    mi.Command.Execute(null);
-        //}
+
+        private MenuItem DropMI()
+        {
+            MenuItem mi = new MenuItem();
+
+            mi.Header = "Drop";
+            mi.SetBinding(MenuItem.CommandProperty, new Binding("DropCommand"));
+            return mi;
+
+        }
+
+        private MenuItem AggregateMI()
+        {
+            MenuItem mi = new MenuItem();
+
+            mi.Header = "Aggregate...";
+            mi.SetBinding(MenuItem.CommandProperty, new Binding("AggregateCommand"));
+            return mi;
+        }
+
         void tb_MouseUp(object sender, MouseButtonEventArgs e)
         {
             try
@@ -71,7 +86,7 @@ namespace MongoMS
                 DatabaseExplorerCollectionViewModel mi =
                     tb.DataContext as DatabaseExplorerCollectionViewModel;
                 mi.FindCommand.Execute(null);
-              
+
             }
             catch (Exception)
             {

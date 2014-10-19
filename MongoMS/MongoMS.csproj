@@ -92,6 +92,7 @@
     <Compile Include="ViewModel\AddCollectionViewModel.cs" />
     <Compile Include="ViewModel\AddDatabaseViewModel.cs" />
     <Compile Include="ViewModel\AddDocumentViewModel.cs" />
+    <Compile Include="ViewModel\AggregateViewModel.cs" />
     <Compile Include="ViewModel\CollectionStatsViewModel.cs" />
     <Compile Include="ViewModel\ConnectionsViewModel.cs" />
     <Compile Include="ViewModel\DatabaseDetailsViewModel.cs" />
@@ -111,6 +112,9 @@
     </Compile>
     <Compile Include="View\AddDocumentView.xaml.cs">
       <DependentUpon>AddDocumentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AggregateView.xaml.cs">
+      <DependentUpon>AggregateView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CollectionStatsView.xaml.cs">
       <DependentUpon>CollectionStatsView.xaml</DependentUpon>
@@ -152,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddDocumentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AggregateView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
