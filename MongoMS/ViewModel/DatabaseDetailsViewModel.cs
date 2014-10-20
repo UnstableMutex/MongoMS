@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MongoDB.Driver;
 using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
 {
     class DatabaseDetailsViewModel:VMB
     {
-        private readonly string _cs;
-        private readonly string _dbname;
+        private readonly MongoDatabase _db;
 
-        public DatabaseDetailsViewModel(string cs,string dbname)
+
+        public DatabaseDetailsViewModel(MongoDatabase db)
         {
-            _cs = cs;
-            _dbname = dbname;
+            _db = db;
         }
-
     }
 }

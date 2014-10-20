@@ -8,11 +8,13 @@ namespace MongoMS.ViewModel
 {
     class DatabaseExplorerServerViewModel : DatabaseExplorerTreeItemBase
     {
-        private readonly string _cs;
+        private readonly MongoServer _serv;
 
-        public DatabaseExplorerServerViewModel(string name,string cs):base(name, ItemType.Server)
+
+        public DatabaseExplorerServerViewModel(string name,MongoServer serv):base(name, ItemType.Server)
         {
-            _cs = cs;
+            _serv = serv;
+
             GetDatabases();
             AssignCommands<NoWeakRelayCommand>();
             MessengerInstance.Register(this, (NotificationMessage<DatabaseExplorerDatabaseViewModel> x) => DBAddedMessage(x));
@@ -25,10 +27,12 @@ namespace MongoMS.ViewModel
 
         private void GetDatabases()
         {
-            var dbs = (new MongoClient(_cs).GetServer().GetDatabaseNames());
+          
+            var dbs = (_serv.GetDatabaseNames());
+
             foreach (var db in dbs)
             {
-                    Children.Add(new DatabaseExplorerDatabaseViewModel(db,_cs));
+                    Children.Add(new DatabaseExplorerDatabaseViewModel(_serv.GetDatabase(db)));
 
             }
         }
@@ -36,7 +40,7 @@ namespace MongoMS.ViewModel
 
         void AddDB()
         {
-            SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new AddDatabaseViewModel(_cs));
+            SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new AddDatabaseViewModel(_serv));
         }
     }
 }

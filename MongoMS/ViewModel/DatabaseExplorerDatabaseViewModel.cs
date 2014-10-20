@@ -1,6 +1,8 @@
-﻿using System.Windows.Input;
+﻿using System.Data;
+using System.Windows.Input;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MVVMLight.Extras;
 
@@ -8,12 +10,14 @@ namespace MongoMS.ViewModel
 {
     class DatabaseExplorerDatabaseViewModel : DatabaseExplorerTreeItemBase
     {
-        private readonly string _cs;
+        private readonly MongoDatabase _db;
 
-        public DatabaseExplorerDatabaseViewModel(string name, string cs)
-            : base(name, ItemType.Database)
+
+        public DatabaseExplorerDatabaseViewModel(MongoDatabase db)
+            : base(db.Name, ItemType.Database)
         {
-            _cs = cs;
+            _db = db;
+
             GetCollections();
             MessengerInstance.Register(this, (NotificationMessage<DatabaseExplorerCollectionViewModel> x) => AddedColl(x));
             AssignCommands<NoWeakRelayCommand>();
@@ -29,17 +33,17 @@ namespace MongoMS.ViewModel
 
         private void GetCollections()
         {
-            var colls = new MongoClient(_cs).GetServer().GetDatabase(Name).GetCollectionNames();
+            var colls = _db.GetCollectionNames();
             foreach (var coll in colls)
             {
-                Children.Add(new DatabaseExplorerCollectionViewModel(coll, _cs, Name));
+                Children.Add(new DatabaseExplorerCollectionViewModel(_db.GetCollection<BsonDocument>(coll)));
             }
         }
         public ICommand AddCollectionCommand { get; private set; }
 
         void AddCollection()
         {
-            SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add( new AddCollectionViewModel(_cs, Name));
+            SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add( new AddCollectionViewModel(_db));
         }
     }
 }

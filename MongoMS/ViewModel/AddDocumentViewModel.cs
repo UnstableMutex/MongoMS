@@ -13,18 +13,18 @@ namespace MongoMS.ViewModel
     [Header("Новый документ")]
     class AddDocumentViewModel : VMBValidated
     {
-        private readonly string _cs;
-        private readonly string _db;
-        private readonly string _coll;
+        private readonly MongoCollection<BsonDocument> _coll;
+
         private string _document;
 
-        public AddDocumentViewModel(string cs, string db, string coll)
+        public AddDocumentViewModel(MongoCollection<BsonDocument> coll)
         {
-            _cs = cs;
-            _db = db;
             _coll = coll;
+
             AssignCommands<NoWeakRelayCommand>();
         }
+
+
         [BsonDocumentValidator("sfdsfsdf")]
         public string Document
         {
@@ -48,8 +48,8 @@ namespace MongoMS.ViewModel
 
         void AddDocument()
         {
-            var coll = new MongoClient(_cs).GetServer().GetDatabase(_db).GetCollection(_coll);
-            coll.Insert(BsonDocument.Parse(Document));
+          
+            _coll.Insert(BsonDocument.Parse(Document));
         }
 
     }

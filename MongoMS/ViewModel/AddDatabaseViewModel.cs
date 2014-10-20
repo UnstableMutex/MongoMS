@@ -12,11 +12,13 @@ namespace MongoMS.ViewModel
 {
     class AddDatabaseViewModel:VMB
     {
-        private readonly string _cs;
+        private readonly MongoServer _serv;
 
-        public AddDatabaseViewModel(string cs)
+
+        public AddDatabaseViewModel(MongoServer serv)
         {
-            _cs = cs;
+            _serv = serv;
+
             AssignCommands<NoWeakRelayCommand>();
         }
 
@@ -31,10 +33,10 @@ namespace MongoMS.ViewModel
 
         void OK()
         {
+
+
            
-    
-         
-           DatabaseExplorerDatabaseViewModel db=new DatabaseExplorerDatabaseViewModel(Name,_cs);
+           DatabaseExplorerDatabaseViewModel db=new DatabaseExplorerDatabaseViewModel( _serv.GetDatabase(Name));
             MessengerInstance.Send(new NotificationMessage<DatabaseExplorerDatabaseViewModel>(this, db, "added"));
         }
     }
