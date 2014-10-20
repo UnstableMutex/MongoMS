@@ -27,11 +27,15 @@
                     <Setter Property="Margin" Value="3"/>
                 </Style>
             </Grid.Resources>
-            <DockPanel>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60*"/>
+                <RowDefinition Height="11*"/>
+            </Grid.RowDefinitions>
+            <DockPanel Margin="3,3,2.6,3.4">
                 <Label DockPanel.Dock="Top">find</Label>
-                <TextBox></TextBox>
+                <TextBox Text="{Binding FindCriteria, UpdateSourceTrigger=PropertyChanged}"/>
             </DockPanel>
-            <DockPanel Grid.Column="1">
+            <DockPanel Grid.Column="1" Margin="3.4,3,2.8,3.4" >
                 <Label DockPanel.Dock="Top">sort</Label>
 
                 <DockPanel DockPanel.Dock="Top">
@@ -48,7 +52,7 @@
 
 
             </DockPanel>
-            <DockPanel Grid.Column="2">
+            <DockPanel Grid.Column="2" Margin="3">
                 <Label DockPanel.Dock="Top">fields</Label>
                 <DockPanel DockPanel.Dock="Top">
                     <Button DockPanel.Dock="Right">+</Button>
@@ -57,6 +61,7 @@
                 </DockPanel>
                 <ListBox/>
             </DockPanel>
+            <Button Content="ok" Command="{Binding FindCommand}" Padding="20,3" Grid.Column="2" HorizontalAlignment="Right"  Grid.Row="1" />
         </Grid>
         <TabControl Grid.Row="1">
             <TabItem Name="ti" Header="table">
