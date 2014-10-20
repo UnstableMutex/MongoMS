@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization.IdGenerators;
 using MongoDB.Driver;
 using MVVMLight.Extras;
 
@@ -44,12 +45,26 @@ namespace MongoMS.ViewModel
 
             }
         }
+        public ICommand AddGuidIdCommand { get; private set; }
+
+        void AddGuidId()
+        {
+            BsonDocument d=new BsonDocument();
+            if (!string.IsNullOrEmpty(Document))
+            {
+                d= BsonDocument.Parse(Document);
+            }
+           
+            d["_id"] = Guid.NewGuid();
+            Document = d.ToString();
+        }
         public ICommand AddDocumentCommand { get; private set; }
 
         void AddDocument()
         {
           
             _coll.Insert(BsonDocument.Parse(Document));
+            Document = string.Empty;
         }
 
     }
