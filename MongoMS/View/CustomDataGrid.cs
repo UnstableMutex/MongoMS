@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
 using MongoDB.Bson;
-
 namespace MongoMS.View
 {
     class CustomDataGrid : DataGrid
@@ -31,29 +30,23 @@ namespace MongoMS.View
                 }
                 foreach (var h in hs)
                 {
-                    this.Columns.Add(new DataGridTextColumn() { Binding = new Binding("["+h+"]"){Converter = new bsonConverter()}, Header = h });
+                    this.Columns.Add(new DataGridTextColumn() { Binding = new Binding("[" + h + "]") { Converter = new bsonConverter() }, Header = h });
                 }
-
-
             }
-
-
-
         }
     }
-
     internal class bsonConverter : IValueConverter
     {
+        private Type t;
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            t = value.GetType();
             return value.ToString();
-            //throw new NotImplementedException();
         }
-
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value;
-            // throw new NotImplementedException();
+            var val = BsonValue.Create(value);
+            return val;
         }
     }
 }
