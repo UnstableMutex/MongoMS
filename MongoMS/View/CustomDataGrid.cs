@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,23 +11,49 @@ using MongoDB.Bson;
 
 namespace MongoMS.View
 {
-   public class CustomDataGrid:DataGrid
+    class CustomDataGrid : DataGrid
     {
-       protected override void OnItemsSourceChanged(IEnumerable oldValue, IEnumerable newValue)
-       {
-           base.OnItemsSourceChanged(oldValue, newValue);
-           if (newValue != null)
-           {
-           this.Columns.Clear();
-           var doc = (newValue as IEnumerable<BsonDocument>).First();
-           for (int i = 0; i < doc.Names.Count(); i++)
-           {
-                this.Columns.Add(new DataGridTextColumn() { Header = doc.Names.ElementAt(i), Binding = new Binding(string.Format("Elements[{0}].Value",i)) });
-           }
-    
-           }
-           
-          
-       }
+        protected override void OnItemsSourceChanged(IEnumerable oldValue, IEnumerable newValue)
+        {
+            base.OnItemsSourceChanged(oldValue, newValue);
+            HashSet<string> hs = new HashSet<string>();
+            var nv = newValue as IEnumerable<BsonDocument>;
+            if (nv != null)
+            {
+                this.Columns.Clear();
+                //var doc = (newValue as IEnumerable<BsonDocument>).First();
+                foreach (var doc in nv)
+                {
+                    foreach (var ele in doc.Elements)
+                    {
+                        hs.Add(ele.Name);
+                    }
+                }
+                foreach (var h in hs)
+                {
+                    this.Columns.Add(new DataGridTextColumn() { Binding = new Binding("["+h+"]"){Converter = new bsonConverter()}, Header = h });
+                }
+
+
+            }
+
+
+
+        }
+    }
+
+    internal class bsonConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value.ToString();
+            //throw new NotImplementedException();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value;
+            // throw new NotImplementedException();
+        }
     }
 }

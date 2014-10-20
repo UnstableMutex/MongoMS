@@ -9,6 +9,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <mongoMs:QRToStringConverter x:Key="c"/>
+         
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -60,14 +61,20 @@
         <TabControl Grid.Row="1">
             <TabItem Header="table">
                 <view:CustomDataGrid ItemsSource="{Binding QueryResults}"/>
+                
             </TabItem>
+            <!--<TabItem Header="listview">
+                <ListView ItemsSource="{Binding QueryResults}">
+                    <ListView.View></ListView.View>
+                </ListView>
+            </TabItem>-->
             <TabItem Header="text">
                 <TextBox Text="{Binding QueryResults, Converter={StaticResource c}}"/>
             </TabItem>
             <TabItem Header="tree">
                 <TreeView ItemsSource="{Binding QueryResults}">
                     <TreeView.ItemTemplate>
-                        <HierarchicalDataTemplate ItemsSource="{Binding AsBsonDocument.Elements}">
+                        <HierarchicalDataTemplate  ItemsSource="{Binding AsBsonDocument.Elements}">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="{Binding Name}"></TextBlock>
                                 <TextBlock Margin="7,2">:</TextBlock>

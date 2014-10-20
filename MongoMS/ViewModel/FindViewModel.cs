@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,8 +24,10 @@ namespace MongoMS.ViewModel
             _db = db;
             _coll = coll;
             QueryResults = new MongoClient(_cs).GetServer().GetDatabase(_db).GetCollection(_coll).FindAll().SetLimit(100).ToList();
-           
+           //var dt = Getdatatable(QueryResults);
         }
+
+      
 
        public IEnumerable<BsonDocument> QueryResults
        {
@@ -35,5 +38,7 @@ namespace MongoMS.ViewModel
                RaisePropertyChangedNoSave();
            }
        }
+
+       public DataTable dt { get; set; }
     }
 }
