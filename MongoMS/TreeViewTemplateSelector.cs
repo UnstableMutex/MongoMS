@@ -38,6 +38,7 @@ namespace MongoMS
 
                 case ItemType.Database:
                     cm.Items.Add(AddCollMI());
+                    cm.Items.Add(DropDBMI());
                     f.SetValue(FrameworkElement.ContextMenuProperty, cm);
                     break;
 
@@ -46,7 +47,7 @@ namespace MongoMS
                     cm.Items.Add(CollectionStatsMI());
                     cm.Items.Add(AddDocMI());
                     cm.Items.Add(AggregateMI());
- cm.Items.Add(DropMI());
+                    cm.Items.Add(DropMI());
                     f.SetValue(Label.ContextMenuProperty, cm);
                     break;
 
@@ -56,6 +57,16 @@ namespace MongoMS
 
             dt.VisualTree = f;
             return dt;
+        }
+
+        private MenuItem DropDBMI()
+        {
+            MenuItem mi = new MenuItem();
+
+            mi.Header = "Drop";
+             mi.SetBinding(MenuItem.CommandProperty, new Binding("DropCommand"));
+            return mi;
+
         }
 
         private MenuItem DropMI()

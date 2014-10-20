@@ -63,7 +63,7 @@
                 <view:CustomDataGrid SelectedItem="{Binding Selected}" ItemsSource="{Binding QueryResults}">
                     <view:CustomDataGrid.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="edit" Command="{Binding ElementName=ti,Path=DataContext.EditCommand}"/>
+                            <MenuItem Header="edit" Command="{Binding EditCommand}"/>
                         </ContextMenu>
                     </view:CustomDataGrid.ContextMenu>
                 </view:CustomDataGrid>

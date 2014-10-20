@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using MongoDB.Driver;
 using MVVMLight.Extras;
@@ -38,6 +39,8 @@ namespace MongoMS.ViewModel
            
            DatabaseExplorerDatabaseViewModel db=new DatabaseExplorerDatabaseViewModel( _serv.GetDatabase(Name));
             MessengerInstance.Send(new NotificationMessage<DatabaseExplorerDatabaseViewModel>(this, db, "added"));
+           SimpleIoc.Default.GetInstance<MainViewModel>().Content.Remove(this);
+
         }
     }
 }
