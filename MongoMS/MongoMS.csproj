@@ -113,6 +113,7 @@
     <Compile Include="ViewModel\DatabaseExplorerTreeItemBase.cs" />
     <Compile Include="ViewModel\DatabaseExplorerViewModel.cs" />
     <Compile Include="ViewModel\EditRecordViewModel.cs" />
+    <Compile Include="ViewModel\ExportMSSQLViewModel.cs" />
     <Compile Include="ViewModel\FindViewModel.cs" />
     <Compile Include="ViewModel\ItemType.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -150,6 +151,9 @@
     </Compile>
     <Compile Include="View\EditRecordView.xaml.cs">
       <DependentUpon>EditRecordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ExportMSSQLView.xaml.cs">
+      <DependentUpon>ExportMSSQLView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\FindView.xaml.cs">
       <DependentUpon>FindView.xaml</DependentUpon>
@@ -214,6 +218,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EditRecordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ExportMSSQLView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
