@@ -4,16 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="318.4" d:DesignWidth="580">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="115*"/>
             <RowDefinition Height="147*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBox TextWrapping="Wrap"  Text="{Binding Document, Delay=100, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"/>
+        <TextBox TextWrapping="Wrap"  Text="{Binding Document,Mode=OneWay}" Grid.Row="1"/>
         <Button Command="{Binding AddDocumentCommand}" Content="ok" Margin="4" Padding="10,3" HorizontalAlignment="Right"  Grid.Row="2" />
-        <Button Content="guidid" Command="{Binding AddGuidIdCommand}" HorizontalAlignment="Left" Margin="26,22,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="guidid" Command="{Binding AddGuidIdCommand}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75"/>
+        <WrapPanel HorizontalAlignment="Left" Margin="206,12,0,0" VerticalAlignment="Top" >
+            <StackPanel Width="100">
+                <Label Content="Имя поля" />
 
+                <TextBox Text="{Binding FieldName}" />
+            </StackPanel>
+            <StackPanel Width="100" >
+                <Label Content="Значение" />
+
+                <TextBox Text="{Binding FieldValue}" />
+            </StackPanel>
+            <StackPanel>
+                <Button Command="{Binding AddFieldCommand}">str</Button><Button>int</Button><Button> float</Button><Button>dec(str4)</Button>
+            </StackPanel>
+        </WrapPanel>
+       
     </Grid>
 </UserControl>
