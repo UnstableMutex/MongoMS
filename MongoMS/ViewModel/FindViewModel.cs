@@ -32,7 +32,9 @@ namespace MongoMS.ViewModel
         public ICommand FindCommand { get; private set; }
         void Find()
         {
-            var doc = new QueryDocument(BsonDocument.Parse(FindCriteria));
+            BsonDocument d=string.IsNullOrEmpty(FindCriteria)?new BsonDocument() :BsonDocument.Parse(FindCriteria) ;
+           
+            var doc = new QueryDocument(d);
             QueryResults = _coll.Find(doc);
         }
         public string FindCriteria
