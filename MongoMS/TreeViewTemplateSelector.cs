@@ -39,6 +39,7 @@ namespace MongoMS
                 case ItemType.Database:
                     cm.Items.Add(AddCollMI());
                     cm.Items.Add(DropDBMI());
+ cm.Items.Add(ExportMSSQLMI());
                     f.SetValue(FrameworkElement.ContextMenuProperty, cm);
                     break;
 
@@ -57,6 +58,16 @@ namespace MongoMS
 
             dt.VisualTree = f;
             return dt;
+        }
+
+        private MenuItem ExportMSSQLMI()
+        {
+              MenuItem mi = new MenuItem();
+
+            mi.Header = "export mssql";
+             mi.SetBinding(MenuItem.CommandProperty, new Binding("ExportFromMSSQLCommand"));
+            return mi;
+
         }
 
         private MenuItem DropDBMI()

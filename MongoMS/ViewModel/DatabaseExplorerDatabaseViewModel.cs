@@ -51,5 +51,11 @@ namespace MongoMS.ViewModel
         {
             //SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add( new AddCollectionViewModel(_db));
         }
+        public ICommand ExportFromMSSQLCommand { get; private set; }
+
+        void ExportFromMSSQL()
+        {
+             SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add( new ExportMSSQLViewModel(_db));
+        }
     }
 }

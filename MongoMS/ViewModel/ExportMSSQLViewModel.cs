@@ -13,9 +13,13 @@ namespace MongoMS.ViewModel
 {
     class ExportMSSQLViewModel : VMB
     {
-        public ExportMSSQLViewModel()
+        private readonly MongoDatabase _db;
+
+        public ExportMSSQLViewModel(MongoDatabase db)
         {
+            _db = db;
             AssignCommands<NoWeakRelayCommand>();
+            ConnectionString = "Server=MainPC;Database=test;Trusted_Connection=True;";
         }
         public string ConnectionString { get; set; }
         public ICommand OKCommand { get; private set; }
@@ -56,8 +60,8 @@ namespace MongoMS.ViewModel
         {
             string q = string.Format("select * from {0}", table);
             var pk = getpk(table);
-            var db = new MongoClient("").GetServer().GetDatabase("");
-            var coll = db.GetCollection(table);
+            
+            var coll = _db.GetCollection(table);
 
             using (var conn = new SqlConnection(ConnectionString))
             {

@@ -92,6 +92,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BsonDocumentValidator.cs" />
+    <Compile Include="Extention\Ext.cs" />
     <Compile Include="HeaderAttribute.cs" />
     <Compile Include="HeaderConverter.cs" />
     <Compile Include="ISaveable.cs" />
