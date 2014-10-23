@@ -25,7 +25,8 @@ namespace MongoMS.ViewModel
             StatsCommand =new OpenTabCommand(()=>new CollectionStatsViewModel(_coll));
             AddDocumentCommand = new OpenTabCommand(()=>new AddDocumentViewModel(_coll));
             AggregateCommand = new OpenTabCommand(() => new AggregateViewModel(_coll));
-
+            AddIndexCommand = new OpenTabCommand(() => new AddIndexViewModel(_coll));
+            CompactCommand = new NoWeakRelayCommand(() => _coll.Database.RunCommand(new CommandDocument("compact", _coll.Name)));
         }
         [WindowCommand("Запрос")]
         public ICommand FindCommand { get; private set; }
@@ -34,10 +35,12 @@ namespace MongoMS.ViewModel
 
          [WindowCommand("Добавить документ")]
         public ICommand AddDocumentCommand { get; private set; }
-
+ [WindowCommand("Добавить индекс")]
+        public ICommand AddIndexCommand { get; private set; }
          [WindowCommand("Агрегация")]
         public ICommand AggregateCommand { get; private set; }
-
+   [WindowCommand("Сжать")]
+        public ICommand CompactCommand { get; private set; }
 
     }
 }

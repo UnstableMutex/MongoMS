@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 namespace MongoMS.View
 {
     /// <summary>
@@ -23,6 +22,28 @@ namespace MongoMS.View
         public DatabaseExplorerView()
         {
             InitializeComponent();
+        }
+        private void OnPreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            TreeViewItem treeViewItem = VisualUpwardSearch(e.OriginalSource as DependencyObject);
+            if (treeViewItem != null)
+            {
+                treeViewItem.Focus();
+                e.Handled = true;
+            }
+        }
+        static TreeViewItem VisualUpwardSearch(DependencyObject source)
+        {
+            try
+            {
+                while (source != null && !(source is TreeViewItem))
+                    source = VisualTreeHelper.GetParent(source);
+                return source as TreeViewItem;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

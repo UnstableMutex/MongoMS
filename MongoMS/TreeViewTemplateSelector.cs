@@ -16,7 +16,7 @@ namespace MongoMS
             var dt = new HierarchicalDataTemplate(item.GetType());
             dt.ItemsSource = new Binding("Children");
             var f = new FrameworkElementFactory(typeof(Label));
-            f.SetBinding(ContentControl.ContentProperty, new Binding("Name"));
+            f.SetBinding(Label.ContentProperty, new Binding("Name"));
             f.AddHandler(Control.MouseDoubleClickEvent, new MouseButtonEventHandler(tb_MouseUp));
             var menu = GetMenu(item.GetType());
             f.SetValue(FrameworkElement.ContextMenuProperty,menu);
