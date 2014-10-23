@@ -20,35 +20,24 @@ namespace MongoMS.ViewModel
         {
             _coll = coll;
 
-            AssignCommands<NoWeakRelayCommand>();
+ 
+            FindCommand = new OpenTabCommand(()=> new FindViewModel(_coll));
+            StatsCommand =new OpenTabCommand(()=>new CollectionStatsViewModel(_coll));
+            AddDocumentCommand = new OpenTabCommand(()=>new AddDocumentViewModel(_coll));
+            AggregateCommand = new OpenTabCommand(() => new AggregateViewModel(_coll));
+
         }
         [WindowCommand("Запрос")]
         public ICommand FindCommand { get; private set; }
-
-        void Find()
-        {
-            SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new FindViewModel(_coll));
-        }
          [WindowCommand("Статистика")]
         public ICommand StatsCommand { get; private set; }
 
-        void Stats()
-        {
-            SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new CollectionStatsViewModel(_coll));
-        }
          [WindowCommand("Добавить документ")]
         public ICommand AddDocumentCommand { get; private set; }
 
-        void AddDocument()
-        {
-            SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new AddDocumentViewModel(_coll));
-        }
          [WindowCommand("Агрегация")]
         public ICommand AggregateCommand { get; private set; }
 
-        void Aggregate()
-        {
-            SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new AggregateViewModel(_coll));
-        }
+
     }
 }
