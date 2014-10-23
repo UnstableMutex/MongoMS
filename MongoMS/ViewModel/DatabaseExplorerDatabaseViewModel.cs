@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoMS.Common;
 using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
@@ -39,18 +40,21 @@ namespace MongoMS.ViewModel
                 Children.Add(new DatabaseExplorerCollectionViewModel(_db.GetCollection<BsonDocument>(coll)));
             }
         }
+        [WindowCommand("+Коллекция")]
         public ICommand AddCollectionCommand { get; private set; }
 
         void AddCollection()
         {
             SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new AddCollectionViewModel(_db));
         }
+        [WindowCommand("-коллекция")]
         public ICommand DropCommand { get; private set; }
 
         void Drop()
         {
             //SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add( new AddCollectionViewModel(_db));
         }
+        [WindowCommand("Экспорт из MSSQL")]
         public ICommand ExportFromMSSQLCommand { get; private set; }
 
         void ExportFromMSSQL()

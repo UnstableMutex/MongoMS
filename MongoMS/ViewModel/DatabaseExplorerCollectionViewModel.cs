@@ -1,9 +1,11 @@
 using System.Data;
+using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.CSharp.RuntimeBinder;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoMS.Common;
 using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
@@ -20,25 +22,28 @@ namespace MongoMS.ViewModel
 
             AssignCommands<NoWeakRelayCommand>();
         }
-
+        [WindowCommand("Запрос")]
         public ICommand FindCommand { get; private set; }
 
         void Find()
         {
             SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new FindViewModel(_coll));
         }
+         [WindowCommand("Статистика")]
         public ICommand StatsCommand { get; private set; }
 
         void Stats()
         {
             SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new CollectionStatsViewModel(_coll));
         }
+         [WindowCommand("Добавить документ")]
         public ICommand AddDocumentCommand { get; private set; }
 
         void AddDocument()
         {
             SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new AddDocumentViewModel(_coll));
         }
+         [WindowCommand("Агрегация")]
         public ICommand AggregateCommand { get; private set; }
 
         void Aggregate()

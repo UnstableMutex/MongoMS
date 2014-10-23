@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using MongoDB.Driver;
+using MongoMS.Common;
 using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
@@ -36,6 +37,7 @@ namespace MongoMS.ViewModel
 
             }
         }
+        [WindowCommand("Добавить БД")]
         public ICommand AddDBCommand { get; private set; }
 
         void AddDB()
