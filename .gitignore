@@ -5,6 +5,7 @@
 *.suo
 *.user
 *.userosscache
+Thumbs.db
 *.sln.docstates
 
 # Build results
