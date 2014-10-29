@@ -11,6 +11,7 @@ using System.Windows.Media;
 using GalaSoft.MvvmLight.Ioc;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using MongoDB.Driver.Linq;
 using MVVMLight.Extras;
 namespace MongoMS.ViewModel
@@ -114,9 +115,13 @@ namespace MongoMS.ViewModel
         void Find()
         {
             BsonDocument d = string.IsNullOrEmpty(FindCriteria) ? new BsonDocument() : BsonDocument.Parse(FindCriteria);
-
+          SortByDocument sbd=new SortByDocument();
+            foreach (var sort in FieldsToSort)
+            {
+                sbd.Add(sort.FieldName, sort.CurrentDirection== OrderByDirection.Ascending?1:-1);
+            }
             var doc = new QueryDocument(d);
-            QueryResults = _coll.Find(doc);
+            QueryResults = _coll.Find(doc).SetSortOrder(sbd).SetFields(FieldsToView.ToArray());
         }
         public string FindCriteria
         {
