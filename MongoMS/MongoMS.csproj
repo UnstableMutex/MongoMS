@@ -120,6 +120,7 @@
     <Compile Include="ViewModel\FindViewModel.cs" />
     <Compile Include="ViewModel\ItemType.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MakeCollectionCappedViewModel.cs" />
     <Compile Include="ViewModel\RenameFieldsViewModel.cs" />
     <Compile Include="View\AddCollectionView.xaml.cs">
       <DependentUpon>AddCollectionView.xaml</DependentUpon>
@@ -163,6 +164,9 @@
     </Compile>
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MakeCollectionCappedView.xaml.cs">
+      <DependentUpon>MakeCollectionCappedView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RenameFieldsView.xaml.cs">
       <DependentUpon>RenameFieldsView.xaml</DependentUpon>
@@ -233,6 +237,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MakeCollectionCappedView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
