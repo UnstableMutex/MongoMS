@@ -1,16 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media;
 using GalaSoft.MvvmLight.Ioc;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using MVVMLight.Extras;
 namespace MongoMS.ViewModel
 {
+    class SortParameterViewModel : VMB
+    {
+        public SortParameterViewModel(string fieldName)
+        {
+            AssignCommands<NoWeakRelayCommand>();
+            FieldName = fieldName;
+
+
+        }
+        private OrderByDirection _currentDirection;
+        public string FieldName { get;private set; }
+        public ICommand ChangeDirectionCommand { get; set; }
+
+        void ChangeDirection()
+        {
+            CurrentDirection = CurrentDirection == OrderByDirection.Ascending ? OrderByDirection.Descending : OrderByDirection.Ascending;
+        }
+
+
+        public OrderByDirection CurrentDirection
+        {
+            get { return _currentDirection; }
+            set
+            {
+                _currentDirection = value;
+                RaisePropertyChangedNoSave();
+            }
+        }
+    }
     [Header("Поиск")]
     class FindViewModel : VMB
     {
@@ -18,12 +51,60 @@ namespace MongoMS.ViewModel
         private IEnumerable<BsonDocument> _queryResults;
         private BsonDocument _selected;
         private string _findCriteria;
+        private IEnumerable<string> _fieldNames;
+
         public FindViewModel(MongoCollection<BsonDocument> coll)
         {
             _coll = coll;
             QueryResults = _coll.FindAll().SetLimit(100).ToList();
+            GetFieldNames();
             AssignCommands<NoWeakRelayCommand>();
+            FieldsToView = new ObservableCollection<string>();
+            FieldsToSort = new ObservableCollection<SortParameterViewModel>();
         }
+
+        public IEnumerable<string> FieldNames
+        {
+            get { return _fieldNames; }
+            set
+            {
+                _fieldNames = value;
+                RaisePropertyChangedNoSave();
+            }
+        }
+
+
+        public string SelectedFieldToView { get; set; }
+        public string SelectedFieldToSort { get; set; }
+
+        public ICommand AddFieldToSortCommand { get; private set; }
+
+        private void AddFieldToSort()
+        {
+            FieldsToSort.Add(new SortParameterViewModel(SelectedFieldToSort));
+        }
+
+
+        public ICommand AddFieldToViewCommand { get; private set; }
+
+        void AddFieldToView()
+        {
+            FieldsToView.Add(SelectedFieldToView);
+
+        }
+        public ObservableCollection<string> FieldsToView { get; private set; }
+        public ObservableCollection<SortParameterViewModel> FieldsToSort { get; set; }
+        private void GetFieldNames()
+        {
+            var cur = _coll.FindAll().SetLimit(100);
+            IEnumerable<string> fields = new List<string>();
+            foreach (var doc in cur)
+            {
+                fields = fields.Union(doc.Names);
+            }
+            FieldNames = fields;
+        }
+
         public ICommand EditCommand { get; private set; }
         void Edit()
         {
@@ -32,8 +113,8 @@ namespace MongoMS.ViewModel
         public ICommand FindCommand { get; private set; }
         void Find()
         {
-            BsonDocument d=string.IsNullOrEmpty(FindCriteria)?new BsonDocument() :BsonDocument.Parse(FindCriteria) ;
-           
+            BsonDocument d = string.IsNullOrEmpty(FindCriteria) ? new BsonDocument() : BsonDocument.Parse(FindCriteria);
+
             var doc = new QueryDocument(d);
             QueryResults = _coll.Find(doc);
         }

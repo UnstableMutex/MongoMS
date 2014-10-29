@@ -6,7 +6,7 @@
              xmlns:view="clr-namespace:MongoMS.View"
              xmlns:mongoMs="clr-namespace:MongoMS"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="415.25" d:DesignWidth="400.8">
     <UserControl.Resources>
         <mongoMs:QRToStringConverter x:Key="c"/>
 
@@ -37,29 +37,56 @@
             </DockPanel>
             <DockPanel Grid.Column="1" Margin="3.4,3,2.8,3.4" >
                 <Label DockPanel.Dock="Top">sort</Label>
-
                 <DockPanel DockPanel.Dock="Top">
-                    <Button DockPanel.Dock="Right">+</Button>
-                    <TextBox/>
+                    <Button Command="{Binding AddFieldToSortCommand}" DockPanel.Dock="Right">+</Button>
+                    <ComboBox Text="{Binding SelectedFieldToSort}" ItemsSource="{Binding FieldNames}" IsEditable="True"/>
                 </DockPanel>
                 <DockPanel>
                     <StackPanel Margin="2" VerticalAlignment="Center" DockPanel.Dock="Right">
-                        <Button>+</Button>
-                        <Button>-</Button>
+                        <Button>
+                            <Image Width="16" Height="16" Source="arrow_up.png"/>
+                        </Button>
+                        <Button>
+                            <Image RenderTransformOrigin="0.5,0.5" Width="16" Height="16"  Source="arrow_up.png">
+                                <Image.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleY="-1" ScaleX="1"/>
+                                    </TransformGroup>
+                                </Image.RenderTransform>
+                            </Image>
+                        </Button>
+                     
                     </StackPanel>
-                    <ListBox/>
+                    <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding FieldsToSort}">
+                        <ListBox.Resources>
+                            <mongoMs:DirectionToScaleConverter x:Key="dts"/>
+                        </ListBox.Resources>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <DockPanel>
+                                    <Button DockPanel.Dock="Right" Command="{Binding ChangeDirectionCommand}">
+                                        <Image RenderTransformOrigin="0.5,0.5" Width="16" Height="16"  Source="arrow_up.png">
+                                            <Image.RenderTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform ScaleY="{Binding CurrentDirection,Converter={StaticResource dts}}" ScaleX="1"/>
+                                                </TransformGroup>
+                                            </Image.RenderTransform>
+                                        </Image>
+                                    </Button>
+                                    <Label Content="{Binding FieldName}"/>
+                                </DockPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </DockPanel>
-
-
             </DockPanel>
             <DockPanel Grid.Column="2" Margin="3">
                 <Label DockPanel.Dock="Top">fields</Label>
                 <DockPanel DockPanel.Dock="Top">
-                    <Button DockPanel.Dock="Right">+</Button>
-                    <TextBox/>
-
+                    <Button Command="{Binding AddFieldToViewCommand}" DockPanel.Dock="Right">+</Button>
+                    <ComboBox Text="{Binding SelectedFieldToView}" IsEditable="True" ItemsSource="{Binding FieldNames}"/>
                 </DockPanel>
-                <ListBox/>
+                <ListBox ItemsSource="{Binding FieldsToView}"/>
             </DockPanel>
             <Button Content="ok" Command="{Binding FindCommand}" Padding="20,3" Grid.Column="2" HorizontalAlignment="Right"  Grid.Row="1" />
         </Grid>
@@ -72,13 +99,7 @@
                         </ContextMenu>
                     </view:CustomDataGrid.ContextMenu>
                 </view:CustomDataGrid>
-
             </TabItem>
-            <!--<TabItem Header="listview">
-                <ListView ItemsSource="{Binding QueryResults}">
-                    <ListView.View></ListView.View>
-                </ListView>
-            </TabItem>-->
             <TabItem Header="text">
                 <TextBox Text="{Binding QueryResults, Converter={StaticResource c}}"/>
             </TabItem>
@@ -96,6 +117,5 @@
                 </TreeView>
             </TabItem>
         </TabControl>
-
     </Grid>
 </UserControl>

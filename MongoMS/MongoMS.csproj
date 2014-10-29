@@ -92,6 +92,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BsonDocumentValidator.cs" />
+    <Compile Include="DirectionToScaleConverter.cs" />
     <Compile Include="Extention\Ext.cs" />
     <Compile Include="HeaderAttribute.cs" />
     <Compile Include="HeaderConverter.cs" />
@@ -283,6 +284,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\server.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\arrow_up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
