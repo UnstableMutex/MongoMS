@@ -132,6 +132,7 @@
     <Compile Include="ViewModel\DatabaseExplorerViewModel.cs" />
     <Compile Include="ViewModel\EditRecordViewModel.cs" />
     <Compile Include="ViewModel\ExportMSSQLViewModel.cs" />
+    <Compile Include="ViewModel\CollectionVMB.cs" />
     <Compile Include="ViewModel\FindViewModel.cs" />
     <Compile Include="ViewModel\ItemType.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -186,7 +187,6 @@
     <Compile Include="View\RenameFieldsView.xaml.cs">
       <DependentUpon>RenameFieldsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\vb.cs" />
     <Compile Include="WindowPosition.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>

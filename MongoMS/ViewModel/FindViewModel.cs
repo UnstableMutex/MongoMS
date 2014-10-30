@@ -46,35 +46,27 @@ namespace MongoMS.ViewModel
         }
     }
     [Header("Поиск")]
-    class FindViewModel : VMB
+    class FindViewModel : CollectionVMB
     {
-        private readonly MongoCollection<BsonDocument> _coll;
+       // private readonly MongoCollection<BsonDocument> _coll;
         private IEnumerable<BsonDocument> _queryResults;
         private BsonDocument _selected;
         private string _findCriteria;
         private IEnumerable<string> _fieldNames;
 
-        public FindViewModel(MongoCollection<BsonDocument> coll)
+        public FindViewModel(MongoCollection<BsonDocument> coll):base(coll)
         {
-            _coll = coll;
+           
             QueryResults = _coll.FindAll().SetLimit(100).ToList();
-         FieldNames=   GetFieldNames();
+      
             AssignCommands<NoWeakRelayCommand>();
-           // FieldsToView = new ObservableCollection<string>();
+          
             FieldsToView = new PairedObservableCollections<string>(FieldNames);
            
             FieldsToSort = new ObservableCollection<SortParameterViewModel>();
         }
         public PairedObservableCollections<string> FieldsToView { get; private set; } 
-        public IEnumerable<string> FieldNames
-        {
-            get { return _fieldNames; }
-            set
-            {
-                _fieldNames = value;
-                RaisePropertyChangedNoSave();
-            }
-        }
+       
 
 
        // public string SelectedFieldToView { get; set; }
@@ -86,28 +78,8 @@ namespace MongoMS.ViewModel
         {
             FieldsToSort.Add(new SortParameterViewModel(SelectedFieldToSort));
         }
-
-
-        //public ICommand AddFieldToViewCommand { get; private set; }
-
-        //void AddFieldToView()
-        //{
-        //    FieldsToView.Add(SelectedFieldToView);
-
-        //}
-        //public ObservableCollection<string> FieldsToView { get; private set; }
         public ObservableCollection<SortParameterViewModel> FieldsToSort { get; set; }
-        private IEnumerable<string> GetFieldNames()
-        {
-            var cur = _coll.FindAll().SetLimit(100);
-            IEnumerable<string> fields = new List<string>();
-            foreach (var doc in cur)
-            {
-                fields = fields.Union(doc.Names);
-            }
-        return fields;
-        }
-
+       
         public ICommand EditCommand { get; private set; }
         void Edit()
         {

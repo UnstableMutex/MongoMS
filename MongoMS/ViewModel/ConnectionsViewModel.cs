@@ -19,6 +19,7 @@ namespace MongoMS.ViewModel
     {
         private KeyValuePair<string, string> _selected;
         private string _newCsServer;
+        private string _newCsName;
 
         public ConnectionsViewModel()
         {
@@ -88,7 +89,16 @@ namespace MongoMS.ViewModel
 
             Connections.Add(NewCSName, sb.ConnectionString);
         }
-        public string NewCSName { get; set; }
+
+        public string NewCSName
+        {
+            get { return _newCsName; }
+            set
+            {
+                _newCsName = value;
+                RaisePropertyChangedNoSave();
+            }
+        }
 
         public KeyValuePair<string, string> Selected
         {
@@ -106,11 +116,13 @@ namespace MongoMS.ViewModel
             if (Selected.Equals(default(KeyValuePair<string, string>)))
             {
                 NewCSServer = null;
+                NewCSName = null;
             }
             else
             {
                 MongoConnectionStringBuilder sb = new MongoConnectionStringBuilder(Selected.Value);
                 NewCSServer = sb.Server.Host;
+                NewCSName = Selected.Key;
             }
         }
 
