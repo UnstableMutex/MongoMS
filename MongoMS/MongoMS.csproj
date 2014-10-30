@@ -306,7 +306,11 @@
     <Resource Include="database_1.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\server.png" />
+    <Resource Include="View\table.png" />
+    <Resource Include="View\database.png" />
+    <Content Include="View\server.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\arrow_up.png" />
