@@ -37,6 +37,16 @@ namespace MongoMS.ViewModel
 
             }
         }
+        [WindowCommand("Отключиться")]
+        public ICommand DisconnectCommand { get; private set; }
+
+        private void Disconnect()
+        {
+           
+        }
+
+
+
         [WindowCommand("Добавить БД")]
         public ICommand AddDBCommand { get; private set; }
 

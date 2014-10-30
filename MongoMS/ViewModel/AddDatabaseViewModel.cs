@@ -11,6 +11,7 @@ using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
 {
+    [Header("Добавить БД")]
     class AddDatabaseViewModel:VMB
     {
         private readonly MongoServer _serv;
