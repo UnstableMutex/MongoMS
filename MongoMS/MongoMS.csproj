@@ -111,8 +111,11 @@
     <Compile Include="ISaveable.cs" />
     <Compile Include="ObservableDictionary.cs" />
     <Compile Include="OpenTabCommand.cs" />
+    <Compile Include="PairedObservableCollections.cs" />
     <Compile Include="QRToStringConverter.cs" />
+    <Compile Include="SelectedEventArgs.cs" />
     <Compile Include="TreeViewTemplateSelector.cs" />
+    <Compile Include="UnSelectedEventArgs.cs" />
     <Compile Include="ViewModel\AddCollectionViewModel.cs" />
     <Compile Include="ViewModel\AddDatabaseViewModel.cs" />
     <Compile Include="ViewModel\AddDocumentViewModel.cs" />

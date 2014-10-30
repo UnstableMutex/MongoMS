@@ -58,12 +58,14 @@ namespace MongoMS.ViewModel
         {
             _coll = coll;
             QueryResults = _coll.FindAll().SetLimit(100).ToList();
-            GetFieldNames();
+         FieldNames=   GetFieldNames();
             AssignCommands<NoWeakRelayCommand>();
-            FieldsToView = new ObservableCollection<string>();
+           // FieldsToView = new ObservableCollection<string>();
+            FieldsToView = new PairedObservableCollections<string>(FieldNames);
+           
             FieldsToSort = new ObservableCollection<SortParameterViewModel>();
         }
-
+        public PairedObservableCollections<string> FieldsToView { get; private set; } 
         public IEnumerable<string> FieldNames
         {
             get { return _fieldNames; }
@@ -75,7 +77,7 @@ namespace MongoMS.ViewModel
         }
 
 
-        public string SelectedFieldToView { get; set; }
+       // public string SelectedFieldToView { get; set; }
         public string SelectedFieldToSort { get; set; }
 
         public ICommand AddFieldToSortCommand { get; private set; }
@@ -86,16 +88,16 @@ namespace MongoMS.ViewModel
         }
 
 
-        public ICommand AddFieldToViewCommand { get; private set; }
+        //public ICommand AddFieldToViewCommand { get; private set; }
 
-        void AddFieldToView()
-        {
-            FieldsToView.Add(SelectedFieldToView);
+        //void AddFieldToView()
+        //{
+        //    FieldsToView.Add(SelectedFieldToView);
 
-        }
-        public ObservableCollection<string> FieldsToView { get; private set; }
+        //}
+        //public ObservableCollection<string> FieldsToView { get; private set; }
         public ObservableCollection<SortParameterViewModel> FieldsToSort { get; set; }
-        private void GetFieldNames()
+        private IEnumerable<string> GetFieldNames()
         {
             var cur = _coll.FindAll().SetLimit(100);
             IEnumerable<string> fields = new List<string>();
@@ -103,7 +105,7 @@ namespace MongoMS.ViewModel
             {
                 fields = fields.Union(doc.Names);
             }
-            FieldNames = fields;
+        return fields;
         }
 
         public ICommand EditCommand { get; private set; }
@@ -121,7 +123,7 @@ namespace MongoMS.ViewModel
                 sbd.Add(sort.FieldName, sort.CurrentDirection== OrderByDirection.Ascending?1:-1);
             }
             var doc = new QueryDocument(d);
-            QueryResults = _coll.Find(doc).SetSortOrder(sbd).SetFields(FieldsToView.ToArray());
+            QueryResults = _coll.Find(doc).SetSortOrder(sbd).SetFields(FieldsToView.SelectedItems.ToArray());
         }
         public string FindCriteria
         {

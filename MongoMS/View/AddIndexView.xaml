@@ -6,6 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            
+        <ComboBox VerticalAlignment="Top" IsEditable="True" ItemsSource="{Binding FieldNames}" />
+   <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="5" Command="{Binding OKCommand}">OK</Button>
     </Grid>
 </UserControl>

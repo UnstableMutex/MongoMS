@@ -83,10 +83,16 @@
             <DockPanel Grid.Column="2" Margin="3">
                 <Label DockPanel.Dock="Top">fields</Label>
                 <DockPanel DockPanel.Dock="Top">
-                    <Button Command="{Binding AddFieldToViewCommand}" DockPanel.Dock="Right">+</Button>
-                    <ComboBox Text="{Binding SelectedFieldToView}" IsEditable="True" ItemsSource="{Binding FieldNames}"/>
+                    <Button Command="{Binding FieldsToView.SelectCommand}" DockPanel.Dock="Right">+</Button>
+                    <ComboBox DataContext="{Binding FieldsToView}" Text="{Binding SourceSelected}" IsEditable="True" ItemsSource="{Binding Source}"/>
                 </DockPanel>
-                <ListBox ItemsSource="{Binding FieldsToView}"/>
+                <ListBox DataContext="{Binding FieldsToView}" SelectedItem="{Binding SelectedSelected}" ItemsSource="{Binding SelectedItems}">
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="del" Command="{Binding UnSelectCommand}"></MenuItem>
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+                </ListBox>
             </DockPanel>
             <Button Content="ok" Command="{Binding FindCommand}" Padding="20,3" Grid.Column="2" HorizontalAlignment="Right"  Grid.Row="1" />
         </Grid>
