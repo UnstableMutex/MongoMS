@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Input;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
@@ -69,7 +70,12 @@ namespace MongoMS.ViewModel
 
         private void OK()
         {
-
+            IndexKeysBuilder b = new IndexKeysBuilder();
+            b.Ascending(SelectedField);
+            IndexOptionsBuilder b1=new IndexOptionsBuilder();
+            b1.SetName(IndexName);
+            _coll.CreateIndex(b,b1);
+            ExistsIndexes = new ObservableCollection<IndexInfo>(GetExistsIndexes());
         }
 
         private IEnumerable<string> GetFieldNames()
