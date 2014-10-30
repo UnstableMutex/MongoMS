@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Ioc;
 using NLog;
 
 namespace MVVMLight.Extras
@@ -23,6 +24,8 @@ namespace MVVMLight.Extras
         protected virtual void RealSave()
         {
         }
+
+     
 
         //protected virtual bool IsPropertyIgnoredOnSave(string propertyName)
         //{

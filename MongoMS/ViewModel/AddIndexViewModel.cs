@@ -9,6 +9,7 @@ using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
 {
+    [Header("Добавить индекс")]
     class AddIndexViewModel:VMB
     {
         private readonly MongoCollection<BsonDocument> _coll;

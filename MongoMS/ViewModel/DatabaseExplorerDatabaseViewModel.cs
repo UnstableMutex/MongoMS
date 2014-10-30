@@ -47,6 +47,13 @@ namespace MongoMS.ViewModel
         {
             SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new AddCollectionViewModel(_db));
         }
+        [WindowCommand("Подробно")]
+        public ICommand DBDetailsCommand { get; private set; }
+
+        void DBDetails()
+        {
+            SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new DatabaseDetailsViewModel(_db));
+        }
         [WindowCommand("-коллекция")]
         public ICommand DropCommand { get; private set; }
 

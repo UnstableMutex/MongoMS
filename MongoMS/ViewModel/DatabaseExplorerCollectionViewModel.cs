@@ -23,8 +23,11 @@ namespace MongoMS.ViewModel
             AggregateCommand = new OpenTabCommand(() => new AggregateViewModel(_coll));
             AddIndexCommand = new OpenTabCommand(() => new AddIndexViewModel(_coll));
             MakeCappedCommand = new OpenTabCommand(() => new MakeCollectionCappedViewModel(_coll));
+            RenameFieldsCommand = new OpenTabCommand(() => new RenameFieldsViewModel(_coll));
             CompactCommand = new NoWeakRelayCommand(() => _coll.Database.RunCommand(new CommandDocument("compact", _coll.Name)));
         }
+        [WindowCommand("Переименовать поле")]
+        public ICommand RenameFieldsCommand { get; set; }
         [WindowCommand("Сделать ограниченной")]
         public ICommand MakeCappedCommand { get; private set; }
         [WindowCommand("Запрос")]
