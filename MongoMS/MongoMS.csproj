@@ -137,6 +137,7 @@
     <Compile Include="ViewModel\ItemType.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MakeCollectionCappedViewModel.cs" />
+    <Compile Include="ViewModel\OKVMB.cs" />
     <Compile Include="ViewModel\RenameFieldsViewModel.cs" />
     <Compile Include="View\AddCollectionView.xaml.cs">
       <DependentUpon>AddCollectionView.xaml</DependentUpon>

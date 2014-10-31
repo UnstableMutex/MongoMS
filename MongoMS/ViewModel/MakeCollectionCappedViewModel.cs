@@ -14,22 +14,20 @@ using MVVMLight.Extras;
 namespace MongoMS.ViewModel
 {
     [Header("Make Capped")]
-    class MakeCollectionCappedViewModel : VMB
+    class MakeCollectionCappedViewModel : CollectionVMB
     {
-        private readonly MongoCollection _coll;
+      
 
-
-        public MakeCollectionCappedViewModel(MongoCollection coll)
+        public MakeCollectionCappedViewModel(MongoCollection coll):base(coll)
         {
             _isMBChecked = true;
-            _coll = coll;
+         
             MaxSize = 1;
             UnitsCommand = new RelayCommand<string>(SetUnits);
         }
 
-        public ICommand OKCommand { get; private set; }
-
-        private void OK()
+       
+        protected override void OK()
         {
             var g = Guid.NewGuid();
             var s = g.ToString();

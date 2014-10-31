@@ -26,7 +26,7 @@ namespace MongoMS.ViewModel
 
         }
         private OrderByDirection _currentDirection;
-        public string FieldName { get;private set; }
+        public string FieldName { get; private set; }
         public ICommand ChangeDirectionCommand { get; set; }
 
         void ChangeDirection()
@@ -48,28 +48,29 @@ namespace MongoMS.ViewModel
     [Header("Поиск")]
     class FindViewModel : CollectionVMB
     {
-       // private readonly MongoCollection<BsonDocument> _coll;
+        // private readonly MongoCollection<BsonDocument> _coll;
         private IEnumerable<BsonDocument> _queryResults;
         private BsonDocument _selected;
         private string _findCriteria;
         private IEnumerable<string> _fieldNames;
 
-        public FindViewModel(MongoCollection<BsonDocument> coll):base(coll)
+        public FindViewModel(MongoCollection<BsonDocument> coll)
+            : base(coll)
         {
-           
+
             QueryResults = _coll.FindAll().SetLimit(100).ToList();
-      
+
             AssignCommands<NoWeakRelayCommand>();
-          
+
             FieldsToView = new PairedObservableCollections<string>(FieldNames);
-           
+
             FieldsToSort = new ObservableCollection<SortParameterViewModel>();
         }
-        public PairedObservableCollections<string> FieldsToView { get; private set; } 
-       
+        public PairedObservableCollections<string> FieldsToView { get; private set; }
 
 
-       // public string SelectedFieldToView { get; set; }
+
+        // public string SelectedFieldToView { get; set; }
         public string SelectedFieldToSort { get; set; }
 
         public ICommand AddFieldToSortCommand { get; private set; }
@@ -79,20 +80,20 @@ namespace MongoMS.ViewModel
             FieldsToSort.Add(new SortParameterViewModel(SelectedFieldToSort));
         }
         public ObservableCollection<SortParameterViewModel> FieldsToSort { get; set; }
-       
+
         public ICommand EditCommand { get; private set; }
         void Edit()
         {
             SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new EditRecordViewModel(_coll, Selected));
         }
-        public ICommand FindCommand { get; private set; }
-        void Find()
+        // public ICommand FindCommand { get; private set; }
+        protected override void OK()
         {
             BsonDocument d = string.IsNullOrEmpty(FindCriteria) ? new BsonDocument() : BsonDocument.Parse(FindCriteria);
-          SortByDocument sbd=new SortByDocument();
+            SortByDocument sbd = new SortByDocument();
             foreach (var sort in FieldsToSort)
             {
-                sbd.Add(sort.FieldName, sort.CurrentDirection== OrderByDirection.Ascending?1:-1);
+                sbd.Add(sort.FieldName, sort.CurrentDirection == OrderByDirection.Ascending ? 1 : -1);
             }
             var doc = new QueryDocument(d);
             QueryResults = _coll.Find(doc).SetSortOrder(sbd).SetFields(FieldsToView.SelectedItems.ToArray());

@@ -94,7 +94,7 @@
                     </ListBox.ContextMenu>
                 </ListBox>
             </DockPanel>
-            <Button Content="ok" Command="{Binding FindCommand}" Padding="20,3" Grid.Column="2" HorizontalAlignment="Right"  Grid.Row="1" />
+            <Button Content="ok" Command="{Binding OKCommand}" Padding="20,3" Grid.Column="2" HorizontalAlignment="Right"  Grid.Row="1" />
         </Grid>
         <TabControl Grid.Row="1">
             <TabItem Name="ti" Header="table">

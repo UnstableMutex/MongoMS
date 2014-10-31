@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using MVVMLight.Extras;
+using MongoDB.Driver.Builders;
 
 namespace MongoMS.ViewModel
 {
-    class CollectionVMB:VMB
+    class CollectionVMB:OKVMB
     {
         protected readonly MongoCollection<BsonDocument> _coll;
 
@@ -28,6 +29,7 @@ namespace MongoMS.ViewModel
             }
             return fields;
         }
-        public IEnumerable<string> FieldNames { get; private set; } 
+        public IEnumerable<string> FieldNames { get; private set; }
+      
     }
 }
