@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -19,13 +20,13 @@ namespace MongoMS.ViewModel
         {
             _db = db;
             AssignCommands<NoWeakRelayCommand>();
-            ConnectionString = "Server=MainPC;Database=test;Trusted_Connection=True;";
+            ConnectionString = "Server=MainPC;Database=AdventureWorks2014;Trusted_Connection=True;";
         }
         public string ConnectionString { get; set; }
-     
+
         IEnumerable<string> GetTableNames()
         {
-            string q = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'";
+            string q = "SELECT TABLE_SCHEMA+'.'+TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'";
             var tablenames = new HashSet<string>();
             using (var conn = new SqlConnection(ConnectionString))
             {
@@ -45,7 +46,7 @@ namespace MongoMS.ViewModel
             }
             return tablenames;
         }
-       protected override void OK()
+        protected override void OK()
         {
 
             var tables = GetTableNames();
@@ -57,9 +58,26 @@ namespace MongoMS.ViewModel
 
         private void ImportTable(string table)
         {
+
+            try
+            {
+                ImportTableImpl(table);
+            }
+            catch (NotSupportedException e)
+            {
+                // Console.WriteLine(e);
+            }
+            //catch (Exception ex)
+            //{
+            //    throw;
+            //}
+        }
+
+        private void ImportTableImpl(string table)
+        {
             string q = string.Format("select * from {0}", table);
             var pk = getpk(table);
-            
+
             var coll = _db.GetCollection(table);
 
             using (var conn = new SqlConnection(ConnectionString))
@@ -73,41 +91,65 @@ namespace MongoMS.ViewModel
                         BsonDocument doc;
                         while (r.Read())
                         {
-                            doc=new BsonDocument();
+                            doc = new BsonDocument();
                             for (int i = 0; i < r.FieldCount; i++)
                             {
                                 var n = r.GetName(i);
                                 if (n == pk)
                                 {
-                                    doc["_id"] =ConvertToBsonValue(r[i],r.GetFieldType(i)) ;
+                                    doc["_id"] = ConvertToBsonValue(r[i], r.GetFieldType(i));
                                 }
                                 else
                                 {
-                                    doc[n] = ConvertToBsonValue(r[i], r.GetFieldType(i));
+                                    if (!r.IsDBNull(i))
+                                    {
+                                        doc[n] = ConvertToBsonValue(r[i], r.GetFieldType(i));
+                                    }
                                 }
-
                             }
                             coll.Save(doc);
                         }
-
                     }
                 }
             }
         }
 
-        private BsonValue ConvertToBsonValue(object field,Type fieldType)
+        private BsonValue ConvertToBsonValue(object field, Type fieldType)
         {
+
             var s = field.ToString();
             switch (fieldType.Name)
             {
-                case "string":
+                case "String":
                     return new BsonString(s);
                     break;
-                case "int":
+                case "Boolean":
+                    return (bool)field;
+                    break;
+                case "Int32":
+
                     return new BsonInt32(int.Parse(s));
                     break;
-                default:
+                case "Int16":
+                    return new BsonInt32((short)field);
+                case "DateTime":
+                    return new BsonDateTime((DateTime)field);
+                case "Byte":
+                    return new BsonInt32((Byte)field);
+                case "Byte[]":
+                    return new BsonBinaryData((byte[]) field);
+                case "TimeSpan":
+                    return new BsonInt64(((TimeSpan)field).Ticks);
+                case "Guid":
+                    return (Guid)field;
+                case "Decimal":
+                    return ((decimal)field).ToString("F4");
+                case "SqlHierarchyId":
+                case "SqlGeography":
                     throw new NotSupportedException();
+                default:
+
+                    throw new Exception();
             }
         }
 

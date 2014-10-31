@@ -20,11 +20,13 @@ namespace MongoMS.ViewModel
             _db = db;
 
             var stats = db.GetStats();
+           
             Size = new Dictionary<string, long>();
             Size.Add("Индексы", stats.IndexSize);
             Size.Add("Данные", stats.DataSize);
             Size.Add("Зарезервированное место",stats.FileSize-stats.IndexSize-stats.DataSize);
         }
+
         public Dictionary<string, long> Size { get; set; }
     }
 }

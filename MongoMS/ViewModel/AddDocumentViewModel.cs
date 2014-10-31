@@ -22,7 +22,7 @@ namespace MongoMS.ViewModel
         public AddDocumentViewModel(MongoCollection<BsonDocument> coll)
         {
             _coll = coll;
-            Doc=new BsonDocument();
+            Doc = new BsonDocument();
             AssignCommands<NoWeakRelayCommand>();
         }
 
@@ -31,7 +31,7 @@ namespace MongoMS.ViewModel
         public string Document
         {
             get { return Doc.ToString(); }
-          
+
         }
 
         private BsonDocument Doc
@@ -40,7 +40,7 @@ namespace MongoMS.ViewModel
             set
             {
                 _doc = value;
-               RaisePropertyChangedNoSave("Document");
+                RaisePropertyChangedNoSave("Document");
             }
         }
 
@@ -50,26 +50,26 @@ namespace MongoMS.ViewModel
 
         private void AddIntField()
         {
-             AddField(new BsonElement(FieldName,int.Parse(FieldValue)));
+            AddField(new BsonElement(FieldName, int.Parse(FieldValue)));
         }
 
         public ICommand AddDecFieldCommand { get; private set; }
 
         private void AddDecField()
         {
-            AddField(new BsonElement(FieldName,decimal.Parse(FieldValue).ToString("F4")));
+            AddField(new BsonElement(FieldName, decimal.Parse(FieldValue).ToString("F4")));
         }
         public ICommand AddFloatFieldCommand { get; private set; }
 
         private void AddFloatField()
         {
-              AddField(new BsonElement(FieldName,float.Parse(FieldValue)));
+            AddField(new BsonElement(FieldName, float.Parse(FieldValue)));
         }
         public ICommand AddFieldCommand { get; private set; }
 
         void AddField()
         {
-            AddField(new BsonElement(FieldName,FieldValue));
+            AddField(new BsonElement(FieldName, FieldValue));
         }
         public ICommand AddGuidIdCommand { get; private set; }
 
@@ -80,31 +80,35 @@ namespace MongoMS.ViewModel
             RaisePropertyChangedNoSave("Document");
         }
 
+        public ICommand AddObjectIdCommand { get; private set; }
+
+        private void AddObjectId()
+        {
+         
+            ObjectIdGenerator g = new ObjectIdGenerator();
+            var oid = (ObjectId)g.GenerateId(_coll, Doc);
+            AddID(oid);
+        }
+
 
         void AddGuidId()
         {
+            var guidgen = new GuidGenerator();
+         var id  = (Guid)guidgen.GenerateId(_coll, Doc);
+            AddID(id);
+        }
 
-            AddField(new BsonElement("_id",Guid.NewGuid()));
-
-
-
-
-            //BsonDocument d=new BsonDocument();
-            //if (!string.IsNullOrEmpty(Document))
-            //{
-            //    d= BsonDocument.Parse(Document);
-            //}
-           
-            //d["_id"] = Guid.NewGuid();
-            //Document = d.ToString();
+        void AddID(BsonValue id)
+        {
+            AddField(new BsonElement("_id", id));
         }
         public ICommand AddDocumentCommand { get; private set; }
 
         void AddDocument()
         {
-          
+
             _coll.Insert(Doc);
-           Doc=new BsonDocument();
+            Doc = new BsonDocument();
         }
 
     }

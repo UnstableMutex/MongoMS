@@ -12,13 +12,11 @@ using MVVMLight.Extras;
 namespace MongoMS.ViewModel
 {
     [Header("Переименовать поле")]
-    class RenameFieldsViewModel : OKVMB
+    class RenameFieldsViewModel : CollectionVMB
     {
-        private readonly MongoCollection _coll;
-
-        public RenameFieldsViewModel(MongoCollection coll)
+       
+        public RenameFieldsViewModel(MongoCollection<BsonDocument> coll):base(coll)
         {
-            _coll = coll;
             AssignCommands<NoWeakRelayCommand>();
         }
 
@@ -33,10 +31,9 @@ namespace MongoMS.ViewModel
             CloseThisTab();
         }
 
-        void CloseThisTab()
+        public override IEnumerable<string> FieldNames
         {
-            //TODO move method to base class - its usable
-            SimpleIoc.Default.GetInstance<MainViewModel>().Content.Remove(this);
+            get { return base.FieldNames.Where(x=>x!="_id"); }
         }
     }
 

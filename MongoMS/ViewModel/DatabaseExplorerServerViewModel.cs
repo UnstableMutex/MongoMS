@@ -17,7 +17,8 @@ namespace MongoMS.ViewModel
             _serv = serv;
 
             GetDatabases();
-            AssignCommands<NoWeakRelayCommand>();
+            AddDBCommand = new OpenTabCommand(()=> new AddDatabaseViewModel(_serv));
+            ServerOverviewCommand = new OpenTabCommand(()=>new ServerOverViewViewModel(_serv));
             MessengerInstance.Register(this, (NotificationMessage<DatabaseExplorerDatabaseViewModel> x) => DBAddedMessage(x));
         }
 
@@ -40,19 +41,20 @@ namespace MongoMS.ViewModel
         [WindowCommand("Отключиться")]
         public ICommand DisconnectCommand { get; private set; }
 
-        private void Disconnect()
-        {
+        //private void Disconnect()
+        //{
            
-        }
-
+        //}
+        [WindowCommand("Overview")]
+        public ICommand ServerOverviewCommand { get; private set; }
 
 
         [WindowCommand("Добавить БД")]
         public ICommand AddDBCommand { get; private set; }
 
-        void AddDB()
-        {
-            SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new AddDatabaseViewModel(_serv));
-        }
+        //void AddDB()
+        //{
+        //    SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new AddDatabaseViewModel(_serv));
+        //}
     }
 }

@@ -29,7 +29,7 @@ namespace MongoMS.ViewModel
             }
             return fields;
         }
-        public IEnumerable<string> FieldNames { get; private set; }
+        public virtual IEnumerable<string> FieldNames { get; private set; }
       
     }
 }

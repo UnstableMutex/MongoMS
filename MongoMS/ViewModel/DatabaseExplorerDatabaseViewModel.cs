@@ -12,8 +12,6 @@ namespace MongoMS.ViewModel
     class DatabaseExplorerDatabaseViewModel : DatabaseExplorerTreeItemBase
     {
         private readonly MongoDatabase _db;
-
-
         public DatabaseExplorerDatabaseViewModel(MongoDatabase db)
             : base(db.Name, ItemType.Database)
         {
@@ -26,10 +24,14 @@ namespace MongoMS.ViewModel
 
         private void AddedColl(NotificationMessage<DatabaseExplorerCollectionViewModel> notificationMessage)
         {
-            Children.Add(notificationMessage.Content);
-
-
-
+            if (notificationMessage.Notification == "added")
+            {
+                Children.Add(notificationMessage.Content);
+            }
+            else
+            {
+                Children.Remove(notificationMessage.Content);
+            }
         }
 
         private void GetCollections()

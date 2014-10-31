@@ -18,7 +18,7 @@ namespace MongoMS.ViewModel
     {
       
 
-        public MakeCollectionCappedViewModel(MongoCollection coll):base(coll)
+        public MakeCollectionCappedViewModel(MongoCollection<BsonDocument> coll):base(coll)
         {
             _isMBChecked = true;
          

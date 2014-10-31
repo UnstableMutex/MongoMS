@@ -1,4 +1,5 @@
 using System.Windows.Input;
+using GalaSoft.MvvmLight.Ioc;
 using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
@@ -21,6 +22,11 @@ namespace MongoMS.ViewModel
         protected virtual bool CanOK()
         {
             return true;
+        }
+      protected void CloseThisTab()
+        {
+            //TODO move method to base class - its usable
+            SimpleIoc.Default.GetInstance<MainViewModel>().Content.Remove(this);
         }
     }
 }

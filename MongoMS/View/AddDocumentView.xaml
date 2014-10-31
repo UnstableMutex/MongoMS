@@ -32,6 +32,7 @@
                 <Button Command="{Binding AddDecFieldCommand}" >dec(str4)</Button>
             </StackPanel>
         </WrapPanel>
-       
+        <Button Content="oid" Command="{Binding AddObjectIdCommand}" HorizontalAlignment="Left" Margin="58,64,0,0" VerticalAlignment="Top" Width="75"/>
+
     </Grid>
 </UserControl>

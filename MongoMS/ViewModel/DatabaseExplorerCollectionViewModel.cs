@@ -1,7 +1,9 @@
 using System.Data;
 using System.Windows;
 using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Messaging;
 using Microsoft.CSharp.RuntimeBinder;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -25,6 +27,12 @@ namespace MongoMS.ViewModel
             MakeCappedCommand = new OpenTabCommand(() => new MakeCollectionCappedViewModel(_coll));
             RenameFieldsCommand = new OpenTabCommand(() => new RenameFieldsViewModel(_coll));
             CompactCommand = new NoWeakRelayCommand(() => _coll.Database.RunCommand(new CommandDocument("compact", _coll.Name)));
+            DropCommand = new RelayCommand(() =>
+            {
+                MessengerInstance.Send(new NotificationMessage<DatabaseExplorerCollectionViewModel>(this, this,
+                    "dropped"));
+                _coll.Drop();
+            });
         }
         [WindowCommand("Переименовать поле")]
         public ICommand RenameFieldsCommand { get; set; }
@@ -42,6 +50,7 @@ namespace MongoMS.ViewModel
         public ICommand AggregateCommand { get; private set; }
         [WindowCommand("Сжать")]
         public ICommand CompactCommand { get; private set; }
-
+        [WindowCommand("Удалить")]
+        public ICommand DropCommand { get; private set; }
     }
 }
