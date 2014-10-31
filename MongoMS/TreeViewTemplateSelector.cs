@@ -48,30 +48,13 @@ namespace MongoMS
             ft.SetBinding(TextBlock.TextProperty,new Binding("Name"));
             f.AppendChild(fi);
             f.AppendChild(ft);
-
-
-           // f.SetBinding(Label.ContentProperty, new Binding("Name"));
-            //f.AddHandler(Control.MouseDoubleClickEvent, new MouseButtonEventHandler(tb_MouseUp));
             var menu = GetMenu(item.GetType());
             f.SetValue(FrameworkElement.ContextMenuProperty, menu);
-
-
-
-
-
-
-            dt.VisualTree = f;
+            var fcc = new FrameworkElementFactory(typeof (ContentControl));
+           fcc.AddHandler(Control.MouseDoubleClickEvent, new MouseButtonEventHandler(tb_MouseUp));
+            fcc.AppendChild(f);
+            dt.VisualTree = fcc;
             return dt;
-
-            //var dt = new HierarchicalDataTemplate(item.GetType());
-            //dt.ItemsSource = new Binding("Children");
-            //var f = new FrameworkElementFactory(typeof(Label));
-            //f.SetBinding(Label.ContentProperty, new Binding("Name"));
-            //f.AddHandler(Control.MouseDoubleClickEvent, new MouseButtonEventHandler(tb_MouseUp));
-            //var menu = GetMenu(item.GetType());
-            //f.SetValue(FrameworkElement.ContextMenuProperty,menu);
-            //dt.VisualTree = f;
-            //return dt;
         }
         ContextMenu GetMenu(Type t)
         {
@@ -82,6 +65,10 @@ namespace MongoMS
                 var mi = new MenuItem();
                 var att = cmd.GetAttribute<WindowCommandAttribute>();
                 mi.Header = att.Name;
+                if (att.IsDefault)
+                {
+                    mi.FontWeight = FontWeights.Bold;
+}
                 mi.SetBinding(MenuItem.CommandProperty, new Binding(cmd.Name));
                 cm.Items.Add(mi);
             }

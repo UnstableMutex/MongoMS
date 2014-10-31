@@ -30,7 +30,7 @@ namespace MongoMS.ViewModel
         public ICommand RenameFieldsCommand { get; set; }
         [WindowCommand("Сделать ограниченной")]
         public ICommand MakeCappedCommand { get; private set; }
-        [WindowCommand("Запрос")]
+        [WindowCommand("Запрос", IsDefault = true)]
         public ICommand FindCommand { get; private set; }
         [WindowCommand("Статистика")]
         public ICommand StatsCommand { get; private set; }

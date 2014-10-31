@@ -17,12 +17,12 @@ namespace MongoMS.Common
         {
             _name = name;
 
-          
         }
 
         public string Name
         {
             get { return _name; }
         }
+        public bool IsDefault { get; set; }
     }
 }
