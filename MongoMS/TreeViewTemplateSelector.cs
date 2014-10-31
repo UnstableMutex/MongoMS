@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
@@ -13,14 +14,21 @@ namespace MongoMS
 {
     internal class TreeViewTemplateSelector : DataTemplateSelector
     {
+        Dictionary<Type, DataTemplate> dic = new Dictionary<Type, DataTemplate>();
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
-            //     <StackPanel Orientation="Horizontal">
-            //    <Image Source="coffie.jpg" Height="30"></Image>
-            //    <TextBlock Text="Coffie"></TextBlock>
-            //</StackPanel>
-
             var t = item.GetType();
+            DataTemplate dt;
+            if (!dic.TryGetValue(t, out dt))
+            {
+                dt = CreateTemplate(t);
+                dic.Add(t, dt);
+            }
+            return dt;
+        }
+
+        private HierarchicalDataTemplate CreateTemplate(Type t)
+        {
             string image;
             if (t == typeof(DatabaseExplorerServerViewModel))
             {
@@ -30,12 +38,10 @@ namespace MongoMS
             {
                 image = "database";
             }
-            else 
+            else
             {
                 image = "table";
             }
-         
-         
 
 
             var dt = new HierarchicalDataTemplate(t);
@@ -43,19 +49,21 @@ namespace MongoMS
             var f = new FrameworkElementFactory(typeof(StackPanel));
             f.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal);
             var fi = new FrameworkElementFactory(typeof(Image));
-            fi.SetValue(Image.SourceProperty, new BitmapImage(new Uri(@"pack://application:,,,/MongoMS;component/View/"+image+".png")));
- var ft = new FrameworkElementFactory(typeof(TextBlock));
-            ft.SetBinding(TextBlock.TextProperty,new Binding("Name"));
+            fi.SetValue(Image.SourceProperty,
+                new BitmapImage(new Uri(@"pack://application:,,,/MongoMS;component/View/" + image + ".png")));
+            var ft = new FrameworkElementFactory(typeof(TextBlock));
+            ft.SetBinding(TextBlock.TextProperty, new Binding("Name"));
             f.AppendChild(fi);
             f.AppendChild(ft);
-            var menu = GetMenu(item.GetType());
+            var menu = GetMenu(t);
             f.SetValue(FrameworkElement.ContextMenuProperty, menu);
-            var fcc = new FrameworkElementFactory(typeof (ContentControl));
-           fcc.AddHandler(Control.MouseDoubleClickEvent, new MouseButtonEventHandler(tb_MouseUp));
+            var fcc = new FrameworkElementFactory(typeof(ContentControl));
+            fcc.AddHandler(Control.MouseDoubleClickEvent, new MouseButtonEventHandler(tb_MouseUp));
             fcc.AppendChild(f);
             dt.VisualTree = fcc;
             return dt;
         }
+
         ContextMenu GetMenu(Type t)
         {
             ContextMenu cm = new ContextMenu();
@@ -68,7 +76,7 @@ namespace MongoMS
                 if (att.IsDefault)
                 {
                     mi.FontWeight = FontWeights.Bold;
-}
+                }
                 mi.SetBinding(MenuItem.CommandProperty, new Binding(cmd.Name));
                 cm.Items.Add(mi);
             }

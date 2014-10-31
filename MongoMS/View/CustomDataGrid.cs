@@ -40,7 +40,7 @@ namespace MongoMS.View
         private Type t;
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            t = value.GetType();
+           // t = value.GetType();
             return value.ToString();
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

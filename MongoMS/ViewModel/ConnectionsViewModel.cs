@@ -47,6 +47,10 @@ namespace MongoMS.ViewModel
                 }
 
             }
+            else
+            {
+                Connections = new ObservableDictionary<string, string>();
+            }
         }
         const string SettingsFileName = "settings.xml";
         public void Save()
