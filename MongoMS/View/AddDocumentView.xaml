@@ -26,7 +26,10 @@
                 <TextBox Text="{Binding FieldValue}" />
             </StackPanel>
             <StackPanel>
-                <Button Command="{Binding AddFieldCommand}">str</Button><Button>int</Button><Button> float</Button><Button>dec(str4)</Button>
+                <Button Command="{Binding AddFieldCommand}">str</Button>
+                <Button  Command="{Binding AddIntFieldCommand}">int</Button>
+                <Button  Command="{Binding AddFloatFieldCommand}" >float</Button>
+                <Button Command="{Binding AddDecFieldCommand}" >dec(str4)</Button>
             </StackPanel>
         </WrapPanel>
        

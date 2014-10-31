@@ -80,11 +80,11 @@ namespace MongoMS.ViewModel
                                 var n = r.GetName(i);
                                 if (n == pk)
                                 {
-                                    doc["_id"] = r.GetInt32(i);
+                                    doc["_id"] =ConvertToBsonValue(r[i],r.GetFieldType(i)) ;
                                 }
                                 else
                                 {
-                                    doc[n] = r.GetString(i);
+                                    doc[n] = ConvertToBsonValue(r[i], r.GetFieldType(i));
                                 }
 
                             }
@@ -94,7 +94,22 @@ namespace MongoMS.ViewModel
                     }
                 }
             }
-            //return key;
+        }
+
+        private BsonValue ConvertToBsonValue(object field,Type fieldType)
+        {
+            var s = field.ToString();
+            switch (fieldType.Name)
+            {
+                case "string":
+                    return new BsonString(s);
+                    break;
+                case "int":
+                    return new BsonInt32(int.Parse(s));
+                    break;
+                default:
+                    throw new NotSupportedException();
+            }
         }
 
         string getpk(string tablename)

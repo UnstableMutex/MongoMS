@@ -35,8 +35,8 @@ namespace MongoMS.ViewModel
     [Header("Добавить индекс")]
     class AddIndexViewModel : CollectionVMB
     {
-        private readonly MongoCollection<BsonDocument> _coll;
-        private IEnumerable<string> _fieldNames;
+       
+      
         private string _selectedField;
         private string _indexName;
         private sbyte _direction;

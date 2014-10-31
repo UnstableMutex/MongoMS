@@ -46,6 +46,25 @@ namespace MongoMS.ViewModel
 
         public string FieldName { get; set; }
         public string FieldValue { get; set; }
+        public ICommand AddIntFieldCommand { get; private set; }
+
+        private void AddIntField()
+        {
+             AddField(new BsonElement(FieldName,int.Parse(FieldValue)));
+        }
+
+        public ICommand AddDecFieldCommand { get; private set; }
+
+        private void AddDecField()
+        {
+            AddField(new BsonElement(FieldName,decimal.Parse(FieldValue).ToString("F4")));
+        }
+        public ICommand AddFloatFieldCommand { get; private set; }
+
+        private void AddFloatField()
+        {
+              AddField(new BsonElement(FieldName,float.Parse(FieldValue)));
+        }
         public ICommand AddFieldCommand { get; private set; }
 
         void AddField()
