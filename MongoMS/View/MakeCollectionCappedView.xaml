@@ -32,10 +32,10 @@
                 <ToggleButton IsChecked="{Binding IsMBChecked}" CommandParameter="2" DockPanel.Dock="Right">MB</ToggleButton>
                 <ToggleButton IsChecked="{Binding IsKBChecked}" CommandParameter="1" DockPanel.Dock="Right">KB</ToggleButton>
                 <ToggleButton IsChecked="{Binding IsBChecked}" CommandParameter="0" DockPanel.Dock="Right">B</ToggleButton>
-                <TextBox Text="{Binding MaxSize}"/>
+                <TextBox Text="{Binding MaxSize,UpdateSourceTrigger=PropertyChanged}"/>
             </DockPanel>
-      
-        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding MaxCount}"/>
+
+            <TextBox IsEnabled="{Binding MaxCountEnabled}" Grid.Column="1" Grid.Row="2" Text="{Binding MaxCount}"/>
             <CheckBox IsChecked="{Binding MaxCountEnabled}" Grid.ColumnSpan="2" Margin="5,5" Grid.Row="1">Количество документов</CheckBox>
     </Grid>
  </DockPanel>

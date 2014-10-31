@@ -29,8 +29,7 @@ namespace MongoMS.ViewModel
         private void OK()
         {
        //TODO test rename
-            UpdateDocument ud = new UpdateDocument();
-            ud.Add("$rename", new BsonDocument(OldName, NewName));
+            UpdateDocument ud = new UpdateDocument {{"$rename", new BsonDocument(OldName, NewName)}};
             _coll.Update(new QueryDocument(), ud);
             CloseThisTab();
         }

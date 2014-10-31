@@ -13,6 +13,7 @@ using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
 {
+    [Header("Make Capped")]
     class MakeCollectionCappedViewModel : VMB
     {
         private readonly MongoCollection _coll;
@@ -20,8 +21,9 @@ namespace MongoMS.ViewModel
 
         public MakeCollectionCappedViewModel(MongoCollection coll)
         {
-            _isBChecked = true;
+            _isMBChecked = true;
             _coll = coll;
+            MaxSize = 1;
             UnitsCommand = new RelayCommand<string>(SetUnits);
         }
 
@@ -41,16 +43,31 @@ namespace MongoMS.ViewModel
             }
             _coll.Drop();
         }
-
-        public int MaxSize { get; set; }
+        [Int32Validator("Необходимо число")]
+        public int MaxSize
+        {
+            get { return _maxSize; }
+            set { _maxSize = value; }
+        }
+        [Int32Validator("Необходимо число")]
         public int MaxCount { get; set; }
-        public bool MaxCountEnabled { get; set; }
+
+        public bool MaxCountEnabled
+        {
+            get { return _maxCountEnabled; }
+            set
+            {
+                _maxCountEnabled = value; 
+                RaisePropertyChangedNoSave();
+            }
+        }
+
         public ICommand UnitsCommand { get; private set; }
         int Multiplier { get; set; }
 
         void SetUnits(string unitPow1)
         {
-            byte unitPow =byte.Parse( unitPow1);
+            byte unitPow = byte.Parse(unitPow1);
             Multiplier = (int)Math.Pow(1024, unitPow);
             switch (unitPow)
             {
@@ -91,6 +108,9 @@ namespace MongoMS.ViewModel
         private bool _isKBChecked;
         private bool _isMBChecked;
         private bool _isGBChecked;
+        private int _maxSize;
+        private bool _maxCountEnabled;
+
         public bool IsBChecked
         {
             get { return _isBChecked; }
