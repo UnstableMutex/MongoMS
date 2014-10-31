@@ -13,7 +13,7 @@ using MVVMLight.Extras;
 namespace MongoMS.ViewModel
 {
     [Header("Новая коллекция")]
-    class AddCollectionViewModel:VMB
+    class AddCollectionViewModel:OKVMB
     {
         private readonly MongoDatabase _db;
         public AddCollectionViewModel(MongoDatabase db)
@@ -39,8 +39,8 @@ namespace MongoMS.ViewModel
         }
         public long? MaxSize { get; set; }
         public long? MaxDocuments { get; set; }
-        public ICommand OKCommand { get; private set; }
-        void OK()
+ 
+       protected override void OK()
         {
             CollectionOptionsBuilder b=new CollectionOptionsBuilder();
             if (Capped)

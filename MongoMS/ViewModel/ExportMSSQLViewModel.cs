@@ -11,7 +11,7 @@ using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
 {
-    class ExportMSSQLViewModel : VMB
+    class ExportMSSQLViewModel : OKVMB
     {
         private readonly MongoDatabase _db;
 
@@ -22,8 +22,7 @@ namespace MongoMS.ViewModel
             ConnectionString = "Server=MainPC;Database=test;Trusted_Connection=True;";
         }
         public string ConnectionString { get; set; }
-        public ICommand OKCommand { get; private set; }
-
+     
         IEnumerable<string> GetTableNames()
         {
             string q = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'";
@@ -46,7 +45,7 @@ namespace MongoMS.ViewModel
             }
             return tablenames;
         }
-        void OK()
+       protected override void OK()
         {
 
             var tables = GetTableNames();

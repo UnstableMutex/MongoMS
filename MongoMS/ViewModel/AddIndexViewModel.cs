@@ -65,9 +65,8 @@ namespace MongoMS.ViewModel
         public ObservableCollection<IndexInfo> ExistsIndexes { get; private set; }
 
 
-        public ICommand OKCommand { get; private set; }
-
-        private void OK()
+       
+        protected override void OK()
         {
             IndexKeysBuilder b = new IndexKeysBuilder();
             b.Ascending(SelectedField);

@@ -86,7 +86,6 @@ namespace MongoMS.ViewModel
         {
             SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new EditRecordViewModel(_coll, Selected));
         }
-        // public ICommand FindCommand { get; private set; }
         protected override void OK()
         {
             BsonDocument d = string.IsNullOrEmpty(FindCriteria) ? new BsonDocument() : BsonDocument.Parse(FindCriteria);

@@ -12,7 +12,7 @@ using MVVMLight.Extras;
 namespace MongoMS.ViewModel
 {
     [Header("Переименовать поле")]
-    class RenameFieldsViewModel : VMB
+    class RenameFieldsViewModel : OKVMB
     {
         private readonly MongoCollection _coll;
 
@@ -24,9 +24,8 @@ namespace MongoMS.ViewModel
 
         public string OldName { get; set; }
         public string NewName { get; set; }
-        public ICommand OKCommand { get; private set; }
-
-        private void OK()
+      
+        protected override void OK()
         {
        //TODO test rename
             UpdateDocument ud = new UpdateDocument {{"$rename", new BsonDocument(OldName, NewName)}};
