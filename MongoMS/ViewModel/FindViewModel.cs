@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using GalaSoft.MvvmLight.Ioc;
@@ -88,6 +89,8 @@ namespace MongoMS.ViewModel
         }
         protected override void OK()
         {
+
+
             BsonDocument d = string.IsNullOrEmpty(FindCriteria) ? new BsonDocument() : BsonDocument.Parse(FindCriteria);
             SortByDocument sbd = new SortByDocument();
             foreach (var sort in FieldsToSort)
@@ -95,7 +98,7 @@ namespace MongoMS.ViewModel
                 sbd.Add(sort.FieldName, sort.CurrentDirection == OrderByDirection.Ascending ? 1 : -1);
             }
             var doc = new QueryDocument(d);
-            QueryResults = _coll.Find(doc).SetSortOrder(sbd).SetFields(FieldsToView.SelectedItems.ToArray());
+            QueryResults = _coll.Find(doc).SetSortOrder(sbd).SetFields(FieldsToView.SelectedItems.ToArray()).ToList();
         }
         public string FindCriteria
         {
@@ -107,8 +110,14 @@ namespace MongoMS.ViewModel
             get { return _selected; }
             set
             {
+                if (_selected != null)
+                {
+                    _coll.Save(_selected);
+                }
                 _selected = value;
+
                 RaisePropertyChangedNoSave();
+
             }
         }
         public IEnumerable<BsonDocument> QueryResults

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MongoDB.Bson;
+using MongoMS.ViewModel;
 
 namespace MongoMS.View
 {
@@ -26,7 +28,24 @@ namespace MongoMS.View
         }
 
 
-      
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            //MessageBox.Show(cdg.GetBindingExpression(DataGrid.SelectedItemProperty).ResolvedSourcePropertyName);
+        }
+
+        private void Cdg_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                var dc = (FindViewModel) ((sender as DataGrid).DataContext);
+                dc.Selected = e.AddedItems[0] as BsonDocument;
+            }
+            catch (IndexOutOfRangeException exception)
+            {
+               // Console.WriteLine(exception);
+            }
+
+        }
     }
    
    

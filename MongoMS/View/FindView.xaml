@@ -94,11 +94,11 @@
                     </ListBox.ContextMenu>
                 </ListBox>
             </DockPanel>
-            <Button Content="ok" Command="{Binding OKCommand}" Padding="20,3" Grid.Column="2" HorizontalAlignment="Right"  Grid.Row="1" />
+            <Button Content="ok" Click="ButtonBase_OnClick" Command="{Binding OKCommand}" Padding="20,3" Grid.Column="2" HorizontalAlignment="Right"  Grid.Row="1" />
         </Grid>
         <TabControl Grid.Row="1">
             <TabItem Name="ti" Header="table">
-                <view:CustomDataGrid SelectedItem="{Binding Selected}" ItemsSource="{Binding QueryResults}">
+                <view:CustomDataGrid SelectionChanged="Cdg_OnSelectionChanged" x:Name="cdg" ItemsSource="{Binding QueryResults}">
                     <view:CustomDataGrid.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="edit" Command="{Binding EditCommand}"/>
