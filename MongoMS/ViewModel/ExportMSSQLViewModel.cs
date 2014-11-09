@@ -116,6 +116,28 @@ WHERE
             }
             return key;
         }
+
+        protected BsonDocument GetDocuementFromRecord(SqlDataReader r, string pk)
+        {
+            BsonDocument doc;
+            doc = new BsonDocument();
+            for (int i = 0; i < r.FieldCount; i++)
+            {
+                var n = r.GetName(i);
+                if (n == pk)
+                {
+                    doc["_id"] = ConvertToBsonValue(r[i], r.GetFieldType(i));
+                }
+                else
+                {
+                    if (!r.IsDBNull(i))
+                    {
+                        doc[n] = ConvertToBsonValue(r[i], r.GetFieldType(i));
+                    }
+                }
+            }
+            return doc;
+        }
     }
 
     class ExportMSSQLViewModel : MSSQLViewModelBase
@@ -169,22 +191,7 @@ WHERE
                         BsonDocument doc;
                         while (r.Read())
                         {
-                            doc = new BsonDocument();
-                            for (int i = 0; i < r.FieldCount; i++)
-                            {
-                                var n = r.GetName(i);
-                                if (n == pk)
-                                {
-                                    doc["_id"] = ConvertToBsonValue(r[i], r.GetFieldType(i));
-                                }
-                                else
-                                {
-                                    if (!r.IsDBNull(i))
-                                    {
-                                        doc[n] = ConvertToBsonValue(r[i], r.GetFieldType(i));
-                                    }
-                                }
-                            }
+                            doc = GetDocuementFromRecord(r, pk);
                             coll.Save(doc);
                         }
                     }
