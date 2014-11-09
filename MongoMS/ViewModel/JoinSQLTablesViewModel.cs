@@ -47,48 +47,61 @@ namespace MongoMS.ViewModel
             }
         }
 
-        private string GetSchema(string tablename)
-        {
-            var dot = ".";
-            return tablename.Substring(0, tablename.IndexOf(dot));
-        }
-        private string GetTable(string tablename)
-        {
-            var dot = ".";
-            return tablename.Substring(tablename.IndexOf(dot)+1);
-        }
 
-        int getschemaid(string name)
+        public int GetTableID(string tableName)
         {
-             using (var conn = new SqlConnection(ConnectionString))
+            int schid;
+            using (var conn = new SqlConnection(ConnectionString))
             {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "select schema_id from sys.schemas where name='" + name + "'";
-                    return (int) cmd.ExecuteScalar();
+                    var dot = ".";
+                    cmd.CommandText = "select schema_id from sys.schemas where name='" + tableName.Substring(0, tableName.IndexOf(dot)) + "'";
+                    schid = (int)cmd.ExecuteScalar();
+                }
+            }
+
+            var dot1 = ".";
+            var tablen = tableName.Substring(tableName.IndexOf(dot1) + 1);
+            using (var conn1 = new SqlConnection(ConnectionString))
+            {
+                conn1.Open();
+                using (var cmd1 = conn1.CreateCommand())
+                {
+                    cmd1.CommandText = "select object_id from sys.tables where name='" + tablen + "' and schema_id=" + schid;
+                    return (int)cmd1.ExecuteScalar();
                 }
             }
         }
 
-        int gettableid(string name, int schid)
+        int GetFKID(string pt, string st)
         {
+            var stid = GetTableID(SecondaryTable);
+            var ptid = GetTableID(PrimaryTable);
 
-            using (var conn = new SqlConnection(ConnectionString))
+
+            using (var conn1 = new SqlConnection(ConnectionString))
             {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
+                conn1.Open();
+                using (var cmd1 = conn1.CreateCommand())
                 {
-                    cmd.CommandText = "select object_id from sys.tables where name='"+name+"' and schema_id="+schid;
-                    return (int) cmd.ExecuteScalar();
+                    cmd1.CommandText = "select object_id from sys.foreign_keys where parent_object_id=" + ptid + " and referenced_object_id=" + stid;
+                    return (int)cmd1.ExecuteScalar();
                 }
-            } 
+            }
+
+
         }
+
+
+
+
         public string GetFKName()
         {
             using (var conn = new SqlConnection(ConnectionString))
             {
-                
+
             }
         }
 
