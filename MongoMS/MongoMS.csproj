@@ -135,6 +135,7 @@
     <Compile Include="ViewModel\CollectionVMB.cs" />
     <Compile Include="ViewModel\FindViewModel.cs" />
     <Compile Include="ViewModel\ItemType.cs" />
+    <Compile Include="ViewModel\JoinSQLTablesViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MakeCollectionCappedViewModel.cs" />
     <Compile Include="ViewModel\OKVMB.cs" />
@@ -179,6 +180,9 @@
     </Compile>
     <Compile Include="View\FindView.xaml.cs">
       <DependentUpon>FindView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\JoinSQLTablesView.xaml.cs">
+      <DependentUpon>JoinSQLTablesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -258,6 +262,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FindView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\JoinSQLTablesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

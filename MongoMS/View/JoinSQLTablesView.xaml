@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="MongoMS.View.JoinSQLTablesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <StackPanel>
+        <ComboBox SelectedItem="{Binding PrimaryTable}" ItemsSource="{Binding TableNames}"/>
+        <ComboBox SelectedItem="{Binding SecondaryTable}" ItemsSource="{Binding TableNames}"/>
+        <CheckBox IsChecked="{Binding SaveSecondaryKeys}">Сохранить ключи</CheckBox>
+        <Button Command="{Binding OKCommand}">OK</Button>
+        
+    </StackPanel>
+</UserControl>

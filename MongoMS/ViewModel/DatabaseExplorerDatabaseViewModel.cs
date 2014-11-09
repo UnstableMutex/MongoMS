@@ -20,6 +20,7 @@ namespace MongoMS.ViewModel
             GetCollections();
             MessengerInstance.Register(this, (NotificationMessage<DatabaseExplorerCollectionViewModel> x) => AddedColl(x));
             AssignCommands<NoWeakRelayCommand>();
+            JoinTablesFromMSSQLCommand = new OpenTabCommand(() => new JoinSQLTablesViewModel(db));
         }
 
         private void AddedColl(NotificationMessage<DatabaseExplorerCollectionViewModel> notificationMessage)
@@ -68,7 +69,9 @@ namespace MongoMS.ViewModel
 
         void ExportFromMSSQL()
         {
-             SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add( new ExportMSSQLViewModel(_db));
+            SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new ExportMSSQLViewModel(_db));
         }
+        [WindowCommand("Объединить таблицы из MSSQL")]
+        public ICommand JoinTablesFromMSSQLCommand { get; private set; }
     }
 }
