@@ -22,6 +22,7 @@
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar Header="File">
                 <Button Command="{Binding NewConnectionCommand}">connect</Button>
+                <Button Command="{Binding SettingsCommand}">settings</Button>
             </ToolBar>
         </ToolBarTray>
         <Grid>

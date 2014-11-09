@@ -141,6 +141,7 @@
     <Compile Include="ViewModel\OKVMB.cs" />
     <Compile Include="ViewModel\RenameFieldsViewModel.cs" />
     <Compile Include="ViewModel\ServerOverViewViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="View\AddCollectionView.xaml.cs">
       <DependentUpon>AddCollectionView.xaml</DependentUpon>
     </Compile>
@@ -195,6 +196,9 @@
     </Compile>
     <Compile Include="View\ServerOverViewView.xaml.cs">
       <DependentUpon>ServerOverViewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowPosition.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -282,6 +286,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ServerOverViewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

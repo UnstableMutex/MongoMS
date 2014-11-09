@@ -24,12 +24,15 @@ namespace MongoMS.ViewModel
             Content.CollectionChanged += Content_CollectionChanged;
             // Content.Add( new ConnectionsViewModel());
             SimpleIoc.Default.Register<DatabaseExplorerViewModel>();
-
+            SettingsCommand = new OpenTabCommand(() => new SettingsViewModel());
             Explorer = SimpleIoc.Default.GetInstance<DatabaseExplorerViewModel>();
             AssignCommands<NoWeakRelayCommand>();
             CloseTabCommand = new RelayCommand<object>(ct);
 
         }
+
+        public ICommand SettingsCommand { get; set; }
+
         public ICommand NewConnectionCommand { get; private set; }
 
         void NewConnection()
@@ -43,6 +46,9 @@ namespace MongoMS.ViewModel
                 Selected = Content.OfType<ConnectionsViewModel>().Single();
             }
         }
+
+
+
         void Content_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
