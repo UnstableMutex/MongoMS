@@ -18,7 +18,7 @@ namespace MongoMS.ViewModel
         public JoinSQLTablesViewModel(MongoDatabase db)
             : base(db)
         {
-            _tableNames = new Lazy<IEnumerable<string>>(()=>GetTableNames().OrderBy(x=>x));
+            _tableNames = new Lazy<IEnumerable<string>>(() => GetTableNames().OrderBy(x => x));
         }
 
         private Lazy<IEnumerable<string>> _tableNames;
@@ -31,7 +31,7 @@ namespace MongoMS.ViewModel
             var fk = GetFKColumnName();
             var foreigntablepk = getpk(SecondaryTable);
             var pk = GetPKColumnName();
-            var stname = SecondaryTable.Substring(0, SecondaryTable.IndexOf("."));
+            var stname = SecondaryTable.Substring(SecondaryTable.IndexOf(".")+1);
             var ptpk = getpk(PrimaryTable);
             using (var sconn = new SqlConnection(ConnectionString))
             using (var pconn = new SqlConnection(ConnectionString))
@@ -45,7 +45,7 @@ namespace MongoMS.ViewModel
                     pcmd.CommandText = string.Format(cmdtext, PrimaryTable, pk);
                     scmd.CommandText = string.Format(cmdtext, SecondaryTable, fk);
                     using (var pr = pcmd.ExecuteReader())
-                    using (var sr = pcmd.ExecuteReader())
+                    using (var sr = scmd.ExecuteReader())
                     {
 
                         Dictionary<object, List<BsonDocument>> dic = new Dictionary<object, List<BsonDocument>>();
@@ -105,7 +105,35 @@ namespace MongoMS.ViewModel
             }
         }
 
+        public int GetFKID(string pt, string st)
+        {
+            var stid = GetTableID(st);
+            var ptid = GetTableID(pt);
+            using (var conn1 = new SqlConnection(ConnectionString))
+            {
+                conn1.Open();
+                using (var cmd1 = conn1.CreateCommand())
+                {
+                    cmd1.CommandText = "select object_id from sys.foreign_keys where  referenced_object_id=" + ptid + " and parent_object_id=" + stid;
+                    return (int)cmd1.ExecuteScalar();
+                }
+            }
+        }
 
+        string getcolname(int tid, int cid)
+        {
+            string q = "select name from sys.columns where object_id=" + tid + " and column_id=" + cid;
+            using (var conn1 = new SqlConnection(ConnectionString))
+            {
+                conn1.Open();
+                using (var cmd1 = conn1.CreateCommand())
+                {
+                    cmd1.CommandText = q;
+                    return (string)cmd1.ExecuteScalar();
+                }
+            }
+
+        }
 
 
 
@@ -113,52 +141,57 @@ namespace MongoMS.ViewModel
         public string GetFKColumnName()
         {
 
-            var stid = GetTableID(SecondaryTable);
+            //   var stid = GetTableID(SecondaryTable);
+            string fkcolname = "";
 
-            int scolid;
-
+            var fkid = GetFKID(PrimaryTable, SecondaryTable);
 
             using (var conn1 = new SqlConnection(ConnectionString))
             {
                 conn1.Open();
                 using (var cmd1 = conn1.CreateCommand())
                 {
-                    cmd1.CommandText = "select referenced_column_id from sys.foreign_key_columns where referenced_object_id=" + stid;
-                    scolid = (int)cmd1.ExecuteScalar();
+                    cmd1.CommandText = "select parent_object_id, parent_column_id from sys.foreign_key_columns where  constraint_object_id=" + fkid;
+                    using (var r = cmd1.ExecuteReader())
+                    {
+                        r.Read();
+                        var tbl = r.GetInt32(0);
+                        var col = r.GetInt32(1);
+                        return getcolname(tbl, col);
+
+                    }
                 }
             }
 
 
-            string fkcolname;
-            using (var conn1 = new SqlConnection(ConnectionString))
-            {
-                conn1.Open();
-                using (var cmd1 = conn1.CreateCommand())
-                {
-                    cmd1.CommandText = "select name from sys.columns where object_id=" + stid + " and column_id=" + scolid;
-                    fkcolname = (string)cmd1.ExecuteScalar();
-                }
-            }
 
 
-            return fkcolname;
 
         }
+
+
 
         public string GetPKColumnName()
         {
 
-            var ptidd = GetTableID(PrimaryTable);
-            int pcolid;
-
+            string pkcolname = "";
+            // var ptidd = GetTableID(PrimaryTable);
+            var fkid = GetFKID(PrimaryTable, SecondaryTable);
 
             using (var conn1 = new SqlConnection(ConnectionString))
             {
                 conn1.Open();
                 using (var cmd1 = conn1.CreateCommand())
                 {
-                    cmd1.CommandText = "select parent_column_id  from sys.foreign_key_columns where parent_object_id=" + ptidd;
-                    pcolid = (int)cmd1.ExecuteScalar();
+                    cmd1.CommandText = "select referenced_object_id, referenced_column_id from sys.foreign_key_columns where  constraint_object_id=" + fkid;
+                    using (var r = cmd1.ExecuteReader())
+                    {
+                        r.Read();
+                        var tbl = r.GetInt32(0);
+                        var col = r.GetInt32(1);
+                        return getcolname(tbl, col);
+
+                    }
                 }
             }
 
@@ -166,16 +199,6 @@ namespace MongoMS.ViewModel
 
 
 
-            string pkcolname;
-            using (var conn1 = new SqlConnection(ConnectionString))
-            {
-                conn1.Open();
-                using (var cmd1 = conn1.CreateCommand())
-                {
-                    cmd1.CommandText = "select name from sys.columns where object_id=" + ptidd + " and column_id=" + pcolid;
-                    pkcolname = (string)cmd1.ExecuteScalar();
-                }
-            }
 
             return pkcolname;
 
