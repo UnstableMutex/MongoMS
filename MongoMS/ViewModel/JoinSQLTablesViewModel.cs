@@ -28,6 +28,7 @@ namespace MongoMS.ViewModel
         public bool SaveSecondaryKeys { get; set; }
         protected override void OK()
         {
+            var coll = _db.GetCollection(PrimaryTable);
             var fk = GetFKColumnName();
             var foreigntablepk = getpk(SecondaryTable);
             var pk = GetPKColumnName();
@@ -41,14 +42,14 @@ namespace MongoMS.ViewModel
                 using (var pcmd = pconn.CreateCommand())
                 {
 
-                    const string cmdtext = "select * from {0} where {1} is not null order by {1} desc";
+                    const string cmdtext = "select * from {0} where {1} is not null order by {1}";
                     pcmd.CommandText = string.Format(cmdtext, PrimaryTable, pk);
                     scmd.CommandText = string.Format(cmdtext, SecondaryTable, fk);
                     using (var pr = pcmd.ExecuteReader())
                     using (var sr = scmd.ExecuteReader())
                     {
 
-                        Dictionary<object, List<BsonDocument>> dic = new Dictionary<object, List<BsonDocument>>();
+                        SortedDictionary<object, List<BsonDocument>> dic = new SortedDictionary<object, List<BsonDocument>>();
                         while (sr.Read())
                         {
                             var doc = GetDocuementFromRecord(sr, foreigntablepk);
@@ -66,10 +67,19 @@ namespace MongoMS.ViewModel
                         while (pr.Read())
                         {
                             var doc = GetDocuementFromRecord(pr, ptpk);
+                            var key = pr[pk];
 
-                            BsonArray arr = new BsonArray(dic[pr[pk]]);
-                            doc.Add(stname, arr);
+                            try
+                            {
+                                BsonArray arr = new BsonArray(dic[key]);
+                                doc.Add(stname, arr);
+                            }
+                            catch (KeyNotFoundException e)
+                            {
+                                //Console.WriteLine(e);
+                            }
 
+                            coll.Save(doc);
                         }
 
                     }
