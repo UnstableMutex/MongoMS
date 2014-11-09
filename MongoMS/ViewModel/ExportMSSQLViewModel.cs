@@ -89,14 +89,14 @@ namespace MongoMS.ViewModel
 
         protected string getpk(string tablename)
         {
-            string q = @"SELECT Col.Column_Name from 
+            string q = @"SELECT COLUMN_NAME from 
     INFORMATION_SCHEMA.TABLE_CONSTRAINTS Tab, 
     INFORMATION_SCHEMA.CONSTRAINT_COLUMN_USAGE Col 
 WHERE 
     Col.Constraint_Name = Tab.Constraint_Name
     AND Col.Table_Name = Tab.Table_Name
     AND Constraint_Type = 'PRIMARY KEY'
-    AND Col.Table_Name = 'Table_1'";
+    AND Col.TABLE_SCHEMA+'.'+Col.Table_Name = '"+tablename+"'";
             string key = string.Empty;
             using (var conn = new SqlConnection(ConnectionString))
             {

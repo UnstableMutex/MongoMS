@@ -26,6 +26,11 @@ namespace MongoMS.ViewModel
         public string PrimaryTable { get; set; }
         public string SecondaryTable { get; set; }
         public bool SaveSecondaryKeys { get; set; }
+        protected override bool CanOK()
+        {
+            return !(string.IsNullOrEmpty(SecondaryTable) || string.IsNullOrEmpty(PrimaryTable));
+        }
+
         protected override void OK()
         {
             var coll = _db.GetCollection(PrimaryTable);
@@ -53,6 +58,10 @@ namespace MongoMS.ViewModel
                         while (sr.Read())
                         {
                             var doc = GetDocuementFromRecord(sr, foreigntablepk);
+                            if (!SaveSecondaryKeys)
+                            {
+                                doc.Remove(fk);
+                            }
                             var key = sr[fk];
                             if (dic.ContainsKey(key))
                             {
