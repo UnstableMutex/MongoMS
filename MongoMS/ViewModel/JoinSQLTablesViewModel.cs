@@ -18,7 +18,7 @@ namespace MongoMS.ViewModel
         public JoinSQLTablesViewModel(MongoDatabase db)
             : base(db)
         {
-            _tableNames = new Lazy<IEnumerable<string>>(GetTableNames);
+            _tableNames = new Lazy<IEnumerable<string>>(()=>GetTableNames().OrderBy(x=>x));
         }
 
         private Lazy<IEnumerable<string>> _tableNames;
@@ -123,7 +123,7 @@ namespace MongoMS.ViewModel
                 conn1.Open();
                 using (var cmd1 = conn1.CreateCommand())
                 {
-                    cmd1.CommandText = "select * from sys.foreign_key_columns where referenced_object_id=" + stid;
+                    cmd1.CommandText = "select referenced_column_id from sys.foreign_key_columns where referenced_object_id=" + stid;
                     scolid = (int)cmd1.ExecuteScalar();
                 }
             }
@@ -157,7 +157,7 @@ namespace MongoMS.ViewModel
                 conn1.Open();
                 using (var cmd1 = conn1.CreateCommand())
                 {
-                    cmd1.CommandText = "select * from sys.foreign_key_columns where parent_object_id=" + ptidd;
+                    cmd1.CommandText = "select parent_column_id  from sys.foreign_key_columns where parent_object_id=" + ptidd;
                     pcolid = (int)cmd1.ExecuteScalar();
                 }
             }
