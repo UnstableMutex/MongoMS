@@ -4,26 +4,20 @@ using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
 {
-    class OKVMB : VMB
+    internal class OKVMB : VMB
     {
-       
-        public OKVMB()
-        {
-          
-        }
-     
         public ICommand OKCommand { get; protected set; }
 
         protected virtual void OK()
         {
-
         }
 
         protected virtual bool CanOK()
         {
             return true;
         }
-      protected void CloseThisTab()
+
+        protected void CloseThisTab()
         {
             //TODO move method to base class - its usable
             SimpleIoc.Default.GetInstance<MainViewModel>().Content.Remove(this);

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using MongoDB.Driver.Builders;
 
 namespace MongoMS.ViewModel
 {
-    class CollectionVMB:OKVMB
+    internal class CollectionVMB : OKVMB
     {
         protected readonly MongoCollection<BsonDocument> _coll;
 
@@ -19,17 +14,18 @@ namespace MongoMS.ViewModel
             _coll = coll;
             FieldNames = GetFieldNames();
         }
+
+        public virtual IEnumerable<string> FieldNames { get; private set; }
+
         private IEnumerable<string> GetFieldNames()
         {
-            var cur = _coll.FindAll().SetLimit(100);
+            MongoCursor<BsonDocument> cur = _coll.FindAll().SetLimit(100);
             IEnumerable<string> fields = new List<string>();
-            foreach (var doc in cur)
+            foreach (BsonDocument doc in cur)
             {
                 fields = fields.Union(doc.Names);
             }
             return fields;
         }
-        public virtual IEnumerable<string> FieldNames { get; private set; }
-      
     }
 }

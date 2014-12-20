@@ -3,13 +3,15 @@ using System.Collections.Generic;
 
 namespace MVVMLight.Extras
 {
-    internal class VError:IEnumerable
+    internal class VError : IEnumerable
     {
         public VError()
         {
-            Errors=new List<string>();
+            Errors = new List<string>();
         }
+
         public List<string> Errors { get; set; }
+
         public IEnumerator GetEnumerator()
         {
             return Errors.GetEnumerator();

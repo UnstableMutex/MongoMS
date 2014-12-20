@@ -6,7 +6,7 @@ using MVVMLight.Extras;
 namespace MongoMS.ViewModel
 {
     [Header("Правка записи")]
-    internal class EditRecordViewModel:VMB
+    internal class EditRecordViewModel : VMB
     {
         private readonly MongoCollection<BsonDocument> _coll;
         private readonly BsonDocument _selected;
@@ -17,11 +17,14 @@ namespace MongoMS.ViewModel
             _selected = selected;
             AssignCommands<NoWeakRelayCommand>();
         }
+
         public string DocumentString { get; set; }
         public string FieldName { get; set; }
         public string Value { get; set; }
         public ICommand GenerateGuidCommand { get; private set; }
-        void GenerateGuid()
-        { }
+
+        private void GenerateGuid()
+        {
+        }
     }
 }

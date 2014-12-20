@@ -1,4 +1,4 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
@@ -9,19 +9,36 @@ using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
 {
-    class DatabaseExplorerDatabaseViewModel : DatabaseExplorerTreeItemBase
+    internal class DatabaseExplorerDatabaseViewModel : DatabaseExplorerTreeItemBase
     {
         private readonly MongoDatabase _db;
+
         public DatabaseExplorerDatabaseViewModel(MongoDatabase db)
             : base(db.Name, ItemType.Database)
         {
             _db = db;
 
             GetCollections();
-            MessengerInstance.Register(this, (NotificationMessage<DatabaseExplorerCollectionViewModel> x) => AddedColl(x));
+            MessengerInstance.Register(this,
+                (NotificationMessage<DatabaseExplorerCollectionViewModel> x) => AddedColl(x));
             AssignCommands<NoWeakRelayCommand>();
             JoinTablesFromMSSQLCommand = new OpenTabCommand(() => new JoinSQLTablesViewModel(db));
         }
+
+        [WindowCommand("+Коллекция")]
+        public ICommand AddCollectionCommand { get; private set; }
+
+        [WindowCommand("Подробно")]
+        public ICommand DBDetailsCommand { get; private set; }
+
+        [WindowCommand("-коллекция")]
+        public ICommand DropCommand { get; private set; }
+
+        [WindowCommand("Экспорт из MSSQL")]
+        public ICommand ExportFromMSSQLCommand { get; private set; }
+
+        [WindowCommand("Объединить таблицы из MSSQL")]
+        public ICommand JoinTablesFromMSSQLCommand { get; private set; }
 
         private void AddedColl(NotificationMessage<DatabaseExplorerCollectionViewModel> notificationMessage)
         {
@@ -37,41 +54,31 @@ namespace MongoMS.ViewModel
 
         private void GetCollections()
         {
-            var colls = _db.GetCollectionNames();
-            foreach (var coll in colls)
+            IEnumerable<string> colls = _db.GetCollectionNames();
+            foreach (string coll in colls)
             {
                 Children.Add(new DatabaseExplorerCollectionViewModel(_db.GetCollection<BsonDocument>(coll)));
             }
         }
-        [WindowCommand("+Коллекция")]
-        public ICommand AddCollectionCommand { get; private set; }
 
-        void AddCollection()
+        private void AddCollection()
         {
             SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new AddCollectionViewModel(_db));
         }
-        [WindowCommand("Подробно")]
-        public ICommand DBDetailsCommand { get; private set; }
 
-        void DBDetails()
+        private void DBDetails()
         {
             SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new DatabaseDetailsViewModel(_db));
         }
-        [WindowCommand("-коллекция")]
-        public ICommand DropCommand { get; private set; }
 
-        void Drop()
+        private void Drop()
         {
             //SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add( new AddCollectionViewModel(_db));
         }
-        [WindowCommand("Экспорт из MSSQL")]
-        public ICommand ExportFromMSSQLCommand { get; private set; }
 
-        void ExportFromMSSQL()
+        private void ExportFromMSSQL()
         {
             SimpleIoc.Default.GetInstance<MainViewModel>().Content.Add(new ExportMSSQLViewModel(_db));
         }
-        [WindowCommand("Объединить таблицы из MSSQL")]
-        public ICommand JoinTablesFromMSSQLCommand { get; private set; }
     }
 }

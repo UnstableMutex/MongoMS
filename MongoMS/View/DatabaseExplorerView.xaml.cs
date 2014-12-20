@@ -1,21 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 namespace MongoMS.View
 {
     /// <summary>
-    /// Логика взаимодействия для DatabaseExplorerView.xaml
+    ///     Логика взаимодействия для DatabaseExplorerView.xaml
     /// </summary>
     public partial class DatabaseExplorerView : UserControl
     {
@@ -23,6 +15,7 @@ namespace MongoMS.View
         {
             InitializeComponent();
         }
+
         private void OnPreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             TreeViewItem treeViewItem = VisualUpwardSearch(e.OriginalSource as DependencyObject);
@@ -32,7 +25,8 @@ namespace MongoMS.View
                 e.Handled = true;
             }
         }
-        static TreeViewItem VisualUpwardSearch(DependencyObject source)
+
+        private static TreeViewItem VisualUpwardSearch(DependencyObject source)
         {
             try
             {

@@ -8,6 +8,7 @@ namespace MongoMS
         {
             Selected = selected;
         }
+
         public object Selected { get; private set; }
     }
 }

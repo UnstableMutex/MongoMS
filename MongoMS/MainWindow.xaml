@@ -5,7 +5,7 @@
         xmlns:mvvmTemplateSelection="clr-namespace:MVVMTemplateSelection;assembly=MVVMTemplateSelection"
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>
-        
+
     </Window.Resources>
-   <view:MainView/>
+    <view:MainView />
 </Window>

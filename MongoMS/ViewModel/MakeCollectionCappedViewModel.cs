@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using MongoDB.Bson;
@@ -14,40 +9,20 @@ using MVVMLight.Extras;
 namespace MongoMS.ViewModel
 {
     [Header("Make Capped")]
-    class MakeCollectionCappedViewModel : CollectionVMB
+    internal class MakeCollectionCappedViewModel : CollectionVMB
     {
-      
-
-        public MakeCollectionCappedViewModel(MongoCollection<BsonDocument> coll):base(coll)
+        public MakeCollectionCappedViewModel(MongoCollection<BsonDocument> coll) : base(coll)
         {
             _isMBChecked = true;
-         
+
             MaxSize = 1;
             UnitsCommand = new RelayCommand<string>(SetUnits);
         }
 
-       
-        protected override void OK()
-        {
-            //db.runCommand({"convertToCapped": "mycoll", size: 100000});  ? не поддерживает maxdocs
-            var g = Guid.NewGuid();
-            var s = g.ToString();
-            CollectionOptionsBuilder b = new CollectionOptionsBuilder();
-            b.SetCapped(true).SetMaxDocuments(MaxCount).SetMaxSize(MaxSize);
-            _coll.Database.CreateCollection(s, b);
-            var newcoll = _coll.Database.GetCollection(s);
-            foreach (var item in _coll.FindAllAs<BsonDocument>())
-            {
-                newcoll.Save(item);
-            }
-            _coll.Drop();
-        }
+
         [Int32Validator("Необходимо число")]
-        public int MaxSize
-        {
-            get { return _maxSize; }
-            set { _maxSize = value; }
-        }
+        public int MaxSize { get; set; }
+
         [Int32Validator("Необходимо число")]
         public int MaxCount { get; set; }
 
@@ -56,18 +31,34 @@ namespace MongoMS.ViewModel
             get { return _maxCountEnabled; }
             set
             {
-                _maxCountEnabled = value; 
+                _maxCountEnabled = value;
                 RaisePropertyChangedNoSave();
             }
         }
 
         public ICommand UnitsCommand { get; private set; }
-        int Multiplier { get; set; }
+        private int Multiplier { get; set; }
 
-        void SetUnits(string unitPow1)
+        protected override void OK()
+        {
+            //db.runCommand({"convertToCapped": "mycoll", size: 100000});  ? не поддерживает maxdocs
+            Guid g = Guid.NewGuid();
+            string s = g.ToString();
+            var b = new CollectionOptionsBuilder();
+            b.SetCapped(true).SetMaxDocuments(MaxCount).SetMaxSize(MaxSize);
+            _coll.Database.CreateCollection(s, b);
+            MongoCollection<BsonDocument> newcoll = _coll.Database.GetCollection(s);
+            foreach (BsonDocument item in _coll.FindAllAs<BsonDocument>())
+            {
+                newcoll.Save(item);
+            }
+            _coll.Drop();
+        }
+
+        private void SetUnits(string unitPow1)
         {
             byte unitPow = byte.Parse(unitPow1);
-            Multiplier = (int)Math.Pow(1024, unitPow);
+            Multiplier = (int) Math.Pow(1024, unitPow);
             switch (unitPow)
             {
                 case 0:
@@ -102,12 +93,13 @@ namespace MongoMS.ViewModel
                     throw new NotSupportedException();
             }
         }
+
         #region
+
         private bool _isBChecked;
+        private bool _isGBChecked;
         private bool _isKBChecked;
         private bool _isMBChecked;
-        private bool _isGBChecked;
-        private int _maxSize;
         private bool _maxCountEnabled;
 
         public bool IsBChecked
@@ -151,7 +143,5 @@ namespace MongoMS.ViewModel
         }
 
         #endregion
-
-
     }
 }

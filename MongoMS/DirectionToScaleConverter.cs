@@ -5,7 +5,7 @@ using MongoDB.Driver.Linq;
 
 namespace MongoMS
 {
-    class DirectionToScaleConverter : IValueConverter
+    internal class DirectionToScaleConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -20,6 +20,7 @@ namespace MongoMS
                     throw new Exception();
             }
         }
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotSupportedException();

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MongoMS
 {
@@ -10,7 +6,7 @@ namespace MongoMS
     internal sealed class HeaderAttribute : Attribute
     {
         private readonly string _header;
-       
+
         // This is a positional argument
         public HeaderAttribute(string header)
         {

@@ -1,27 +1,28 @@
 ﻿<UserControl x:Class="MongoMS.View.RenameFieldsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <DockPanel>
         <Button DockPanel.Dock="Bottom" HorizontalAlignment="Right" Margin="10" Command="{Binding OKCommand}">OK</Button>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="103*"/>
-                <ColumnDefinition Width="197*"/>
+                <ColumnDefinition Width="103*" />
+                <ColumnDefinition Width="197*" />
             </Grid.ColumnDefinitions>
-            <Label Content="Старое имя"/>
-            <Label Content="Новое имя" Grid.Row="1"/>
-            <ComboBox ItemsSource="{Binding FieldNames}" Text="{Binding OldName}" IsEditable="True" Grid.Column="1"/>
-            <ComboBox ItemsSource="{Binding FieldNames}"  IsEditable="True"  Grid.Column="1" Grid.Row="1" Text="{Binding NewName}"/>
+            <Label Content="Старое имя" />
+            <Label Content="Новое имя" Grid.Row="1" />
+            <ComboBox ItemsSource="{Binding FieldNames}" Text="{Binding OldName}" IsEditable="True" Grid.Column="1" />
+            <ComboBox ItemsSource="{Binding FieldNames}" IsEditable="True" Grid.Column="1" Grid.Row="1"
+                      Text="{Binding NewName}" />
 
         </Grid>
     </DockPanel>

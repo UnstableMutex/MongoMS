@@ -1,43 +1,43 @@
 ﻿<UserControl x:Class="MongoMS.View.MakeCollectionCappedView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
- <DockPanel>
+    <DockPanel>
         <Button DockPanel.Dock="Bottom" HorizontalAlignment="Right" Margin="10" Command="{Binding OKCommand}">OK</Button>
         <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
 
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <Label>MaxSize</Label>
-        <Label Grid.Row="2">MaxDocs</Label>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Label>MaxSize</Label>
+            <Label Grid.Row="2">MaxDocs</Label>
             <DockPanel Grid.Column="1">
                 <DockPanel.Resources>
                     <Style TargetType="ToggleButton">
-                        <Setter Property="Width" Value="30"/>
-                        <Setter Property="Command" Value="{Binding UnitsCommand}"/>
+                        <Setter Property="Width" Value="30" />
+                        <Setter Property="Command" Value="{Binding UnitsCommand}" />
                     </Style>
                 </DockPanel.Resources>
                 <ToggleButton IsChecked="{Binding IsGBChecked}" CommandParameter="3" DockPanel.Dock="Right">GB</ToggleButton>
                 <ToggleButton IsChecked="{Binding IsMBChecked}" CommandParameter="2" DockPanel.Dock="Right">MB</ToggleButton>
                 <ToggleButton IsChecked="{Binding IsKBChecked}" CommandParameter="1" DockPanel.Dock="Right">KB</ToggleButton>
                 <ToggleButton IsChecked="{Binding IsBChecked}" CommandParameter="0" DockPanel.Dock="Right">B</ToggleButton>
-                <TextBox Text="{Binding MaxSize,UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Text="{Binding MaxSize,UpdateSourceTrigger=PropertyChanged}" />
             </DockPanel>
 
-            <TextBox IsEnabled="{Binding MaxCountEnabled}" Grid.Column="1" Grid.Row="2" Text="{Binding MaxCount}"/>
+            <TextBox IsEnabled="{Binding MaxCountEnabled}" Grid.Column="1" Grid.Row="2" Text="{Binding MaxCount}" />
             <CheckBox IsChecked="{Binding MaxCountEnabled}" Grid.ColumnSpan="2" Margin="5,5" Grid.Row="1">Количество документов</CheckBox>
-    </Grid>
- </DockPanel>
-   
+        </Grid>
+    </DockPanel>
+
 </UserControl>

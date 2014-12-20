@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MongoMS.ViewModel
+﻿namespace MongoMS.ViewModel
 {
     [Header("Настройки")]
-    class SettingsViewModel:OKVMB
+    internal class SettingsViewModel : OKVMB
     {
     }
 }

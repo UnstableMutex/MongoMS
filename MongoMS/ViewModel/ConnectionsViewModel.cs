@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 using System.Xml.Serialization;
 using GalaSoft.MvvmLight.Ioc;
@@ -15,54 +12,17 @@ using MVVMLight.Extras;
 namespace MongoMS.ViewModel
 {
     [Header("Соединиться")]
-    class ConnectionsViewModel : VMB, ISaveable
+    internal class ConnectionsViewModel : VMB, ISaveable
     {
-        private KeyValuePair<string, string> _selected;
-        private string _newCsServer;
+        private const string SettingsFileName = "settings.xml";
         private string _newCsName;
+        private string _newCsServer;
+        private KeyValuePair<string, string> _selected;
 
         public ConnectionsViewModel()
         {
             AssignCommands<NoWeakRelayCommand>();
             Load();
-        }
-
-        void Load()
-        {
-            if (File.Exists(SettingsFileName))
-            {
-                XmlSerializer ser = new XmlSerializer(typeof(List<Entry>));
-                using (var sr = new StreamReader(SettingsFileName))
-                {
-                    var dic = (List<Entry>)ser.Deserialize(sr);
-
-
-
-                    var d = new ObservableDictionary<string, string>();
-                    foreach (var entry in dic)
-                    {
-                        d.Add(entry.Name, entry.ConnectionString);
-                    }
-                    Connections = d;
-                }
-
-            }
-            else
-            {
-                Connections = new ObservableDictionary<string, string>();
-            }
-        }
-        const string SettingsFileName = "settings.xml";
-        public void Save()
-        {
-            var d = new List<Entry>();
-            foreach (var connection in Connections)
-            {
-                d.Add(new Entry(connection.Key, connection.Value));
-            }
-
-            XmlSerializer ser = new XmlSerializer(d.GetType());
-            ser.Serialize(new StreamWriter(SettingsFileName, false), d);
         }
 
 
@@ -80,19 +40,6 @@ namespace MongoMS.ViewModel
         public ObservableDictionary<string, string> Connections { get; private set; }
         public ICommand DeleteConnectionCommand { get; private set; }
         public ICommand AddNewConnectionCommand { get; private set; }
-
-        void DeleteConnection()
-        {
-            Connections.Remove(Selected);
-            Selected = default(KeyValuePair<string, string>);
-        }
-        void AddNewConnection()
-        {
-            MongoConnectionStringBuilder sb = new MongoConnectionStringBuilder();
-            sb.Server = new MongoServerAddress(NewCSServer);
-
-            Connections.Add(NewCSName, sb.ConnectionString);
-        }
 
         public string NewCSName
         {
@@ -115,6 +62,58 @@ namespace MongoMS.ViewModel
             }
         }
 
+        public ICommand SelectCommand { get; private set; }
+
+        public void Save()
+        {
+            var d = new List<Entry>();
+            foreach (var connection in Connections)
+            {
+                d.Add(new Entry(connection.Key, connection.Value));
+            }
+
+            var ser = new XmlSerializer(d.GetType());
+            ser.Serialize(new StreamWriter(SettingsFileName, false), d);
+        }
+
+        private void Load()
+        {
+            if (File.Exists(SettingsFileName))
+            {
+                var ser = new XmlSerializer(typeof (List<Entry>));
+                using (var sr = new StreamReader(SettingsFileName))
+                {
+                    var dic = (List<Entry>) ser.Deserialize(sr);
+
+
+                    var d = new ObservableDictionary<string, string>();
+                    foreach (Entry entry in dic)
+                    {
+                        d.Add(entry.Name, entry.ConnectionString);
+                    }
+                    Connections = d;
+                }
+            }
+            else
+            {
+                Connections = new ObservableDictionary<string, string>();
+            }
+        }
+
+        private void DeleteConnection()
+        {
+            Connections.Remove(Selected);
+            Selected = default(KeyValuePair<string, string>);
+        }
+
+        private void AddNewConnection()
+        {
+            var sb = new MongoConnectionStringBuilder();
+            sb.Server = new MongoServerAddress(NewCSServer);
+
+            Connections.Add(NewCSName, sb.ConnectionString);
+        }
+
         private void OnSelectedChanged()
         {
             if (Selected.Equals(default(KeyValuePair<string, string>)))
@@ -124,38 +123,38 @@ namespace MongoMS.ViewModel
             }
             else
             {
-                MongoConnectionStringBuilder sb = new MongoConnectionStringBuilder(Selected.Value);
+                var sb = new MongoConnectionStringBuilder(Selected.Value);
                 NewCSServer = sb.Server.Host;
                 NewCSName = Selected.Key;
             }
         }
 
-        public ICommand SelectCommand { get; private set; }
-
-        void Select()
+        private void Select()
         {
-
             var exp = SimpleIoc.Default.GetInstance<DatabaseExplorerViewModel>();
             if (exp.Servers.All(x => x.Name != Selected.Key))
             {
-                exp.Servers.Add(new DatabaseExplorerServerViewModel(Selected.Key,new MongoClient( Selected.Value).GetServer()));
+                exp.Servers.Add(new DatabaseExplorerServerViewModel(Selected.Key,
+                    new MongoClient(Selected.Value).GetServer()));
                 SimpleIoc.Default.GetInstance<MainViewModel>().Content.Remove(this);
             }
             // exp.Servers.Add(new DatabaseExplorerServerViewModel(Selected.Key,  Selected.Value));
         }
     }
+
     [Serializable]
     public class Entry
     {
         public Entry()
         {
-
         }
+
         public Entry(string name, string cs)
         {
             Name = name;
             ConnectionString = cs;
         }
+
         public string Name { get; set; }
 
         public string ConnectionString { get; set; }

@@ -1,5 +1,7 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="MongoMS" GeneratedClassName="WindowPosition">
+
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
+              GeneratedClassNamespace="MongoMS" GeneratedClassName="WindowPosition">
   <Profiles />
   <Settings>
     <Setting Name="Top" Type="System.Int32" Scope="User">

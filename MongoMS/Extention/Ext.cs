@@ -1,26 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using MongoDB.Bson;
 
 namespace MongoMS.Extention
 {
-    static class Ext
+    internal static class Ext
     {
         public static BsonValue GetMongoType(IDataRecord r, int index)
         {
             throw new NotImplementedException();
         }
     }
+
     public static class TypeExtensions
     {
         /// <summary>
-        /// Loads the custom attributes from the type
+        ///     Loads the custom attributes from the type
         /// </summary>
         /// <typeparam name="T">The type of the custom attribute to find.</typeparam>
         /// <param name="typeWithAttributes">The calling assembly to search.</param>
@@ -34,15 +32,11 @@ namespace MongoMS.Extention
         public static T GetAttribute<T>(this PropertyInfo pi)
             where T : Attribute
         {
-         return   pi.GetCustomAttributes(typeof (T), false).FirstOrDefault() as T;
-
-
-
-
-
+            return pi.GetCustomAttributes(typeof (T), false).FirstOrDefault() as T;
         }
+
         /// <summary>
-        /// Loads the custom attributes from the type
+        ///     Loads the custom attributes from the type
         /// </summary>
         /// <typeparam name="T">The type of the custom attribute to find.</typeparam>
         /// <param name="typeWithAttributes">The calling assembly to search.</param>
@@ -52,7 +46,7 @@ namespace MongoMS.Extention
         {
             // Try to find the configuration attribute for the default logger if it exists
             object[] configAttributes = Attribute.GetCustomAttributes(typeWithAttributes,
-                typeof(T), false);
+                typeof (T), false);
 
             if (configAttributes != null)
             {
@@ -64,4 +58,3 @@ namespace MongoMS.Extention
         }
     }
 }
-

@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 
 namespace MongoMS
 {
-    class PairedObservableCollections<T>
+    internal class PairedObservableCollections<T>
     {
-        public event EventHandler<SelectedEventArgs> Selected;
-        public event EventHandler<UnSelectedEventArgs> UnSelected;
-
         public PairedObservableCollections()
         {
             Source = new ObservableCollection<T>();
@@ -30,20 +23,29 @@ namespace MongoMS
             SelectCommand = new RelayCommand(Select);
             UnSelectCommand = new RelayCommand(UnSelect);
         }
-        public PairedObservableCollections(IEnumerable<T> source,IEnumerable<T> selected)
+
+        public PairedObservableCollections(IEnumerable<T> source, IEnumerable<T> selected)
         {
             Source = new ObservableCollection<T>(source);
             SelectedItems = new ObservableCollection<T>(selected);
             SelectCommand = new RelayCommand(Select);
             UnSelectCommand = new RelayCommand(UnSelect);
         }
+
         public ObservableCollection<T> Source { get; set; }
         public ObservableCollection<T> SelectedItems { get; set; }
 
-         void Select()
-         {
+        public T SourceSelected { get; set; }
 
-             var tmp = SourceSelected;
+        public T SelectedSelected { get; set; }
+        public ICommand SelectCommand { get; private set; }
+        public ICommand UnSelectCommand { get; private set; }
+        public event EventHandler<SelectedEventArgs> Selected;
+        public event EventHandler<UnSelectedEventArgs> UnSelected;
+
+        private void Select()
+        {
+            T tmp = SourceSelected;
             Source.Remove(tmp);
             SelectedItems.Add(tmp);
             if (Selected != null)
@@ -53,9 +55,9 @@ namespace MongoMS
         }
 
 
-         void UnSelect()
-         {
-             var tmp = SelectedSelected;
+        private void UnSelect()
+        {
+            T tmp = SelectedSelected;
             SelectedItems.Remove(tmp);
             Source.Add(tmp);
             if (UnSelected != null)
@@ -63,11 +65,5 @@ namespace MongoMS
                 UnSelected(this, new UnSelectedEventArgs(tmp));
             }
         }
-
-        public T SourceSelected { get; set; }
-
-        public T SelectedSelected { get; set; }
-        public ICommand SelectCommand { get; private set; }
-        public ICommand UnSelectCommand { get; private set; }
     }
 }

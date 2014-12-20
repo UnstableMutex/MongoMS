@@ -1,33 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using GalaSoft.MvvmLight.Ioc;
+﻿using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using MVVMLight.Extras;
+
 namespace MongoMS.ViewModel
 {
     [Header("Новая коллекция")]
-    class AddCollectionViewModel:OKVMB
+    internal class AddCollectionViewModel : OKVMB
     {
         private readonly MongoDatabase _db;
+
+        private bool _capped;
+
         public AddCollectionViewModel(MongoDatabase db)
         {
             _db = db;
             AssignCommands<NoWeakRelayCommand>();
         }
-        private string _name;
-        private bool _capped;
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
+
+        public string Name { get; set; }
+
         public bool Capped
         {
             get { return _capped; }
@@ -37,14 +31,17 @@ namespace MongoMS.ViewModel
                 RaisePropertyChangedNoSave();
             }
         }
+
         public long? MaxSize { get; set; }
         public long? MaxDocuments { get; set; }
- 
-       protected override void OK()
+
+        protected override void OK()
         {
-            CollectionOptionsBuilder b=new CollectionOptionsBuilder();
+            var b = new CollectionOptionsBuilder();
             if (Capped)
-            { b.SetCapped(Capped);}
+            {
+                b.SetCapped(Capped);
+            }
             if (MaxSize.HasValue)
             {
                 b.SetMaxSize(MaxSize.Value);
@@ -53,10 +50,10 @@ namespace MongoMS.ViewModel
             {
                 b.SetMaxDocuments(MaxDocuments.Value);
             }
-           _db.CreateCollection(Name, b);
-            var mongoCollection = _db.GetCollection(Name);
-            DatabaseExplorerCollectionViewModel coll=new DatabaseExplorerCollectionViewModel(mongoCollection);
-            MessengerInstance.Send(new NotificationMessage<DatabaseExplorerCollectionViewModel>(this,coll,"added"));
+            _db.CreateCollection(Name, b);
+            MongoCollection<BsonDocument> mongoCollection = _db.GetCollection(Name);
+            var coll = new DatabaseExplorerCollectionViewModel(mongoCollection);
+            MessengerInstance.Send(new NotificationMessage<DatabaseExplorerCollectionViewModel>(this, coll, "added"));
             SimpleIoc.Default.GetInstance<MainViewModel>().Content.Remove(this);
         }
     }

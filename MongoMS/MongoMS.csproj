@@ -158,6 +158,7 @@
     <Compile Include="View\AggregateView.xaml.cs">
       <DependentUpon>AggregateView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\bsonConverter.cs" />
     <Compile Include="View\CollectionStatsView.xaml.cs">
       <DependentUpon>CollectionStatsView.xaml</DependentUpon>
     </Compile>
@@ -168,6 +169,7 @@
       <DependentUpon>CopyCollectionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CustomDataGrid.cs" />
+    <Compile Include="View\CustomTabControl.cs" />
     <Compile Include="View\DatabaseDetailsView.xaml.cs">
       <DependentUpon>DatabaseDetailsView.xaml</DependentUpon>
     </Compile>

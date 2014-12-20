@@ -7,15 +7,15 @@ using MongoDB.Bson;
 
 namespace MongoMS
 {
-    class QRToStringConverter : IValueConverter
+    internal class QRToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             var ie = value as IEnumerable<BsonDocument>;
-            foreach (var val in ie)
+            foreach (BsonDocument val in ie)
             {
-                sb.Append(val.ToString() + Environment.NewLine + Environment.NewLine + Environment.NewLine);
+                sb.Append(val + Environment.NewLine + Environment.NewLine + Environment.NewLine);
             }
             return sb.ToString();
             // return value.ToString();

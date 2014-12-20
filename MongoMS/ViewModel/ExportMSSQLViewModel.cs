@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using MVVMLight.Extras;
@@ -32,16 +27,15 @@ namespace MongoMS.ViewModel
             using (var conn = new SqlConnection(ConnectionString))
             {
                 conn.Open();
-                using (var cmd = conn.CreateCommand())
+                using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = q;
-                    using (var r = cmd.ExecuteReader())
+                    using (SqlDataReader r = cmd.ExecuteReader())
                     {
                         while (r.Read())
                         {
                             tablenames.Add(r.GetString(0));
                         }
-
                     }
                 }
             }
@@ -50,34 +44,33 @@ namespace MongoMS.ViewModel
 
         protected BsonValue ConvertToBsonValue(object field, Type fieldType)
         {
-
-            var s = field.ToString();
+            string s = field.ToString();
             switch (fieldType.Name)
             {
                 case "String":
                     return new BsonString(s);
                     break;
                 case "Boolean":
-                    return (bool)field;
+                    return (bool) field;
                     break;
                 case "Int32":
 
                     return new BsonInt32(int.Parse(s));
                     break;
                 case "Int16":
-                    return new BsonInt32((short)field);
+                    return new BsonInt32((short) field);
                 case "DateTime":
-                    return new BsonDateTime((DateTime)field);
+                    return new BsonDateTime((DateTime) field);
                 case "Byte":
-                    return new BsonInt32((Byte)field);
+                    return new BsonInt32((Byte) field);
                 case "Byte[]":
                     return new BsonBinaryData((byte[]) field);
                 case "TimeSpan":
-                    return new BsonInt64(((TimeSpan)field).Ticks);
+                    return new BsonInt64(((TimeSpan) field).Ticks);
                 case "Guid":
-                    return (Guid)field;
+                    return (Guid) field;
                 case "Decimal":
-                    return ((decimal)field).ToString("F4");
+                    return ((decimal) field).ToString("F4");
                 case "SqlHierarchyId":
                 case "SqlGeography":
                     throw new NotSupportedException();
@@ -96,21 +89,20 @@ WHERE
     Col.Constraint_Name = Tab.Constraint_Name
     AND Col.Table_Name = Tab.Table_Name
     AND Constraint_Type = 'PRIMARY KEY'
-    AND Col.TABLE_SCHEMA+'.'+Col.Table_Name = '"+tablename+"'";
+    AND Col.TABLE_SCHEMA+'.'+Col.Table_Name = '" + tablename + "'";
             string key = string.Empty;
             using (var conn = new SqlConnection(ConnectionString))
             {
                 conn.Open();
-                using (var cmd = conn.CreateCommand())
+                using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = q;
-                    using (var r = cmd.ExecuteReader())
+                    using (SqlDataReader r = cmd.ExecuteReader())
                     {
                         while (r.Read())
                         {
                             key = r.GetString(0);
                         }
-
                     }
                 }
             }
@@ -123,7 +115,7 @@ WHERE
             doc = new BsonDocument();
             for (int i = 0; i < r.FieldCount; i++)
             {
-                var n = r.GetName(i);
+                string n = r.GetName(i);
                 if (n == pk)
                 {
                     doc["_id"] = ConvertToBsonValue(r[i], r.GetFieldType(i));
@@ -140,7 +132,7 @@ WHERE
         }
     }
 
-    class ExportMSSQLViewModel : MSSQLViewModelBase
+    internal class ExportMSSQLViewModel : MSSQLViewModelBase
     {
         public ExportMSSQLViewModel(MongoDatabase db) : base(db)
         {
@@ -148,9 +140,8 @@ WHERE
 
         protected override void OK()
         {
-
-            var tables = GetTableNames();
-            foreach (var table in tables)
+            IEnumerable<string> tables = GetTableNames();
+            foreach (string table in tables)
             {
                 ImportTable(table);
             }
@@ -158,7 +149,6 @@ WHERE
 
         private void ImportTable(string table)
         {
-
             try
             {
                 ImportTableImpl(table);
@@ -176,17 +166,17 @@ WHERE
         private void ImportTableImpl(string table)
         {
             string q = string.Format("select * from {0}", table);
-            var pk = getpk(table);
+            string pk = getpk(table);
 
-            var coll = _db.GetCollection(table);
+            MongoCollection<BsonDocument> coll = _db.GetCollection(table);
 
             using (var conn = new SqlConnection(ConnectionString))
             {
                 conn.Open();
-                using (var cmd = conn.CreateCommand())
+                using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = q;
-                    using (var r = cmd.ExecuteReader())
+                    using (SqlDataReader r = cmd.ExecuteReader())
                     {
                         BsonDocument doc;
                         while (r.Read())
