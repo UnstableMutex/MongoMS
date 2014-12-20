@@ -34,7 +34,7 @@
 
             <DockPanel Margin="{StaticResource dpm}">
                 <Label DockPanel.Dock="Top">find</Label>
-                <TextBox  TextChanged="FindTextBox_OnTextChanged" GotFocus="FindTextBox_OnGotFocus" Name="FindTextBox">
+                <TextBox PreviewTextInput="FindTextBox_OnPreviewTextInput" PreviewKeyDown="FindTextBox_OnPreviewKeyDown" GotFocus="FindTextBox_OnGotFocus" Name="FindTextBox">
                     <TextBox.Text>
                         <Binding Path="FindCriteria" UpdateSourceTrigger="PropertyChanged" TargetNullValue="{}{}" />
                     </TextBox.Text>
