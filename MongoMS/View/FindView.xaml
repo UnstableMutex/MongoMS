@@ -18,68 +18,70 @@
         </Grid.RowDefinitions>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="34*"/>
-                <ColumnDefinition Width="37*"/>
-                <ColumnDefinition Width="29*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Grid.Resources>
-                <Style TargetType="DockPanel">
-                    <Setter Property="Margin" Value="3"/>
-                </Style>
+                <Thickness x:Key="dpm">1</Thickness>
             </Grid.Resources>
             <Grid.RowDefinitions>
-                <RowDefinition Height="60*"/>
-                <RowDefinition Height="11*"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <DockPanel Margin="3,3,2.6,3.4">
+            
+            <DockPanel Margin="{StaticResource dpm}">
                 <Label DockPanel.Dock="Top">find</Label>
                 <TextBox SelectionStart="1" Name="FindTextBox" TextChanged="TextBoxBase_OnTextChanged" >
                     <TextBox.Text>
-                       <!--Text="{Binding , UpdateSourceTrigger=PropertyChanged , TargetNullValue={}}"-->
+                        <!--Text="{Binding , UpdateSourceTrigger=PropertyChanged , TargetNullValue={}}"-->
                         <Binding Path="FindCriteria" UpdateSourceTrigger="PropertyChanged" TargetNullValue="{}{}" />
                     </TextBox.Text>
                 </TextBox>
             </DockPanel>
-            <DockPanel Grid.Column="1" Margin="3.4,3,2.8,3.4" >
+            <DockPanel Grid.Column="1"  Margin="{StaticResource dpm}">
                 <Label DockPanel.Dock="Top">sort</Label>
-                <DockPanel DockPanel.Dock="Top">
+                <DockPanel Margin="0,1" DockPanel.Dock="Top">
                     <Button Command="{Binding AddFieldToSortCommand}" DockPanel.Dock="Right">
                         <Image Source="plus.png" Width="16"/>
                     </Button>
                     <ComboBox Text="{Binding SelectedFieldToSort}" ItemsSource="{Binding FieldNames}" IsEditable="True"/>
                 </DockPanel>
                 <DockPanel>
-                    <StackPanel Margin="2" VerticalAlignment="Center" DockPanel.Dock="Right">
-                        <Button>
-                            <Image Width="16" Height="16" Source="arrow_up.png"/>
-                        </Button>
-                        <Button>
-                            <Image RenderTransformOrigin="0.5,0.5" Width="16" Height="16"  Source="arrow_up.png">
-                                <Image.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform ScaleY="-1" ScaleX="1"/>
-                                    </TransformGroup>
-                                </Image.RenderTransform>
-                            </Image>
-                        </Button>
-                     
-                    </StackPanel>
+                
                     <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding FieldsToSort}">
                         <ListBox.Resources>
                             <mongoMs:DirectionToScaleConverter x:Key="dts"/>
                         </ListBox.Resources>
                         <ListBox.ItemTemplate>
                             <DataTemplate>
+                               
                                 <DockPanel>
-                                    <Button DockPanel.Dock="Right" Command="{Binding ChangeDirectionCommand}">
-                                        <Image RenderTransformOrigin="0.5,0.5" Width="16" Height="16"  Source="arrow_up.png">
-                                            <Image.RenderTransform>
-                                                <TransformGroup>
-                                                    <ScaleTransform ScaleY="{Binding CurrentDirection,Converter={StaticResource dts}}" ScaleX="1"/>
-                                                </TransformGroup>
-                                            </Image.RenderTransform>
-                                        </Image>
-                                    </Button>
+                                    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                                     <Button Command="{Binding ChangeDirectionCommand}">
+                                            <Image RenderTransformOrigin="0.5,0.5" Width="16" Height="16"  Source="arrow_up.png">
+                                                <Image.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform ScaleY="{Binding CurrentDirection,Converter={StaticResource dts}}" ScaleX="1"/>
+                                                    </TransformGroup>
+                                                </Image.RenderTransform>
+                                            </Image>
+                                        </Button>
+                                        <Button>
+                                            <Image Width="16" Height="16" Source="arrow_up.png"/>
+                                        </Button>
+                                        <Button>
+                                            <Image RenderTransformOrigin="0.5,0.5" Width="16" Height="16"  Source="arrow_up.png">
+                                                <Image.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform ScaleY="-1" ScaleX="1"/>
+                                                    </TransformGroup>
+                                                </Image.RenderTransform>
+                                            </Image>
+                                        </Button>
+
+                                    </StackPanel> 
+                                   
                                     <Label Content="{Binding FieldName}"/>
                                 </DockPanel>
                             </DataTemplate>
@@ -87,9 +89,9 @@
                     </ListBox>
                 </DockPanel>
             </DockPanel>
-            <DockPanel Grid.Column="2" Margin="3">
+            <DockPanel Grid.Column="2"  Margin="{StaticResource dpm}">
                 <Label DockPanel.Dock="Top">fields</Label>
-                <DockPanel DockPanel.Dock="Top">
+                <DockPanel Margin="0,1" DockPanel.Dock="Top">
                     <Button Command="{Binding FieldsToView.SelectCommand}" DockPanel.Dock="Right">
                         <Image Source="plus.png" Width="16"/>
                     </Button>
@@ -103,7 +105,7 @@
                     </ListBox.ContextMenu>
                 </ListBox>
             </DockPanel>
-            <Button Content="ok" Click="ButtonBase_OnClick" Command="{Binding OKCommand}" Padding="20,3" Grid.Column="2" HorizontalAlignment="Right"  Grid.Row="1" />
+            <Button Content="OK" Click="ButtonBase_OnClick" Command="{Binding OKCommand}" Margin="5" Padding="30,2" Grid.Column="2" HorizontalAlignment="Right"  Grid.Row="1" />
         </Grid>
         <TabControl Grid.Row="1">
             <TabItem Name="ti" Header="table">
