@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:view="clr-namespace:MongoMS.View"
              xmlns:mongoMs="clr-namespace:MongoMS"
-             mc:Ignorable="d" Initialized="FindView_OnInitialized"
+             mc:Ignorable="d" 
+             Loaded="FindView_OnLoaded"
+           
              d:DesignHeight="415.25" d:DesignWidth="400.8">
     <UserControl.Resources>
         <mongoMs:QRToStringConverter x:Key="c" />
@@ -32,9 +34,8 @@
 
             <DockPanel Margin="{StaticResource dpm}">
                 <Label DockPanel.Dock="Top">find</Label>
-                <TextBox SelectionStart="1" Name="FindTextBox" TextChanged="TextBoxBase_OnTextChanged">
+                <TextBox  TextChanged="FindTextBox_OnTextChanged" GotFocus="FindTextBox_OnGotFocus" Name="FindTextBox">
                     <TextBox.Text>
-                        <!--Text="{Binding , UpdateSourceTrigger=PropertyChanged , TargetNullValue={}}"-->
                         <Binding Path="FindCriteria" UpdateSourceTrigger="PropertyChanged" TargetNullValue="{}{}" />
                     </TextBox.Text>
                 </TextBox>
@@ -111,12 +112,12 @@
                     </ListBox.ContextMenu>
                 </ListBox>
             </DockPanel>
-            <Button Content="OK" Click="ButtonBase_OnClick" Command="{Binding OKCommand}" Margin="5" Padding="30,2"
+            <Button Content="OK" Command="{Binding OKCommand}" Margin="5" Padding="30,2"
                     Grid.Column="2" HorizontalAlignment="Right" Grid.Row="1" />
         </Grid>
         <TabControl Grid.Row="1">
             <TabItem Name="ti" Header="table">
-                <view:CustomDataGrid SelectionChanged="Cdg_OnSelectionChanged" x:Name="cdg"
+                <view:CustomDataGrid IsTabStop="False" SelectionChanged="Cdg_OnSelectionChanged" x:Name="cdg"
                                      ItemsSource="{Binding QueryResults}">
                     <view:CustomDataGrid.ContextMenu>
                         <ContextMenu>

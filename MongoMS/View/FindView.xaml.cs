@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -18,11 +19,6 @@ namespace MongoMS.View
         }
 
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            //MessageBox.Show(cdg.GetBindingExpression(DataGrid.SelectedItemProperty).ResolvedSourcePropertyName);
-        }
-
         private void Cdg_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -36,14 +32,38 @@ namespace MongoMS.View
             }
         }
 
-
-        private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
+        private void FindView_OnLoaded(object sender, RoutedEventArgs e)
         {
+              FocusManager.SetFocusedElement(this, FindTextBox);
+            Keyboard.Focus(FindTextBox);
         }
 
-        private void FindView_OnInitialized(object sender, EventArgs e)
+        private void FindTextBox_OnGotFocus(object sender, RoutedEventArgs e)
         {
-            FocusManager.SetFocusedElement(this, FindTextBox);
+            if (FindTextBox.Text=="{}")
+            FindTextBox.SelectionStart = 1;
         }
+        private void FindTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            var selstart = FindTextBox.SelectionStart;
+            var text = FindTextBox.Text;
+            var firstchange = e.Changes.First();
+            var start = text.Substring(0, firstchange.Offset);
+            var end = text.Substring(firstchange.Offset + 1);
+
+            var addedsymb = text.Substring(firstchange.Offset, 1);
+            switch (addedsymb)
+            {
+                case "'":
+                   FindTextBox.  Text = start + "''" + end;
+                     FindTextBox.SelectionStart = selstart;
+                    break;
+                default:
+                    return;
+            }
+        
+        }
+
+       
     }
 }

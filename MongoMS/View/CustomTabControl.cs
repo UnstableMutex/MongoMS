@@ -1,5 +1,7 @@
 using System.Collections.Specialized;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace MongoMS.View
 {
@@ -13,6 +15,7 @@ namespace MongoMS.View
                 {
                     SelectedIndex = e.NewStartingIndex;
                 }
+
         }
     }
 }

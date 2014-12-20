@@ -38,7 +38,7 @@
                           Background="LightBlue"
                           ShowsPreview="True"
                           Width="3" />
-            <view:DatabaseExplorerView DataContext="{Binding Explorer}" />
+            <view:DatabaseExplorerView IsTabStop="False" DataContext="{Binding Explorer}" />
 
             <!--Explorer ItemTemplateSelector="{StaticResource cts}" -->
             <view:CustomTabControl SelectedItem="{Binding Selected}" x:Name="tc"
