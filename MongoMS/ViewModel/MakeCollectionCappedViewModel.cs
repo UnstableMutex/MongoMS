@@ -29,6 +29,7 @@ namespace MongoMS.ViewModel
        
         protected override void OK()
         {
+            //db.runCommand({"convertToCapped": "mycoll", size: 100000});  ? не поддерживает maxdocs
             var g = Guid.NewGuid();
             var s = g.ToString();
             CollectionOptionsBuilder b = new CollectionOptionsBuilder();

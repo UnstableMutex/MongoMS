@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:view="clr-namespace:MongoMS.View"
              xmlns:mongoMs="clr-namespace:MongoMS"
-             mc:Ignorable="d" 
+             mc:Ignorable="d" Initialized="FindView_OnInitialized"
              d:DesignHeight="415.25" d:DesignWidth="400.8">
     <UserControl.Resources>
         <mongoMs:QRToStringConverter x:Key="c"/>
@@ -33,12 +33,19 @@
             </Grid.RowDefinitions>
             <DockPanel Margin="3,3,2.6,3.4">
                 <Label DockPanel.Dock="Top">find</Label>
-                <TextBox Text="{Binding FindCriteria, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox SelectionStart="1" Name="FindTextBox" TextChanged="TextBoxBase_OnTextChanged" >
+                    <TextBox.Text>
+                       <!--Text="{Binding , UpdateSourceTrigger=PropertyChanged , TargetNullValue={}}"-->
+                        <Binding Path="FindCriteria" UpdateSourceTrigger="PropertyChanged" TargetNullValue="{}{}" />
+                    </TextBox.Text>
+                </TextBox>
             </DockPanel>
             <DockPanel Grid.Column="1" Margin="3.4,3,2.8,3.4" >
                 <Label DockPanel.Dock="Top">sort</Label>
                 <DockPanel DockPanel.Dock="Top">
-                    <Button Command="{Binding AddFieldToSortCommand}" DockPanel.Dock="Right">+</Button>
+                    <Button Command="{Binding AddFieldToSortCommand}" DockPanel.Dock="Right">
+                        <Image Source="plus.png" Width="16"/>
+                    </Button>
                     <ComboBox Text="{Binding SelectedFieldToSort}" ItemsSource="{Binding FieldNames}" IsEditable="True"/>
                 </DockPanel>
                 <DockPanel>
@@ -83,7 +90,9 @@
             <DockPanel Grid.Column="2" Margin="3">
                 <Label DockPanel.Dock="Top">fields</Label>
                 <DockPanel DockPanel.Dock="Top">
-                    <Button Command="{Binding FieldsToView.SelectCommand}" DockPanel.Dock="Right">+</Button>
+                    <Button Command="{Binding FieldsToView.SelectCommand}" DockPanel.Dock="Right">
+                        <Image Source="plus.png" Width="16"/>
+                    </Button>
                     <ComboBox DataContext="{Binding FieldsToView}" Text="{Binding SourceSelected}" IsEditable="True" ItemsSource="{Binding Source}"/>
                 </DockPanel>
                 <ListBox DataContext="{Binding FieldsToView}" SelectedItem="{Binding SelectedSelected}" ItemsSource="{Binding SelectedItems}">

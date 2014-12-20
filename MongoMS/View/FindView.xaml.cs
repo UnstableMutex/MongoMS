@@ -46,6 +46,19 @@ namespace MongoMS.View
             }
 
         }
+
+
+        private void TextBoxBase_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            
+        }
+
+        private void FindView_OnInitialized(object sender, EventArgs e)
+        {
+           
+            FocusManager.SetFocusedElement(this,FindTextBox);
+
+        }
     }
    
    

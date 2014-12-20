@@ -342,6 +342,7 @@
   <ItemGroup>
     <Resource Include="View\table.png" />
     <Resource Include="View\database.png" />
+    <Resource Include="View\plus.png" />
     <Content Include="View\server.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

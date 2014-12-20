@@ -76,6 +76,10 @@ namespace MongoMS.ViewModel
 
         void AddField(BsonElement element)
         {
+            if (Doc.Contains(element.Name))
+            {
+                Doc.Remove(element.Name);
+            }
             Doc.Add(element);
             RaisePropertyChangedNoSave("Document");
         }
