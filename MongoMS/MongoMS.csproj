@@ -138,6 +138,7 @@
     <Compile Include="ViewModel\JoinSQLTablesViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MakeCollectionCappedViewModel.cs" />
+    <Compile Include="ViewModel\MakeTTLViewModel.cs" />
     <Compile Include="ViewModel\OKVMB.cs" />
     <Compile Include="ViewModel\RenameFieldsViewModel.cs" />
     <Compile Include="ViewModel\ServerOverViewViewModel.cs" />
@@ -190,6 +191,9 @@
     </Compile>
     <Compile Include="View\MakeCollectionCappedView.xaml.cs">
       <DependentUpon>MakeCollectionCappedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MakeTTLView.xaml.cs">
+      <DependentUpon>MakeTTLView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\RenameFieldsView.xaml.cs">
       <DependentUpon>RenameFieldsView.xaml</DependentUpon>
@@ -278,6 +282,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MakeCollectionCappedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MakeTTLView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

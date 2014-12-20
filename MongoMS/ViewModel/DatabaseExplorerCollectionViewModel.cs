@@ -26,6 +26,7 @@ namespace MongoMS.ViewModel
             AddIndexCommand = new OpenTabCommand(() => new AddIndexViewModel(_coll));
             MakeCappedCommand = new OpenTabCommand(() => new MakeCollectionCappedViewModel(_coll));
             RenameFieldsCommand = new OpenTabCommand(() => new RenameFieldsViewModel(_coll));
+            MakeTTLCommand = new OpenTabCommand(() => new MakeTTLViewModel(_coll));
             CompactCommand = new NoWeakRelayCommand(() => _coll.Database.RunCommand(new CommandDocument("compact", _coll.Name)));
             DropCommand = new RelayCommand(() =>
             {
@@ -34,6 +35,9 @@ namespace MongoMS.ViewModel
                 _coll.Drop();
             });
         }
+        [WindowCommand("ttl")]
+        public ICommand MakeTTLCommand { get; set; }
+
         [WindowCommand("Переименовать поле")]
         public ICommand RenameFieldsCommand { get; set; }
         [WindowCommand("Сделать ограниченной")]
