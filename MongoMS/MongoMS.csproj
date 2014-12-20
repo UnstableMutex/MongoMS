@@ -121,6 +121,7 @@
     <Compile Include="ViewModel\AddDocumentViewModel.cs" />
     <Compile Include="ViewModel\AddIndexViewModel.cs" />
     <Compile Include="ViewModel\AggregateViewModel.cs" />
+    <Compile Include="ViewModel\Aggregate\AggregateStepViewModel.cs" />
     <Compile Include="ViewModel\CollectionStatsViewModel.cs" />
     <Compile Include="ViewModel\ConnectionsViewModel.cs" />
     <Compile Include="ViewModel\CopyCollectionViewModel.cs" />

@@ -13,15 +13,15 @@
         </Grid.RowDefinitions>
         <wpfControlsExtended:StretchedHeaderedContentControl Grid.Row="1">
             <HeaderedContentControl.Header>Шаги</HeaderedContentControl.Header>
-            <ListBox/>
+            <ListBox DisplayMemberPath="Json" SelectedItem="{Binding Selected}" ItemsSource="{Binding Steps}" />
         </wpfControlsExtended:StretchedHeaderedContentControl>
-       
-       <wpfControlsExtended:StretchedHeaderedContentControl Grid.Row="0" Header="Новый шаг" Margin="0,0,90,0.2">
-            <TextBox/>
-       </wpfControlsExtended:StretchedHeaderedContentControl>
-        
-        
-        <Button  HorizontalAlignment="Left" Height="32"  VerticalAlignment="Top" Margin="235,48,0,0" >
+
+        <wpfControlsExtended:StretchedHeaderedContentControl Grid.Row="0" Header="Новый шаг" Margin="0,0,52,0">
+            <TextBox Text="{Binding Json}" />
+        </wpfControlsExtended:StretchedHeaderedContentControl>
+
+
+        <Button Command="{Binding AddStepCommand}" HorizontalAlignment="Right" Height="32"  VerticalAlignment="Top" Margin="0,48,10,0" >
             <Image Source="plus.png"/>
         </Button>
 
