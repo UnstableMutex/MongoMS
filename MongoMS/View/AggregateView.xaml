@@ -13,7 +13,35 @@
         </Grid.RowDefinitions>
         <wpfControlsExtended:StretchedHeaderedContentControl Grid.Row="1">
             <HeaderedContentControl.Header>Шаги</HeaderedContentControl.Header>
-            <ListBox DisplayMemberPath="Json" SelectedItem="{Binding Selected}" ItemsSource="{Binding Steps}" />
+            <ListBox HorizontalContentAlignment="Stretch" SelectedItem="{Binding Selected}" ItemsSource="{Binding Steps}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+
+                        <DockPanel>
+                            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                               
+                                <Button>
+                                    <Image Width="16" Height="16" Source="arrow_up.png" />
+                                </Button>
+                                <Button>
+                                    <Image RenderTransformOrigin="0.5,0.5" Width="16" Height="16"
+                                                   Source="arrow_up.png">
+                                        <Image.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform ScaleY="-1" ScaleX="1" />
+                                            </TransformGroup>
+                                        </Image.RenderTransform>
+                                    </Image>
+                                </Button>
+
+                            </StackPanel>
+
+                            <Label Content="{Binding Json}" />
+                        </DockPanel>
+
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </wpfControlsExtended:StretchedHeaderedContentControl>
 
         <wpfControlsExtended:StretchedHeaderedContentControl Grid.Row="0" Header="Новый шаг" Margin="0,0,52,0">

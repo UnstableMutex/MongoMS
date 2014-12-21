@@ -33,6 +33,7 @@ namespace MongoMS.ViewModel
     }
 
     [Header("Добавить индекс")]
+    [CollectionLevelCommand]
     internal class AddIndexViewModel : CollectionVMB
     {
         private sbyte _direction;

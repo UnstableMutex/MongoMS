@@ -9,6 +9,7 @@ using MVVMLight.Extras;
 namespace MongoMS.ViewModel
 {
     [Header("Make Capped")]
+    [CollectionLevelCommand]
     internal class MakeCollectionCappedViewModel : CollectionVMB
     {
         public MakeCollectionCappedViewModel(MongoCollection<BsonDocument> coll) : base(coll)

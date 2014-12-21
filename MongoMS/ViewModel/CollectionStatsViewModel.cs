@@ -5,6 +5,7 @@ using MVVMLight.Extras;
 namespace MongoMS.ViewModel
 {
     [Header("Статистика")]
+    [CollectionLevelCommand]
     internal class CollectionStatsViewModel : VMB
     {
         private readonly MongoCollection<BsonDocument> _coll;

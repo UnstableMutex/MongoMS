@@ -7,6 +7,7 @@ using MVVMLight.Extras;
 namespace MongoMS.ViewModel
 {
     [Header("Переименовать поле")]
+    [CollectionLevelCommand]
     internal class RenameFieldsViewModel : CollectionVMB
     {
         public RenameFieldsViewModel(MongoCollection<BsonDocument> coll) : base(coll)

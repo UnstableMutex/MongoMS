@@ -31,9 +31,6 @@ namespace MongoMS.ViewModel
         [WindowCommand("Подробно")]
         public ICommand DBDetailsCommand { get; private set; }
 
-        [WindowCommand("-коллекция")]
-        public ICommand DropCommand { get; private set; }
-
         [WindowCommand("Экспорт из MSSQL")]
         public ICommand ExportFromMSSQLCommand { get; private set; }
 

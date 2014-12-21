@@ -90,6 +90,7 @@
 
                                     <Label Content="{Binding FieldName}" />
                                 </DockPanel>
+                                
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>

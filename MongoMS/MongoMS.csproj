@@ -113,6 +113,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BsonDocumentValidator.cs" />
+    <Compile Include="CollectionLevelCommandAttribute.cs" />
     <Compile Include="DirectionToScaleConverter.cs" />
     <Compile Include="Extention\Ext.cs" />
     <Compile Include="HeaderAttribute.cs" />

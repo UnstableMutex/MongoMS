@@ -37,5 +37,6 @@
             <Button Content="guidid" Command="{Binding AddGuidIdCommand}" />
             <Button Content="objectid" Command="{Binding AddObjectIdCommand}" />
         </StackPanel>
+        <Button Content="Date" HorizontalAlignment="Left" Margin="144,102,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </UserControl>
