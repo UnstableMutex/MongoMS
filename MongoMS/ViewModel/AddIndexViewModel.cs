@@ -33,12 +33,13 @@ namespace MongoMS.ViewModel
     }
 
     [Header("Добавить индекс")]
-    [CollectionLevelCommand]
+    [CommandLevel(Level.Collection)]
     internal class AddIndexViewModel : CollectionVMB
     {
         private sbyte _direction;
         private string _indexName;
         private string _selectedField;
+        private ObservableCollection<IndexInfo> _existsIndexes;
 
         public AddIndexViewModel(MongoCollection<BsonDocument> coll) : base(coll)
         {
@@ -47,7 +48,15 @@ namespace MongoMS.ViewModel
             AssignCommands<NoWeakRelayCommand>();
         }
 
-        public ObservableCollection<IndexInfo> ExistsIndexes { get; private set; }
+        public ObservableCollection<IndexInfo> ExistsIndexes
+        {
+            get { return _existsIndexes; }
+            private set
+            {
+                _existsIndexes = value;
+                RaisePropertyChanged();
+            }
+        }
 
 
         public string IndexName
@@ -105,6 +114,7 @@ namespace MongoMS.ViewModel
             var b1 = new IndexOptionsBuilder();
             b1.SetName(IndexName);
             _coll.CreateIndex(b, b1);
+
             ExistsIndexes = new ObservableCollection<IndexInfo>(GetExistsIndexes());
         }
 

@@ -6,6 +6,7 @@ using MVVMLight.Extras;
 namespace MongoMS.ViewModel
 {
     [Header("Добавить БД")]
+    [CommandLevel(Level.Server)]
     internal class AddDatabaseViewModel : OKVMB
     {
         private readonly MongoServer _serv;

@@ -8,7 +8,7 @@ using MVVMLight.Extras;
 namespace MongoMS.ViewModel
 {
     [Header("Новый документ")]
-    [CollectionLevelCommand]
+    [CommandLevel(Level.Collection)]
     internal class AddDocumentViewModel : VMBValidated
     {
         private readonly MongoCollection<BsonDocument> _coll;

@@ -113,12 +113,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="BsonDocumentValidator.cs" />
-    <Compile Include="CollectionLevelCommandAttribute.cs" />
+    <Compile Include="CommandLevelAttribute.cs" />
     <Compile Include="DirectionToScaleConverter.cs" />
     <Compile Include="Extention\Ext.cs" />
     <Compile Include="HeaderAttribute.cs" />
     <Compile Include="HeaderConverter.cs" />
     <Compile Include="ISaveable.cs" />
+    <Compile Include="Level.cs" />
     <Compile Include="ObservableDictionary.cs" />
     <Compile Include="OpenTabCommand.cs" />
     <Compile Include="PairedObservableCollections.cs" />

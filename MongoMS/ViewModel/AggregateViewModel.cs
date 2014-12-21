@@ -8,7 +8,7 @@ using MVVMLight.Extras;
 namespace MongoMS.ViewModel
 {
     [Header("Агрегация")]
-    [CollectionLevelCommand]
+    [CommandLevel(Level.Collection)]
     internal class AggregateViewModel : CollectionVMB
     {
         public AggregateViewModel(MongoCollection<BsonDocument> coll)

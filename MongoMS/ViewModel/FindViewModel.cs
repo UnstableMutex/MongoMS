@@ -43,7 +43,7 @@ namespace MongoMS.ViewModel
     }
 
     [Header("Поиск")]
-    [CollectionLevelCommand]
+    [CommandLevel(Level.Collection)]
     internal class FindViewModel : CollectionVMB
     {
         // private readonly MongoCollection<BsonDocument> _coll;
