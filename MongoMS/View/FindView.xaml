@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:view="clr-namespace:MongoMS.View"
              xmlns:mongoMs="clr-namespace:MongoMS"
+             xmlns:wpfControlsExtended="clr-namespace:WpfControls_Extended;assembly=WpfControls_Extended"
              mc:Ignorable="d" 
              Loaded="FindView_OnLoaded"
            
@@ -34,11 +35,11 @@
 
             <DockPanel Margin="{StaticResource dpm}">
                 <Label DockPanel.Dock="Top">find</Label>
-                <TextBox PreviewTextInput="FindTextBox_OnPreviewTextInput" PreviewKeyDown="FindTextBox_OnPreviewKeyDown" GotFocus="FindTextBox_OnGotFocus" Name="FindTextBox">
+                <wpfControlsExtended:JsonTextBox GotFocus="FindTextBox_OnGotFocus" Name="FindTextBox">
                     <TextBox.Text>
                         <Binding Path="FindCriteria" UpdateSourceTrigger="PropertyChanged" TargetNullValue="{}{}" />
                     </TextBox.Text>
-                </TextBox>
+                </wpfControlsExtended:JsonTextBox>
             </DockPanel>
             <DockPanel Grid.Column="1" Margin="{StaticResource dpm}">
                 <Label DockPanel.Dock="Top">sort</Label>

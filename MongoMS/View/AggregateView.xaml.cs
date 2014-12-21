@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace MongoMS.View
 {
@@ -10,6 +11,11 @@ namespace MongoMS.View
         public AggregateView()
         {
             InitializeComponent();
+        }
+
+        private void AggregateView_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            FocusedTextBox.Focus();
         }
     }
 }
