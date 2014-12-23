@@ -5,6 +5,7 @@ using MVVMLight.Extras;
 namespace MongoMS.ViewModel
 {
     [Header("Подробно")]
+    [CommandLevel(Level.Database)]
     internal class DatabaseDetailsViewModel : VMB
     {
         private readonly MongoDatabase _db;

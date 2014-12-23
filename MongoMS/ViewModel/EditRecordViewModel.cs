@@ -6,6 +6,7 @@ using MVVMLight.Extras;
 namespace MongoMS.ViewModel
 {
     [Header("Правка записи")]
+
     internal class EditRecordViewModel : VMB
     {
         private readonly MongoCollection<BsonDocument> _coll;

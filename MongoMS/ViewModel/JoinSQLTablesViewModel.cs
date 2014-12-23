@@ -8,6 +8,7 @@ using MongoDB.Driver;
 namespace MongoMS.ViewModel
 {
     [Header("Объединить таблицы")]
+    [CommandLevel(Level.Database)]
     internal class JoinSQLTablesViewModel : MSSQLViewModelBase
     {
         private readonly Lazy<IEnumerable<string>> _tableNames;

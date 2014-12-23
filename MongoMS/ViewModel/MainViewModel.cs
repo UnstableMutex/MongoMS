@@ -23,7 +23,7 @@ namespace MongoMS.ViewModel
             SettingsCommand = new OpenTabCommand(() => new SettingsViewModel());
             Explorer = SimpleIoc.Default.GetInstance<DatabaseExplorerViewModel>();
             AssignCommands<NoWeakRelayCommand>();
-            CloseTabCommand = new RelayCommand<object>(ct);
+            CloseTabCommand = new RelayCommand<object>(CloseTab);
         }
 
         public ICommand SettingsCommand { get; set; }
@@ -94,8 +94,9 @@ namespace MongoMS.ViewModel
             }
         }
 
-        private void ct(object o)
+        internal void CloseTab(object o)
         {
+            SaveTab(o);
             Content.Remove(o);
         }
 
@@ -103,11 +104,19 @@ namespace MongoMS.ViewModel
         {
             if (Content != null)
             {
-                var saveable = Content as ISaveable;
-                if (saveable != null)
+                foreach (var tab in Content)
                 {
-                    saveable.Save();
+                    SaveTab(tab);
                 }
+            }
+        }
+
+        private static void SaveTab(object tab)
+        {
+            var saveable = tab as ISaveable;
+            if (saveable != null)
+            {
+                saveable.Save();
             }
         }
 

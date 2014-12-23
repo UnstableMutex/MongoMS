@@ -20,7 +20,8 @@ namespace MongoMS.ViewModel
         protected void CloseThisTab()
         {
             //TODO move method to base class - its usable
-            SimpleIoc.Default.GetInstance<MainViewModel>().Content.Remove(this);
+
+            SimpleIoc.Default.GetInstance<MainViewModel>().CloseTab(this);
         }
     }
 }

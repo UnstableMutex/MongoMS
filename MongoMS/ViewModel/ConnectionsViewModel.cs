@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Deployment.Internal;
 using System.IO;
 using System.Linq;
 using System.Windows.Input;
@@ -12,7 +13,7 @@ using MVVMLight.Extras;
 namespace MongoMS.ViewModel
 {
     [Header("Соединиться")]
-    internal class ConnectionsViewModel : VMB, ISaveable
+    internal class ConnectionsViewModel : OKVMB, ISaveable
     {
         private const string SettingsFileName = "settings.xml";
         private string _newCsName;
@@ -62,8 +63,6 @@ namespace MongoMS.ViewModel
             }
         }
 
-        public ICommand SelectCommand { get; private set; }
-
         public void Save()
         {
             var d = new List<Entry>();
@@ -80,10 +79,10 @@ namespace MongoMS.ViewModel
         {
             if (File.Exists(SettingsFileName))
             {
-                var ser = new XmlSerializer(typeof (List<Entry>));
+                var ser = new XmlSerializer(typeof(List<Entry>));
                 using (var sr = new StreamReader(SettingsFileName))
                 {
-                    var dic = (List<Entry>) ser.Deserialize(sr);
+                    var dic = (List<Entry>)ser.Deserialize(sr);
 
 
                     var d = new ObservableDictionary<string, string>();
@@ -129,17 +128,19 @@ namespace MongoMS.ViewModel
             }
         }
 
-        private void Select()
+        protected override void OK()
         {
-            var exp = SimpleIoc.Default.GetInstance<DatabaseExplorerViewModel>();
+           var exp = SimpleIoc.Default.GetInstance<DatabaseExplorerViewModel>();
             if (exp.Servers.All(x => x.Name != Selected.Key))
             {
                 exp.Servers.Add(new DatabaseExplorerServerViewModel(Selected.Key,
                     new MongoClient(Selected.Value).GetServer()));
-                SimpleIoc.Default.GetInstance<MainViewModel>().Content.Remove(this);
+
             }
+            CloseThisTab();
             // exp.Servers.Add(new DatabaseExplorerServerViewModel(Selected.Key,  Selected.Value));
         }
+
     }
 
     [Serializable]

@@ -1,6 +1,13 @@
-﻿namespace MongoMS.ViewModel
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+
+namespace MongoMS.ViewModel
 {
-    internal class CopyCollectionViewModel
+    internal class CopyCollectionViewModel:CollectionVMB
     {
+        public CopyCollectionViewModel(MongoCollection<BsonDocument> coll) : base(coll)
+        {
+        }
+
     }
 }

@@ -17,7 +17,7 @@
                  DisplayMemberPath="Key">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <command:EventToCommand Command="{Binding Path=SelectCommand, Mode=OneWay}" />
+                    <command:EventToCommand Command="{Binding Path=OKCommand, Mode=OneWay}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <ListBox.ContextMenu>

@@ -8,6 +8,7 @@ using MVVMLight.Extras;
 namespace MongoMS.ViewModel
 {
     [Header("Новая коллекция")]
+    [CommandLevel(Level.Database)]
     internal class AddCollectionViewModel : OKVMB
     {
         private readonly MongoDatabase _db;

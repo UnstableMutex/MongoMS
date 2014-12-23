@@ -7,6 +7,7 @@ using MVVMLight.Extras;
 
 namespace MongoMS.ViewModel
 {
+    [CommandLevel(Level.Database)]
     internal class MSSQLViewModelBase : OKVMB
     {
         protected MongoDatabase _db;
