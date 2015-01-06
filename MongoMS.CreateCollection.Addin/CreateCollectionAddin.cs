@@ -28,7 +28,7 @@ namespace MongoMS.CreateCollection.Addin
 
         public void Initialize()
         {
-            _regionManager.AddToRegion(RegionNames.DatabaseContextMenuRegion, GetMenuItem());
+            //_regionManager.AddToRegion(RegionNames.DatabaseContextMenuRegion, GetMenuItem());
         }
     }
 }
