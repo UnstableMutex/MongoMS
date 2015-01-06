@@ -9,7 +9,10 @@ namespace MongoMS.Common
     public class RegionNames
     {
         public const string TabControlRegion = "TabControlRegion";
-        public const string ServerExplorerRegion = "ServerExplorerRegion";
+        public const string ServerContextMenuRegion = "ServerContextMenuRegion";
+        public const string DatabaseContextMenuRegion = "DatabaseContextMenuRegion";
+        public const string CollectionContextMenuRegion = "CollectionContextMenuRegion";
+
         public const string TopMenuRegion = "TopMenuRegion";
     }
 }

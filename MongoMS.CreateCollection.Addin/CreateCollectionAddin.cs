@@ -19,16 +19,16 @@ namespace MongoMS.CreateCollection.Addin
             _regionManager = regionManager;
         }
 
-        Button GetMenuButton()
+        MenuItem GetMenuItem()
         {
-            Button b=new Button();
-            b.Content = "Click me";
+            MenuItem b=new MenuItem();
+            b.Header = "CreateCollection";
             return b;
         }
 
         public void Initialize()
         {
-            _regionManager.AddToRegion(RegionNames.TopMenuRegion, GetMenuButton());
+            _regionManager.AddToRegion(RegionNames.DatabaseContextMenuRegion, GetMenuItem());
         }
     }
 }

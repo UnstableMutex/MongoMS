@@ -10,9 +10,9 @@
             </ToolBar>
        </ToolBarTray>
        <DockPanel>
-           <ItemsControl prism:RegionManager.RegionName="ServerExplorerRegion" DockPanel.Dock="Left">
+           <TreeView  DockPanel.Dock="Left">
                 
-            </ItemsControl>
+            </TreeView>
            <TabControl prism:RegionManager.RegionName="TabControlRegion"  DockPanel.Dock="Right">
                
            </TabControl>
