@@ -1,0 +1,21 @@
+﻿<Window x:Class="MongoMS.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://www.codeplex.com/CompositeWPF"
+        Title="Shell" Height="300" Width="300">
+   <DockPanel>
+       <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar prism:RegionManager.RegionName="TopMenuRegion">
+           
+            </ToolBar>
+       </ToolBarTray>
+       <DockPanel>
+           <ItemsControl prism:RegionManager.RegionName="ServerExplorerRegion" DockPanel.Dock="Left">
+                
+            </ItemsControl>
+           <TabControl prism:RegionManager.RegionName="TabControlRegion"  DockPanel.Dock="Right">
+               
+           </TabControl>
+       </DockPanel>
+   </DockPanel>
+</Window>
