@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Regions;
+using MongoMS.Common;
 using MongoMS.Connect.Addin.ViewModel;
 
 namespace MongoMS.Connect.Addin.View
@@ -22,8 +24,11 @@ namespace MongoMS.Connect.Addin.View
     /// </summary>
     public partial class MainView : UserControl
     {
-        public MainView(MainViewModel viewModel)
+        private readonly IRegionManager _regionManager;
+
+        public MainView(MainViewModel viewModel,IRegionManager regionManager)
         {
+            _regionManager = regionManager;
             InitializeComponent();
             DataContext = viewModel;
         }
@@ -33,6 +38,8 @@ namespace MongoMS.Connect.Addin.View
             {
                 dynamic dc = (sender as ListBox).DataContext;
                 (dc.OKCommand as ICommand).Execute(null);
+                _regionManager.Regions[RegionNames.TabControlRegion].Remove(this);
+
             }
             catch (Exception)
             {

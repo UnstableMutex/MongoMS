@@ -60,6 +60,7 @@ namespace MongoMS.Connect.Addin.ViewModel
         {
             var e = _eventAggregator.GetEvent<PubSubEvent<RequestConnect>>();
             e.Publish(new RequestConnect(Selected.Name, Selected.CS.ConnectionString));
+
         }
     }
 }
