@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Configuration;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
@@ -47,6 +48,11 @@ namespace MongoMS.Connect.Addin.ViewModel
         public override string Header
         {
             get { return "Connect"; }
+        }
+
+        public override void BeforeClose()
+        {
+            MessageBox.Show("dsfsdf");
         }
     }
 }
