@@ -12,7 +12,7 @@
             </ToolBar>
         </ToolBarTray>
         <DockPanel>
-            <ContentControl prism:RegionManager.RegionName="ServerExplorerRegion"></ContentControl>
+            <ContentControl DockPanel.Dock="Left" prism:RegionManager.RegionName="ServerExplorerRegion"></ContentControl>
             <controls:LastTabSelectionTabControl prism:RegionManager.RegionName="TabControlRegion"  DockPanel.Dock="Right">
                 <TabControl.ItemTemplate>
                     <DataTemplate>

@@ -22,10 +22,10 @@ namespace MongoMS.ServerExplorer.Addin.View
     /// </summary>
     public partial class ServerExplorerView : UserControl
     {
-        public ServerExplorerView(IUnityContainer unity)
+        public ServerExplorerView(ServerExplorerViewModel viewModel)
         {
             InitializeComponent();
-            DataContext = unity.Resolve<ServerExplorerViewModel>();
+            DataContext = viewModel;
         }
     }
 }

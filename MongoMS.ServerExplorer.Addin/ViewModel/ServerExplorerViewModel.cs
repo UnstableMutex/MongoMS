@@ -8,7 +8,7 @@ using Microsoft.Practices.Prism.PubSubEvents;
 
 namespace MongoMS.ServerExplorer.Addin.ViewModel
 {
-    class ServerExplorerViewModel:BindableBase
+    public class ServerExplorerViewModel:BindableBase
     {
         private readonly IEventAggregator _eventAggregator;
 

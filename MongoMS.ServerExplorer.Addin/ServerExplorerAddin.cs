@@ -8,6 +8,7 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using MongoMS.Common;
+using MongoMS.ServerExplorer.Addin.View;
 
 namespace MongoMS.ServerExplorer.Addin
 {
@@ -19,7 +20,7 @@ namespace MongoMS.ServerExplorer.Addin
 
         public void Initialize()
         {
-          
+            _regionManager.RegisterViewWithRegion(RegionNames.ServerExplorerRegion, typeof(ServerExplorerView));
         }
 
         public ServerExplorerAddin(IUnityContainer unity, IEventAggregator eventAggregator, IRegionManager regionManager)
