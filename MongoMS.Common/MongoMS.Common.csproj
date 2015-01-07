@@ -96,7 +96,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContextMenuLevels.cs" />
     <Compile Include="ICloseRequest.cs" />
+    <Compile Include="MenuCommand.cs" />
     <Compile Include="OKViewModel.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
