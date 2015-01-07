@@ -43,7 +43,5 @@ namespace MongoMS.Connect.Addin.ViewModel
             Selected = conn;
 
         }
-
-
     }
 }
