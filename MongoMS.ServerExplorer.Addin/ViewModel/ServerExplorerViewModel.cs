@@ -43,6 +43,7 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
             _unity = unity;
         }
 
+
         private void InitChildren()
         {
             Children = new ObservableCollection<DatabaseViewModel>();
@@ -59,6 +60,15 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
         {
             get { return _name; }
         }
+
+        public object CmdParameter
+        {
+            get
+            {
+                return new MongoClient(_cs).GetServer();
+            }
+        }
+
         public ObservableCollection<IMenuCommand> Menu
         {
             get
