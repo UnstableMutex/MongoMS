@@ -24,18 +24,14 @@ namespace MongoMS.Common
 
   public  class MenuCommand:IMenuCommand
     {
-      public MenuCommand(string name)
+      public MenuCommand()
       {
-          Name = name;
-          Command = new DelegateCommand<MongoServer>(ExecuteMethod);
+        
       }
 
-      private void ExecuteMethod(MongoServer mongoServer)
-      {
-          MessageBox.Show("sfsdf");
-      }
+     
 
-      public string Name { get; private set; }
-      public ICommand Command { get; private set; }
+      public string Name { get;  set; }
+      public ICommand Command { get;  set; }
     }
 }
