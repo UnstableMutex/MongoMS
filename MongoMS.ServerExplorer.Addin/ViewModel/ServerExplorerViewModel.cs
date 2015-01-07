@@ -4,25 +4,18 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
-using Microsoft.Practices.Unity;
-using MongoDB.Driver;
 
 namespace MongoMS.ServerExplorer.Addin.ViewModel
 {
     public class ServerExplorerViewModel:BindableBase
     {
         private readonly IEventAggregator _eventAggregator;
-        private readonly IUnityContainer _unity;
-        private readonly IModuleCatalog _mc;
-        private readonly IModuleManager _moduleManager;
 
-        public ServerExplorerViewModel(IEventAggregator eventAggregator, IUnityContainer unity)
+        public ServerExplorerViewModel(IEventAggregator eventAggregator)
         {
             _eventAggregator = eventAggregator;
-            _unity = unity;
             Servers = new ObservableCollection<ServerViewModel>();
         }
         public ObservableCollection<ServerViewModel> Servers { get; private set; } 
@@ -42,15 +35,6 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
         public string Name
         {
             get { return _name; }
-        }
-
-    }
-
-    public class DatabaseViewModel
-    {
-        public DatabaseViewModel(MongoDatabase db)
-        {
-            
         }
     }
 }
