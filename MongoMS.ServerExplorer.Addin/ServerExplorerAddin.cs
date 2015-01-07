@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.PubSubEvents;
+using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
+using MongoMS.Common;
 
 namespace MongoMS.ServerExplorer.Addin
 {
@@ -13,16 +15,26 @@ namespace MongoMS.ServerExplorer.Addin
     {
         private readonly IUnityContainer _unity;
         private readonly IEventAggregator _eventAggregator;
+        private readonly IRegionManager _regionManager;
 
         public void Initialize()
         {
           
         }
 
-        public ServerExplorerAddin(IUnityContainer unity, IEventAggregator eventAggregator)
+        public ServerExplorerAddin(IUnityContainer unity, IEventAggregator eventAggregator, IRegionManager regionManager)
         {
             _unity = unity;
             _eventAggregator = eventAggregator;
+            _regionManager = regionManager;
+            var e = _eventAggregator.GetEvent<PubSubEvent<RequestConnect>>();
+            e.Subscribe(OnConnectRequest);
+        }
+
+        void OnConnectRequest(RequestConnect rc)
+        {
+          
+            //_regionManager.AddToRegion(RegionNames.ServerExplorerRegion,)
         }
     }
 }

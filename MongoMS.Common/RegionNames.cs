@@ -12,7 +12,7 @@ namespace MongoMS.Common
         public const string ServerContextMenuRegion = "ServerContextMenuRegion";
         public const string DatabaseContextMenuRegion = "DatabaseContextMenuRegion";
         public const string CollectionContextMenuRegion = "CollectionContextMenuRegion";
-
         public const string TopMenuRegion = "TopMenuRegion";
+        public const string ServerExplorerRegion = "ServerExplorerRegion";
     }
 }
