@@ -1,24 +1,18 @@
 ﻿using System.Reflection.Emit;
 using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Prism.PubSubEvents;
 using MongoDB.Driver;
+using MongoMS.Common;
 namespace MongoMS.Connect.Addin.ViewModel
 {
-    public class ConnectionViewModel : BindableBase
+    public class ConnectionViewModel : OKViewModel
     {
-        public static ConnectionViewModel CreateDefault()
-        {
-            var c = new ConnectionViewModel("server=localhost");
-            c.Name = "local";
-            return c;
-        }
+        private readonly IEventAggregator _eventAggregator;
         private string _name;
-        public ConnectionViewModel()
+        public ConnectionViewModel(IEventAggregator eventAggregator)
         {
+            _eventAggregator = eventAggregator;
             CS = new MongoConnectionStringBuilder();
-        }
-        public ConnectionViewModel(string cs)
-        {
-            CS = new MongoConnectionStringBuilder(cs);
         }
         public string Name
         {
@@ -30,5 +24,10 @@ namespace MongoMS.Connect.Addin.ViewModel
             }
         }
         public MongoConnectionStringBuilder CS { get; set; }
+        protected override void OK()
+        {
+            var e = _eventAggregator.GetEvent<PubSubEvent<RequestConnect>>();
+            e.Publish(new RequestConnect(Name, CS.ConnectionString));
+        }
     }
 }

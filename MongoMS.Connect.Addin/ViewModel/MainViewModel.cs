@@ -10,14 +10,19 @@ using System.Windows;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Unity;
+using MongoDB.Driver;
 using MongoMS.Common;
 
 namespace MongoMS.Connect.Addin.ViewModel
 {
     public class MainViewModel : OKViewModel
     {
-        public MainViewModel()
+        private readonly IUnityContainer _unity;
+
+        public MainViewModel(IUnityContainer unity)
         {
+            _unity = unity;
             Connections = new ObservableCollection<ConnectionViewModel>();
             AddNewCommand = new DelegateCommand(AddNew);
         }
@@ -39,7 +44,11 @@ namespace MongoMS.Connect.Addin.ViewModel
 
         private void AddNew()
         {
-            var conn = ConnectionViewModel.CreateDefault();
+
+
+            var conn = _unity.Resolve<ConnectionViewModel>();
+            conn.Name = "local";
+            conn.CS.Server =new MongoServerAddress("localhost"); 
             Connections.Add(conn);
             Selected = conn;
 
