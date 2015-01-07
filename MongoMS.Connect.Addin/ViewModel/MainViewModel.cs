@@ -43,5 +43,10 @@ namespace MongoMS.Connect.Addin.ViewModel
             Selected = conn;
 
         }
+
+        public override string Header
+        {
+            get { return "Connect"; }
+        }
     }
 }

@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace MongoMS.Common
 {
-  public  interface ICloseRequest
+    public interface ICloseRequest
     {
         void BeforeClose();
-
+    }
+    public interface ITabContent
+    {
+        string Header { get; }
     }
 }

@@ -18,8 +18,8 @@
                 <TabControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Margin="3" VerticalAlignment="Center"
-                                      Text="sfd" />
+                            <mongoMs:HeaderTextBlock Margin="3"  VerticalAlignment="Center"
+                                       />
                             <Button BorderThickness="0" VerticalAlignment="Center">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="Click">

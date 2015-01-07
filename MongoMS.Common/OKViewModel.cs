@@ -9,7 +9,7 @@ using Microsoft.Practices.Prism.Mvvm;
 
 namespace MongoMS.Common
 {
-   public class OKViewModel:BindableBase,ICloseRequest
+   public class OKViewModel:BindableBase,ICloseRequest,ITabContent
     {
         public OKViewModel()
         {
@@ -32,5 +32,7 @@ namespace MongoMS.Common
        {
           
        }
+
+       public virtual string Header { get { return "Header"; } }
     }
 }
