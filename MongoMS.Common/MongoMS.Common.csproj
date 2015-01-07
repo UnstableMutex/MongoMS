@@ -97,11 +97,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContextMenuLevel.cs" />
+    <Compile Include="Events\CollectionCreated.cs" />
+    <Compile Include="Events\CollectionDropped.cs" />
+    <Compile Include="Events\DatabaseCreated.cs" />
+    <Compile Include="Events\DatabaseDropped.cs" />
     <Compile Include="ICloseRequest.cs" />
     <Compile Include="OKViewModel.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequestConnect.cs" />
+    <Compile Include="Events\RequestConnect.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

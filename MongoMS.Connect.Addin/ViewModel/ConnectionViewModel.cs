@@ -3,6 +3,8 @@ using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
 using MongoDB.Driver;
 using MongoMS.Common;
+using MongoMS.Common.Events;
+
 namespace MongoMS.Connect.Addin.ViewModel
 {
     public class ConnectionViewModel : OKViewModel

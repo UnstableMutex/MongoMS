@@ -14,6 +14,8 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Unity;
 using MongoDB.Driver;
 using MongoMS.Common;
+using MongoMS.Common.Events;
+
 namespace MongoMS.Connect.Addin.ViewModel
 {
     public class MainViewModel : OKViewModel

@@ -8,6 +8,7 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using MongoMS.Common;
+using MongoMS.Common.Events;
 using MongoMS.ServerExplorer.Addin.View;
 using MongoMS.ServerExplorer.Addin.ViewModel;
 
