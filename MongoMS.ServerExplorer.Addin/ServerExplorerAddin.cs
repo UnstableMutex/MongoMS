@@ -9,6 +9,7 @@ using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using MongoMS.Common;
 using MongoMS.ServerExplorer.Addin.View;
+using MongoMS.ServerExplorer.Addin.ViewModel;
 
 namespace MongoMS.ServerExplorer.Addin
 {
@@ -17,10 +18,12 @@ namespace MongoMS.ServerExplorer.Addin
         private readonly IUnityContainer _unity;
         private readonly IEventAggregator _eventAggregator;
         private readonly IRegionManager _regionManager;
-
+        private ServerExplorerViewModel _viewModel;
         public void Initialize()
         {
-            _regionManager.RegisterViewWithRegion(RegionNames.ServerExplorerRegion, typeof(ServerExplorerView));
+             _viewModel = _unity.Resolve<ServerExplorerViewModel>();
+            var v = new ServerExplorerView(_viewModel);
+            _regionManager.RegisterViewWithRegion(RegionNames.ServerExplorerRegion,()=>v);
         }
 
         public ServerExplorerAddin(IUnityContainer unity, IEventAggregator eventAggregator, IRegionManager regionManager)
@@ -29,13 +32,12 @@ namespace MongoMS.ServerExplorer.Addin
             _eventAggregator = eventAggregator;
             _regionManager = regionManager;
             var e = _eventAggregator.GetEvent<PubSubEvent<RequestConnect>>();
-            e.Subscribe(OnConnectRequest);
+            e.Subscribe(OnConnectRequest, true);
         }
 
         void OnConnectRequest(RequestConnect rc)
         {
-          
-            //_regionManager.AddToRegion(RegionNames.ServerExplorerRegion,)
+           _viewModel.Servers.Add(new ServerViewModel(rc.Name, rc.ConnectionString));
         }
     }
 }

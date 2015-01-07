@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Unity;
 using MongoDB.Driver;
 using MongoMS.Common;
@@ -19,10 +20,12 @@ namespace MongoMS.Connect.Addin.ViewModel
     public class MainViewModel : OKViewModel
     {
         private readonly IUnityContainer _unity;
+        private readonly IEventAggregator _eventAggregator;
 
-        public MainViewModel(IUnityContainer unity)
+        public MainViewModel(IUnityContainer unity, IEventAggregator eventAggregator)
         {
             _unity = unity;
+            _eventAggregator = eventAggregator;
             Connections = new ObservableCollection<ConnectionViewModel>();
             AddNewCommand = new DelegateCommand(AddNew);
         }
@@ -48,7 +51,7 @@ namespace MongoMS.Connect.Addin.ViewModel
 
             var conn = _unity.Resolve<ConnectionViewModel>();
             conn.Name = "local";
-            conn.CS.Server =new MongoServerAddress("localhost"); 
+            conn.CS.Server = new MongoServerAddress("localhost");
             Connections.Add(conn);
             Selected = conn;
 
@@ -62,6 +65,12 @@ namespace MongoMS.Connect.Addin.ViewModel
         public override void BeforeClose()
         {
             MessageBox.Show("dsfsdf");
+        }
+
+        protected override void OK()
+        {
+            var e = _eventAggregator.GetEvent<PubSubEvent<RequestConnect>>();
+            e.Publish(new RequestConnect(Selected.Name, Selected.CS.ConnectionString));
         }
     }
 }
