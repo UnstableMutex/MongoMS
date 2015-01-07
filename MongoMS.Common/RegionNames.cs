@@ -18,4 +18,15 @@ namespace MongoMS.Common
         string Name { get; }
         ICommand Command { get; }
     }
+
+  public  class MenuCommand:IMenuCommand
+    {
+      public MenuCommand(string name)
+      {
+          Name = name;
+      }
+
+      public string Name { get; private set; }
+      public ICommand Command { get; private set; }
+    }
 }
