@@ -2,20 +2,36 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://www.codeplex.com/CompositeWPF"
+        xmlns:controls="clr-namespace:MongoMS.Controls"
         Title="Shell" Height="300" Width="300">
-   <DockPanel>
-       <ToolBarTray DockPanel.Dock="Top">
+    <DockPanel>
+        <ToolBarTray DockPanel.Dock="Top">
             <ToolBar prism:RegionManager.RegionName="TopMenuRegion">
-           
+
             </ToolBar>
-       </ToolBarTray>
-       <DockPanel>
-           <TreeView  DockPanel.Dock="Left">
-                
+        </ToolBarTray>
+        <DockPanel>
+            <TreeView Width="100" DockPanel.Dock="Left">
+
             </TreeView>
-           <TabControl prism:RegionManager.RegionName="TabControlRegion"  DockPanel.Dock="Right">
-               
-           </TabControl>
-       </DockPanel>
-   </DockPanel>
+            <controls:LastTabSelectionTabControl prism:RegionManager.RegionName="TabControlRegion"  DockPanel.Dock="Right">
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="3" VerticalAlignment="Center"
+                                      Text="sfd" />
+                            <Button BorderThickness="0" VerticalAlignment="Center">
+                                <Canvas Width="14" Height="14">
+                                    <Rectangle RadiusX="3" RadiusY="3" Fill="Red" Width="14" Height="14" Stroke="Red" />
+                                    <Line X1="2" Y1="2" X2="12" Y2="12" Stroke="White" StrokeThickness="1" />
+                                    <Line X1="12" Y1="2" X2="2" Y2="12" Stroke="White" StrokeThickness="1" />
+                                </Canvas>
+                            </Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+
+            </controls:LastTabSelectionTabControl>
+        </DockPanel>
+    </DockPanel>
 </Window>

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using MongoMS.Common;
+using MongoMS.Connect.Addin.View;
 
 namespace MongoMS.Connect.Addin
 {
@@ -30,13 +32,18 @@ namespace MongoMS.Connect.Addin
         void b_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             _regionManager.AddToRegion(RegionNames.TabControlRegion, GetConnectTab());
+
         }
 
-        private TabItem GetConnectTab()
+        private UserControl GetConnectTab()
         {
-            var ti = new TabItem();
-            ti.Header = "sdfsdf";
-            return ti;
+            return new MainView();
+        }
+
+        void close_Click(object sender, RoutedEventArgs e)
+        {
+            var b = (sender as Button);
+            _regionManager.Regions[RegionNames.TabControlRegion].Remove(b.Tag);
         }
 
         public void Initialize()
