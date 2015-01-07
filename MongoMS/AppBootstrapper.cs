@@ -21,12 +21,25 @@ namespace MongoMS
         }
         protected override void InitializeShell()
         {
+
             base.InitializeShell();
+            RegisterMenuItems();
             App.Current.MainWindow = (Window)this.Shell;
             App.Current.MainWindow.Show();
         }
+
+        private void RegisterMenuItems()
+        {
+            var menulevels = Enum.GetNames(typeof (ContextMenuLevel));
+            foreach (var menulevel in menulevels)
+            {
+                this.Container.RegisterInstance(menulevel, new ObservableCollection<IMenuCommand>());
+            }
+        }
+
         protected override IModuleCatalog CreateModuleCatalog()
         {
+
             const string addinsPath = "Addins";
             if (Directory.Exists(addinsPath))
             {
@@ -39,15 +52,9 @@ namespace MongoMS
                 return new ModuleCatalog();
             }
         }
-        //protected override void ConfigureContainer()
-        //{
-        //    var menulevels = Enum.GetNames(typeof(ContextMenuLevel));
-        //    foreach (var menulevel in menulevels)
-        //    {
-        //        this.Container.RegisterInstance(menulevel, new ObservableCollection<IMenuCommand>());
-        //    }
+      
 
-        //}
+
     }
 
    
