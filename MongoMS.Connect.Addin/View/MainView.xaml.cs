@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Practices.Prism.Commands;
+using MongoMS.Connect.Addin.ViewModel;
+
 namespace MongoMS.Connect.Addin.View
 {
     /// <summary>
@@ -19,9 +22,10 @@ namespace MongoMS.Connect.Addin.View
     /// </summary>
     public partial class MainView : UserControl
     {
-        public MainView()
+        public MainView(MainViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
         }
         private void Lb_OnMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -34,5 +38,7 @@ namespace MongoMS.Connect.Addin.View
             {
             }
         }
+
+      
     }
 }

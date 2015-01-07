@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
+using Microsoft.Practices.Unity;
 using MongoMS.Common;
 using MongoMS.Connect.Addin.View;
 
@@ -15,10 +16,12 @@ namespace MongoMS.Connect.Addin
     public class ConnectAddin : IModule
     {
         private readonly IRegionManager _regionManager;
+        private readonly IUnityContainer _unity;
 
-        public ConnectAddin(IRegionManager regionManager)
+        public ConnectAddin(IRegionManager regionManager, IUnityContainer unity)
         {
             _regionManager = regionManager;
+            _unity = unity;
         }
 
         Button GetConnectButton()
@@ -37,7 +40,7 @@ namespace MongoMS.Connect.Addin
 
         private UserControl GetConnectTab()
         {
-            return new MainView();
+            return _unity.Resolve<MainView>();
         }
 
         void close_Click(object sender, RoutedEventArgs e)
