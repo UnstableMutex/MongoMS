@@ -89,6 +89,8 @@
     <Compile Include="UnityHolder.cs" />
     <Compile Include="ViewModel\CollectionViewModel.cs" />
     <Compile Include="ViewModel\DatabaseViewModel.cs" />
+    <Compile Include="ViewModel\GridFSViewModel.cs" />
+    <Compile Include="ViewModel\IDatabaseChild.cs" />
     <Compile Include="ViewModel\ServerExplorerViewModel.cs" />
     <Compile Include="ViewModel\ServerViewModel.cs" />
     <Compile Include="View\ServerExplorerView.xaml.cs">

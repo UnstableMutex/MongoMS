@@ -6,15 +6,15 @@ using MongoMS.Common;
 
 namespace MongoMS.ServerExplorer.Addin.ViewModel
 {
-    public class CollectionViewModel
+    public class CollectionViewModel:IDatabaseChild
     {
         private readonly MongoCollection _collection;
-       
+
 
         public CollectionViewModel(MongoCollection collection)
         {
             _collection = collection;
-          
+
         }
 
         public object CmdParameter
@@ -26,7 +26,7 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
         {
             get
             {
-                var res= UnityHolder.Unity.Resolve<ObservableCollection<IMenuCommand>>(ContextMenuLevel.Collection.ToString());
+                var res = UnityHolder.Unity.Resolve<ObservableCollection<IMenuCommand>>(ContextMenuLevel.Collection.ToString());
                 return res;
             }
         }
