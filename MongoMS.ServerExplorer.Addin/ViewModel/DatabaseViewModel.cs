@@ -1,7 +1,11 @@
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Unity;
 using MongoDB.Driver;
 using MongoMS.Common;
+using MongoMS.Common.Events;
 
 namespace MongoMS.ServerExplorer.Addin.ViewModel
 {
@@ -9,13 +13,43 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
     {
         private readonly MongoDatabase _db;
         private readonly IUnityContainer _unity;
+        private readonly IEventAggregator _eventAggregator;
 
 
-        public DatabaseViewModel(MongoDatabase db, IUnityContainer unity)
+        public DatabaseViewModel(MongoDatabase db, IUnityContainer unity, IEventAggregator eventAggregator)
         {
             _db = db;
             _unity = unity;
+            _eventAggregator = eventAggregator;
             InitChildren();
+            _eventAggregator.GetEvent<PubSubEvent<CollectionAction>>().Subscribe(CollectionListChanged);
+
+        }
+
+        private void CollectionListChanged(CollectionAction collectionAction)
+        {
+            
+            if (collectionAction.Action == ActionType.Create)
+            {
+
+                if (collectionAction.Database == _db)
+                {
+                    Children.Add(new CollectionViewModel(_db.GetCollection(collectionAction.CollectionName), _unity, _eventAggregator));
+                }
+                return;
+            }
+            if (collectionAction.Action == ActionType.Drop)
+            {
+                if (collectionAction.Database == _db)
+                {
+                    var db = Children.SingleOrDefault(x => x.Name == collectionAction.CollectionName);
+                    if (db != null)
+                    {
+                        Children.Remove(db);
+                    }
+                }
+            }
+
         }
 
         public string Name
@@ -38,7 +72,7 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
             Children = new ObservableCollection<CollectionViewModel>();
             foreach (var dbname in _db.GetCollectionNames())
             {
-                Children.Add(new CollectionViewModel(_db.GetCollection(dbname), _unity));
+                Children.Add(new CollectionViewModel(_db.GetCollection(dbname), _unity,_eventAggregator));
             }
         }
 

@@ -20,10 +20,9 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
         {
             _name = name;
             _cs = cs;
-
+            _eventAggregator = eventAggregator;
             _unity = unity;
             InitChildren();
-            _eventAggregator = eventAggregator;
             eventAggregator.GetEvent<PubSubEvent<DatabaseAction>>().Subscribe(OnDbListChanged);
         }
 
@@ -35,7 +34,7 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
 
                 if (databaseAction.Server == s)
                 {
-                    Children.Add(new DatabaseViewModel(s.GetDatabase(databaseAction.DatabaseName), _unity));
+                    Children.Add(new DatabaseViewModel(s.GetDatabase(databaseAction.DatabaseName), _unity ,_eventAggregator));
                 }
                 return;
             }
@@ -60,7 +59,7 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
             MongoServer s = new MongoClient(_cs).GetServer();
             foreach (var dbname in s.GetDatabaseNames())
             {
-                Children.Add(new DatabaseViewModel(s.GetDatabase(dbname), _unity));
+                Children.Add(new DatabaseViewModel(s.GetDatabase(dbname), _unity, _eventAggregator));
             }
         }
 

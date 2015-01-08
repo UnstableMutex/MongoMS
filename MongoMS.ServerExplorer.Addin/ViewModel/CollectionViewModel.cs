@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Unity;
 using MongoDB.Driver;
 using MongoMS.Common;
@@ -9,11 +10,13 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
     {
         private readonly MongoCollection _collection;
         private readonly IUnityContainer _unity;
+        private readonly IEventAggregator _eventAggregator;
 
-        public CollectionViewModel(MongoCollection collection, IUnityContainer unity)
+        public CollectionViewModel(MongoCollection collection, IUnityContainer unity, IEventAggregator eventAggregator)
         {
             _collection = collection;
             _unity = unity;
+            _eventAggregator = eventAggregator;
         }
 
         public object CmdParameter
