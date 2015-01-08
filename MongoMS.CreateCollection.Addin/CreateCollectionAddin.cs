@@ -26,7 +26,6 @@ namespace MongoMS.CreateCollection.Addin
             _unity = unity;
         }
 
-
         public void Initialize()
         {
             var servermenu = _unity.Resolve<ObservableCollection<IMenuCommand>>(ContextMenuLevel.Database.ToString());

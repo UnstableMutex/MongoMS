@@ -86,7 +86,10 @@
   <ItemGroup>
     <Compile Include="ServerExplorerAddin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\CollectionViewModel.cs" />
+    <Compile Include="ViewModel\DatabaseViewModel.cs" />
     <Compile Include="ViewModel\ServerExplorerViewModel.cs" />
+    <Compile Include="ViewModel\ServerViewModel.cs" />
     <Compile Include="View\ServerExplorerView.xaml.cs">
       <DependentUpon>ServerExplorerView.xaml</DependentUpon>
     </Compile>
