@@ -36,7 +36,6 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
         private void InitChildren()
         {
             Children = new ObservableCollection<CollectionViewModel>();
-           
             foreach (var dbname in _db.GetCollectionNames())
             {
                 Children.Add(new CollectionViewModel(_db.GetCollection(dbname), _unity));

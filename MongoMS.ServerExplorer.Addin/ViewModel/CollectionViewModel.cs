@@ -25,7 +25,8 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
         {
             get
             {
-                return _unity.Resolve<ObservableCollection<IMenuCommand>>(ContextMenuLevel.Collection.ToString());
+                var res= _unity.Resolve<ObservableCollection<IMenuCommand>>(ContextMenuLevel.Collection.ToString());
+                return res;
             }
         }
     }
