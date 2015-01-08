@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Practices.Prism.Regions;
+using MongoMS.Common;
 using MongoMS.CreateDatabase.Addin.ViewModel;
 
 namespace MongoMS.CreateDatabase.Addin.View
@@ -21,10 +23,21 @@ namespace MongoMS.CreateDatabase.Addin.View
     /// </summary>
     public partial class MainView : UserControl
     {
-        public MainView(MainViewModel viewModel)
+        private readonly IRegionManager _regionManager;
+
+        public MainView(MainViewModel viewModel,IRegionManager regionManager)
         {
+            _regionManager = regionManager;
             InitializeComponent();
+
             DataContext = viewModel;
+            viewModel.CloseRequest += viewModel_CloseRequest;
+
+        }
+
+        void viewModel_CloseRequest(object sender, EventArgs e)
+        {
+            _regionManager.Regions[RegionNames.TabControlRegion].Remove(this);
         }
     }
 }

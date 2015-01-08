@@ -34,6 +34,16 @@ namespace MongoMS.Common
           
        }
 
+       public event EventHandler CloseRequest;
+
+       protected void RaiseCloseRequest()
+       {
+           if (CloseRequest != null)
+           {
+               CloseRequest(this, EventArgs.Empty);
+           }
+       }
+
        public virtual string Header { get { return "Header"; } }
     }
 }

@@ -44,6 +44,7 @@ namespace MongoMS.CreateDatabase.Addin.ViewModel
 
         private void CloseThisTab()
         {
+            RaiseCloseRequest();
            
         }
     }
