@@ -32,31 +32,42 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
         private readonly string _name;
         private readonly string _cs;
 
-        ServerViewModel(string name, string cs)
+
+        public ServerViewModel(string name, string cs, IUnityContainer unity, IEventAggregator eventAggregator)
         {
             _name = name;
             _cs = cs;
-            InitChildren();
-        }
 
-        public ServerViewModel(string name, string connectionString, IUnityContainer unity,IEventAggregator eventAggregator)
-            : this(name, connectionString)
-        {
             _unity = unity;
+            InitChildren();
             _eventAggregator = eventAggregator;
             eventAggregator.GetEvent<PubSubEvent<DatabaseAction>>().Subscribe(OnDbListChanged);
         }
 
         private void OnDbListChanged(DatabaseAction databaseAction)
         {
+            MongoServer s = new MongoClient(_cs).GetServer();
             if (databaseAction.Action == ActionType.Create)
             {
-                MongoServer s = new MongoClient(_cs).GetServer();
+
                 if (databaseAction.Server == s)
                 {
-                      Children.Add(new DatabaseViewModel(s.GetDatabase(databaseAction.DatabaseName)));
+                    Children.Add(new DatabaseViewModel(s.GetDatabase(databaseAction.DatabaseName), _unity));
+                }
+                return;
+            }
+            if (databaseAction.Action == ActionType.Drop)
+            {
+                if (databaseAction.Server == s)
+                {
+                    var db = Children.SingleOrDefault(x => x.Name == databaseAction.DatabaseName);
+                    if (db != null)
+                    {
+                        Children.Remove(db);
+                    }
                 }
             }
+
         }
 
 
@@ -66,7 +77,7 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
             MongoServer s = new MongoClient(_cs).GetServer();
             foreach (var dbname in s.GetDatabaseNames())
             {
-                Children.Add(new DatabaseViewModel(s.GetDatabase(dbname)));
+                Children.Add(new DatabaseViewModel(s.GetDatabase(dbname), _unity));
             }
         }
 
@@ -89,23 +100,37 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
         {
             get
             {
-                return _unity.Resolve<ObservableCollection<IMenuCommand>>(ContextMenuLevel.Server.ToString());
+                var res = _unity.Resolve<ObservableCollection<IMenuCommand>>(ContextMenuLevel.Server.ToString());
+                return res;
             }
         }
     }
     public class DatabaseViewModel
     {
         private readonly MongoDatabase _db;
+        private readonly IUnityContainer _unity;
 
 
-        public DatabaseViewModel(MongoDatabase db)
+        public DatabaseViewModel(MongoDatabase db, IUnityContainer unity)
         {
             _db = db;
+            _unity = unity;
         }
 
         public string Name
         {
             get { return _db.Name; }
+        }
+        public object CmdParameter
+        {
+            get { return _db; }
+        }
+        public ObservableCollection<IMenuCommand> Menu
+        {
+            get
+            {
+                return _unity.Resolve<ObservableCollection<IMenuCommand>>(ContextMenuLevel.Database.ToString());
+            }
         }
     }
 }

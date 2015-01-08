@@ -10,16 +10,17 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Unity;
 using MongoDB.Driver;
 using MongoMS.Common;
+using MongoMS.Common.Events;
 
 
 namespace MongoMS.DropDatabase.Addin
 {
-    public class DropDatabaseAddin:IModule
+    public class DropDatabaseAddin : IModule
     {
         private readonly IUnityContainer _unity;
         private readonly IEventAggregator _eventAggregator;
 
-        public DropDatabaseAddin(IUnityContainer unity,IEventAggregator eventAggregator)
+        public DropDatabaseAddin(IUnityContainer unity, IEventAggregator eventAggregator)
         {
             _unity = unity;
             _eventAggregator = eventAggregator;
@@ -36,7 +37,12 @@ namespace MongoMS.DropDatabase.Addin
 
         private void ExecuteMethod(MongoDatabase obj)
         {
-           obj.Drop();
+            DatabaseAction dba = new DatabaseAction();
+            dba.Action = ActionType.Drop;
+            dba.DatabaseName = obj.Name;
+            dba.Server = obj.Server;
+            obj.Drop();
+            _eventAggregator.GetEvent<PubSubEvent<DatabaseAction>>().Publish(dba);
         }
     }
 }
