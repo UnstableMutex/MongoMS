@@ -38,7 +38,7 @@ namespace MongoMS.ServerExplorer.Addin
 
         void OnConnectRequest(RequestConnect rc)
         {
-           _viewModel.Servers.Add(new ServerViewModel(rc.Name, rc.ConnectionString,_unity));
+           _viewModel.Servers.Add(new ServerViewModel(rc.Name, rc.ConnectionString,_unity,_eventAggregator));
         }
     }
 }

@@ -28,6 +28,7 @@ namespace MongoMS.Common
            
         }
 
+
        public virtual void BeforeClose()
        {
           

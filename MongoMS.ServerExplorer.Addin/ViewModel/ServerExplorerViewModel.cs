@@ -9,6 +9,7 @@ using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Unity;
 using MongoDB.Driver;
 using MongoMS.Common;
+using MongoMS.Common.Events;
 
 namespace MongoMS.ServerExplorer.Addin.ViewModel
 {
@@ -27,6 +28,7 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
     public class ServerViewModel
     {
         private readonly IUnityContainer _unity;
+        private readonly IEventAggregator _eventAggregator;
         private readonly string _name;
         private readonly string _cs;
 
@@ -37,10 +39,24 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
             InitChildren();
         }
 
-        public ServerViewModel(string name, string connectionString, IUnityContainer unity)
+        public ServerViewModel(string name, string connectionString, IUnityContainer unity,IEventAggregator eventAggregator)
             : this(name, connectionString)
         {
             _unity = unity;
+            _eventAggregator = eventAggregator;
+            eventAggregator.GetEvent<PubSubEvent<DatabaseAction>>().Subscribe(OnDbListChanged);
+        }
+
+        private void OnDbListChanged(DatabaseAction databaseAction)
+        {
+            if (databaseAction.Action == ActionType.Create)
+            {
+                MongoServer s = new MongoClient(_cs).GetServer();
+                if (databaseAction.Server == s)
+                {
+                      Children.Add(new DatabaseViewModel(s.GetDatabase(databaseAction.DatabaseName)));
+                }
+            }
         }
 
 

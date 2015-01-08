@@ -38,7 +38,7 @@ namespace MongoMS.CreateDatabase.Addin
 
         private void ExecuteMethod(MongoServer mongoServer)
         {
-            _regionManager.AddToRegion(RegionNames.TabControlRegion, _unity.Resolve<MainView>());
+            _regionManager.AddToRegion(RegionNames.TabControlRegion, _unity.Resolve<MainView>(new ParameterOverride("server",mongoServer)));
 
         }
     }

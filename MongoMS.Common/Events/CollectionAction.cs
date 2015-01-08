@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MongoMS.Common.Events
 {
-    class CollectionDropped
+    class CollectionAction
     {
     }
 }
