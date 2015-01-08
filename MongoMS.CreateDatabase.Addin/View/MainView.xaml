@@ -6,7 +6,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
   <DockPanel >
-      <Button Command="{Binding OKCommand}" HorizontalAlignment="Right" Margin="4" MinWidth="75" DockPanel.Dock="Bottom">OK</Button>
+        <DockPanel.Resources>
+            <ResourceDictionary Source="pack://application:,,,/MongoMS.Resources;component/Resource.xaml"/>
+        </DockPanel.Resources>
+        <Button Command="{Binding OKCommand}" HorizontalAlignment="Right" Style="{StaticResource OKButton}" DockPanel.Dock="Bottom"/>
     <Grid>
         <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>

@@ -99,6 +99,10 @@
       <Project>{1C05DC85-FE00-4BC1-A3C6-0D924F937362}</Project>
       <Name>MongoMS.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MongoMS.Resources\MongoMS.Resources.csproj">
+      <Project>{08220863-4918-424a-8cb1-04a9cd535fb2}</Project>
+      <Name>MongoMS.Resources</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="View\MainView.xaml">

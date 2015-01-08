@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="MongoMS.CreateCollection.Addin.View.MainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+  <DockPanel>
+      <DockPanel.Resources>
+            <ResourceDictionary Source="pack://application:,,,/MongoMS.Resources;component/Resource.xaml"/>
+      </DockPanel.Resources>
+        <Button Command="{Binding OKCommand}" Style="{StaticResource OKButton}" DockPanel.Dock="Bottom" HorizontalAlignment="Right"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="63*"/>
+        </Grid.ColumnDefinitions>
+<Label> collname</Label>
+        <TextBox Text="{Binding CollectionName}" Grid.Column="1" />
+    </Grid></DockPanel>
+</UserControl>

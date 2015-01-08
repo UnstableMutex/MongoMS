@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoMS.AddDocument.Addin",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoMS.ServerExplorer.Addin", "MongoMS.ServerExplorer.Addin\MongoMS.ServerExplorer.Addin.csproj", "{CEE3D45D-D307-4A59-8BF1-E10DE587B2F7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoMS.Resources", "MongoMS.Resources\MongoMS.Resources.csproj", "{08220863-4918-424A-8CB1-04A9CD535FB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,10 @@ Global
 		{CEE3D45D-D307-4A59-8BF1-E10DE587B2F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEE3D45D-D307-4A59-8BF1-E10DE587B2F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEE3D45D-D307-4A59-8BF1-E10DE587B2F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08220863-4918-424A-8CB1-04A9CD535FB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08220863-4918-424A-8CB1-04A9CD535FB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08220863-4918-424A-8CB1-04A9CD535FB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08220863-4918-424A-8CB1-04A9CD535FB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

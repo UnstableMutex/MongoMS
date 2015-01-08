@@ -97,15 +97,29 @@
   <ItemGroup>
     <Compile Include="CreateCollectionAddin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="View\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MongoMS.Common\MongoMS.Common.csproj">
       <Project>{1c05dc85-fe00-4bc1-a3c6-0d924f937362}</Project>
       <Name>MongoMS.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MongoMS.Resources\MongoMS.Resources.csproj">
+      <Project>{08220863-4918-424a-8cb1-04a9cd535fb2}</Project>
+      <Name>MongoMS.Resources</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="View\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
