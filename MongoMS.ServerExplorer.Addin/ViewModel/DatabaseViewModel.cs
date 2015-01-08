@@ -12,17 +12,15 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
     public class DatabaseViewModel
     {
         private readonly MongoDatabase _db;
-        private readonly IUnityContainer _unity;
-        private readonly IEventAggregator _eventAggregator;
+     
 
-
-        public DatabaseViewModel(MongoDatabase db, IUnityContainer unity, IEventAggregator eventAggregator)
+        public DatabaseViewModel(MongoDatabase db)
         {
             _db = db;
-            _unity = unity;
-            _eventAggregator = eventAggregator;
+
+         var   eventAggregator = UnityHolder.Unity.Resolve<IEventAggregator>();
             InitChildren();
-            _eventAggregator.GetEvent<PubSubEvent<CollectionAction>>().Subscribe(CollectionListChanged);
+            eventAggregator.GetEvent<PubSubEvent<CollectionAction>>().Subscribe(CollectionListChanged);
 
         }
 
@@ -34,7 +32,7 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
 
                 if (collectionAction.Database == _db)
                 {
-                    Children.Add(new CollectionViewModel(_db.GetCollection(collectionAction.CollectionName), _unity, _eventAggregator));
+                    Children.Add(new CollectionViewModel(_db.GetCollection(collectionAction.CollectionName)));
                 }
                 return;
             }
@@ -64,7 +62,7 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
         {
             get
             {
-                return _unity.Resolve<ObservableCollection<IMenuCommand>>(ContextMenuLevel.Database.ToString());
+                return UnityHolder.Unity.Resolve<ObservableCollection<IMenuCommand>>(ContextMenuLevel.Database.ToString());
             }
         }
         private void InitChildren()
@@ -72,7 +70,8 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
             Children = new ObservableCollection<CollectionViewModel>();
             foreach (var dbname in _db.GetCollectionNames())
             {
-                Children.Add(new CollectionViewModel(_db.GetCollection(dbname), _unity,_eventAggregator));
+                Children.Add(new CollectionViewModel(_db.GetCollection(dbname)));
+
             }
         }
 

@@ -9,14 +9,12 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
     public class CollectionViewModel
     {
         private readonly MongoCollection _collection;
-        private readonly IUnityContainer _unity;
-        private readonly IEventAggregator _eventAggregator;
+       
 
-        public CollectionViewModel(MongoCollection collection, IUnityContainer unity, IEventAggregator eventAggregator)
+        public CollectionViewModel(MongoCollection collection)
         {
             _collection = collection;
-            _unity = unity;
-            _eventAggregator = eventAggregator;
+          
         }
 
         public object CmdParameter
@@ -28,7 +26,7 @@ namespace MongoMS.ServerExplorer.Addin.ViewModel
         {
             get
             {
-                var res= _unity.Resolve<ObservableCollection<IMenuCommand>>(ContextMenuLevel.Collection.ToString());
+                var res= UnityHolder.Unity.Resolve<ObservableCollection<IMenuCommand>>(ContextMenuLevel.Collection.ToString());
                 return res;
             }
         }

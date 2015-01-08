@@ -16,20 +16,20 @@ namespace MongoMS.ServerExplorer.Addin
 {
     public class ServerExplorerAddin:IModule
     {
-        private readonly IUnityContainer _unity;
+       
         private readonly IEventAggregator _eventAggregator;
         private readonly IRegionManager _regionManager;
         private ServerExplorerViewModel _viewModel;
         public void Initialize()
         {
-             _viewModel = _unity.Resolve<ServerExplorerViewModel>();
+             _viewModel = UnityHolder.Unity.Resolve<ServerExplorerViewModel>();
             var v = new ServerExplorerView(_viewModel);
             _regionManager.RegisterViewWithRegion(RegionNames.ServerExplorerRegion,()=>v);
         }
 
         public ServerExplorerAddin(IUnityContainer unity, IEventAggregator eventAggregator, IRegionManager regionManager)
         {
-            _unity = unity;
+            UnityHolder.Unity = unity;
             _eventAggregator = eventAggregator;
             _regionManager = regionManager;
             var e = _eventAggregator.GetEvent<PubSubEvent<RequestConnect>>();
@@ -38,7 +38,7 @@ namespace MongoMS.ServerExplorer.Addin
 
         void OnConnectRequest(RequestConnect rc)
         {
-           _viewModel.Servers.Add(new ServerViewModel(rc.Name, rc.ConnectionString,_unity,_eventAggregator));
+           _viewModel.Servers.Add(new ServerViewModel(rc.Name, rc.ConnectionString));
         }
     }
 }
