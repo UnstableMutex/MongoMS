@@ -32,6 +32,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoMS.Resources", "MongoM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoMS.CreateIndex.Addin", "MongoMS.CreateIndex.Addin\MongoMS.CreateIndex.Addin.csproj", "{E08C2D4E-7092-4B1F-9439-3C3ACB2039F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoMS.Find.Addin", "MongoMS.Find.Addin\MongoMS.Find.Addin.csproj", "{13BCF12F-04D5-40F7-8D5F-0753D522BE72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoMS.RenameFields.Addin", "MongoMS.RenameFields.Addin\MongoMS.RenameFields.Addin.csproj", "{6139AFF0-56B4-477E-8C81-A8358DC74012}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoMS.ImportFromMSSQL.Addin", "MongoMS.ImportFromMSSQL.Addin\MongoMS.ImportFromMSSQL.Addin.csproj", "{5863A951-71EB-4099-A9F7-65BA1FB0CDA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoMS.TTL.Addin", "MongoMS.TTL.Addin\MongoMS.TTL.Addin.csproj", "{34551F70-6DF4-4931-96D3-CBF2A86A7197}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoMS.MakeCollectionCapped.Addin", "MongoMS.MakeCollectionCapped.Addin\MongoMS.MakeCollectionCapped.Addin.csproj", "{534CA16C-17A4-4A5D-AB5E-EFFFD36304EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -82,6 +92,26 @@ Global
 		{E08C2D4E-7092-4B1F-9439-3C3ACB2039F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E08C2D4E-7092-4B1F-9439-3C3ACB2039F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E08C2D4E-7092-4B1F-9439-3C3ACB2039F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13BCF12F-04D5-40F7-8D5F-0753D522BE72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13BCF12F-04D5-40F7-8D5F-0753D522BE72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13BCF12F-04D5-40F7-8D5F-0753D522BE72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13BCF12F-04D5-40F7-8D5F-0753D522BE72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6139AFF0-56B4-477E-8C81-A8358DC74012}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6139AFF0-56B4-477E-8C81-A8358DC74012}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6139AFF0-56B4-477E-8C81-A8358DC74012}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6139AFF0-56B4-477E-8C81-A8358DC74012}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5863A951-71EB-4099-A9F7-65BA1FB0CDA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5863A951-71EB-4099-A9F7-65BA1FB0CDA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5863A951-71EB-4099-A9F7-65BA1FB0CDA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5863A951-71EB-4099-A9F7-65BA1FB0CDA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34551F70-6DF4-4931-96D3-CBF2A86A7197}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34551F70-6DF4-4931-96D3-CBF2A86A7197}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34551F70-6DF4-4931-96D3-CBF2A86A7197}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34551F70-6DF4-4931-96D3-CBF2A86A7197}.Release|Any CPU.Build.0 = Release|Any CPU
+		{534CA16C-17A4-4A5D-AB5E-EFFFD36304EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{534CA16C-17A4-4A5D-AB5E-EFFFD36304EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{534CA16C-17A4-4A5D-AB5E-EFFFD36304EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{534CA16C-17A4-4A5D-AB5E-EFFFD36304EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
