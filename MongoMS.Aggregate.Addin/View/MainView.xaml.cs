@@ -12,9 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MongoMS.RenameFields.Addin.ViewModel;
+using MongoMS.Aggregate.Addin.ViewModel;
 
-namespace MongoMS.RenameFields.Addin.View
+namespace MongoMS.Aggregate.Addin.View
 {
     /// <summary>
     /// Логика взаимодействия для MainView.xaml
@@ -26,5 +26,6 @@ namespace MongoMS.RenameFields.Addin.View
             InitializeComponent();
             DataContext = viewModel;
         }
+
     }
 }

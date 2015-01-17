@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MongoMS.AddDocument.Addin.ViewModel;
 
 namespace MongoMS.AddDocument.Addin.View
 {
@@ -20,9 +21,10 @@ namespace MongoMS.AddDocument.Addin.View
     /// </summary>
     public partial class AddDocumentView : UserControl
     {
-        public AddDocumentView()
+        public AddDocumentView(AddDocumentViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
         }
     }
 }

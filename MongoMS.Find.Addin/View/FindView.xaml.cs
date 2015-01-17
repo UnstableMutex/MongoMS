@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MongoMS.Find.Addin.ViewModel;
 
 namespace MongoMS.Find.Addin.View
 {
@@ -20,9 +21,10 @@ namespace MongoMS.Find.Addin.View
     /// </summary>
     public partial class FindView : UserControl
     {
-        public FindView()
+        public FindView(FindViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
         }
     }
 }

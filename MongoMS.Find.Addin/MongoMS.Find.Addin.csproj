@@ -99,6 +99,7 @@
   <ItemGroup>
     <Compile Include="FindAddin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\FindViewModel.cs" />
     <Compile Include="View\FindView.xaml.cs">
       <DependentUpon>FindView.xaml</DependentUpon>
     </Compile>
@@ -110,6 +111,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MongoMS.Common\MongoMS.Common.csproj">
+      <Project>{1C05DC85-FE00-4BC1-A3C6-0D924F937362}</Project>
+      <Name>MongoMS.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MongoMS.Resources\MongoMS.Resources.csproj">
       <Project>{08220863-4918-424a-8cb1-04a9cd535fb2}</Project>
       <Name>MongoMS.Resources</Name>
