@@ -11,34 +11,22 @@ using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using MongoDB.Driver;
 using MongoMS.Common;
+using MongoMS.Common.AddinBase;
 using MongoMS.CreateIndex.Addin.View;
 
 namespace MongoMS.CreateIndex.Addin
 {
-    public class CreateIndexAddin:IModule
+    public class CreateIndexAddin:CollectionCommandAddinBase<MainView>
     {
-        private readonly IUnityContainer _unity;
-        private readonly IRegionManager _regionManager;
-
-        public CreateIndexAddin(IUnityContainer unity, IRegionManager regionManager)
+    
+        public CreateIndexAddin(IUnityContainer unity, IRegionManager regionManager):base(unity,regionManager)
         {
-            _unity = unity;
-            _regionManager = regionManager;
+          
         }
 
-        public void Initialize()
+        protected override string GetMenuItemName()
         {
-            var servermenu = _unity.Resolve<ObservableCollection<IMenuCommand>>(ContextMenuLevel.Collection.ToString());
-            MenuCommand mc = _unity.Resolve<MenuCommand>();
-            mc.Name = "Indexes";
-            mc.Command = new DelegateCommand<MongoCollection>(ExecuteMethod);
-            servermenu.Add(mc);
-        }
-
-        private void ExecuteMethod(MongoCollection obj)
-        {
-            _regionManager.AddToRegion(RegionNames.TabControlRegion, _unity.Resolve<MainView>(new ParameterOverride("collection", obj)));
-
+            return "CreateIndex";
         }
     }
 }

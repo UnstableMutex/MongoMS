@@ -12,9 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MongoMS.TTL.Addin.ViewModel;
+using MongoMS.MapReduce.Addin.ViewModel;
 
-namespace MongoMS.TTL.Addin.View
+namespace MongoMS.MapReduce.Addin.View
 {
     /// <summary>
     /// Логика взаимодействия для MainView.xaml

@@ -10,32 +10,24 @@ using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using MongoDB.Driver;
 using MongoMS.Common;
+using MongoMS.Common.AddinBase;
+using MongoMS.TTL.Addin.View;
 
 namespace MongoMS.TTL.Addin
 {
-    public class TTLAddin:IModule
+    public class TTLAddin:CollectionCommandAddinBase<MainView>
     {
-        private readonly IRegionManager _regionManager;
-        private readonly IUnityContainer _unity;
-
-        public TTLAddin(IRegionManager regionManager, IUnityContainer unity)
+        protected override string GetMenuItemName()
         {
-            _regionManager = regionManager;
-            _unity = unity;
+            return "TTL...";
         }
 
-        public void Initialize()
-        {
-            var servermenu = _unity.Resolve<ObservableCollection<IMenuCommand>>(ContextMenuLevel.Collection.ToString());
-            var mc = _unity.Resolve<MenuCommand>();
-            mc.Name = "TTL...";
-            mc.Command = new DelegateCommand<MongoCollection>(ExecuteMethod);
-            servermenu.Add(mc);
-        }
 
-        private void ExecuteMethod(MongoCollection obj)
+        public TTLAddin(IRegionManager regionManager, IUnityContainer unity):base(unity,regionManager)
         {
             
         }
+
+       
     }
 }

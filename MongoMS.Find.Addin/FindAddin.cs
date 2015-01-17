@@ -10,33 +10,19 @@ using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using MongoDB.Driver;
 using MongoMS.Common;
+using MongoMS.Common.AddinBase;
 using MongoMS.Find.Addin.View;
 
 namespace MongoMS.Find.Addin
 {
-    public class FindAddin:IModule
+    public class FindAddin:CollectionCommandAddinBase<FindView>
     {
-        private readonly IRegionManager _regionManager;
-        private readonly IUnityContainer _unity;
-
-        public FindAddin(IRegionManager regionManager, IUnityContainer unity)
+        protected override string GetMenuItemName()
         {
-            _regionManager = regionManager;
-            _unity = unity;
+            return "Find...";
         }
 
-        public void Initialize()
-        {
-            var servermenu = _unity.Resolve<ObservableCollection<IMenuCommand>>(ContextMenuLevel.Collection.ToString());
-            var mc = _unity.Resolve<MenuCommand>();
-            mc.Name = "Find...";
-            mc.Command = new DelegateCommand<MongoCollection>(ExecuteMethod);
-            servermenu.Add(mc);
-        }
+        public FindAddin(IRegionManager regionManager, IUnityContainer unity):base(unity,regionManager){}
 
-        private void ExecuteMethod(MongoCollection obj)
-        {
-            _regionManager.AddToRegion(RegionNames.TabControlRegion, _unity.Resolve<FindView>(new ParameterOverride("collection", obj)));
-        }
     }
 }
