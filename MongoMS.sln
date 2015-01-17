@@ -46,6 +46,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoMS.Aggregate.Addin", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoMS.MapReduce.Addin", "MongoMS.MapReduce.Addin\MongoMS.MapReduce.Addin.csproj", "{8FB3679C-688D-448F-8E8A-8E653D9F7E85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoMS.ExportToMSSQL.Addin", "MongoMS.ExportToMSSQL.Addin\MongoMS.ExportToMSSQL.Addin.csproj", "{A4C0DFE0-4BE3-4EB0-8574-238DA1ABD3FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -124,6 +126,10 @@ Global
 		{8FB3679C-688D-448F-8E8A-8E653D9F7E85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FB3679C-688D-448F-8E8A-8E653D9F7E85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FB3679C-688D-448F-8E8A-8E653D9F7E85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4C0DFE0-4BE3-4EB0-8574-238DA1ABD3FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4C0DFE0-4BE3-4EB0-8574-238DA1ABD3FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4C0DFE0-4BE3-4EB0-8574-238DA1ABD3FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4C0DFE0-4BE3-4EB0-8574-238DA1ABD3FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
