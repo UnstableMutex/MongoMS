@@ -1,5 +1,4 @@
 using System.Collections.ObjectModel;
-using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Unity;
 using MongoDB.Driver;
 using MongoMS.Common;

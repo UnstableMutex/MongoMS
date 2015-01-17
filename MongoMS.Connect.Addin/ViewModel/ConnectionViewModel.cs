@@ -1,6 +1,4 @@
-﻿using System.Reflection.Emit;
-using Microsoft.Practices.Prism.Mvvm;
-using Microsoft.Practices.Prism.PubSubEvents;
+﻿using Microsoft.Practices.Prism.PubSubEvents;
 using MongoDB.Driver;
 using MongoMS.Common;
 using MongoMS.Common.Events;

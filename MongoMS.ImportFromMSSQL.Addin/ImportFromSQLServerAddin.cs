@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Practices.Prism.Modularity;
+﻿using Microsoft.Practices.Prism.Regions;
+using Microsoft.Practices.Unity;
+using MongoMS.Common.AddinBase;
+using MongoMS.ImportFromMSSQL.Addin.View;
 
 namespace MongoMS.ImportFromMSSQL.Addin
 {
-    public class ImportFromSQLServerAddin:IModule
+    public class ImportFromSQLServerAddin:DatabaseCommandAddinBase<MainView>
     {
-        public void Initialize()
+        public ImportFromSQLServerAddin(IRegionManager regionManager, IUnityContainer unity) : base(regionManager, unity)
         {
-            
+        }
+
+        protected override string GetMenuItemName()
+        {
+            return "ImportfromSqlserver";
         }
     }
 }

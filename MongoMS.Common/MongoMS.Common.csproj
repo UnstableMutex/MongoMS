@@ -99,6 +99,7 @@
     <Compile Include="ActionType.cs" />
     <Compile Include="AddinBase\CollectionCommandAddinBase.cs" />
     <Compile Include="AddinBase\DatabaseCommandAddinBase.cs" />
+    <Compile Include="AddinBase\ServerCommandAddinBase.cs" />
     <Compile Include="ContextMenuLevel.cs" />
     <Compile Include="Events\CollectionAction.cs" />
     <Compile Include="Events\DatabaseAction.cs" />
