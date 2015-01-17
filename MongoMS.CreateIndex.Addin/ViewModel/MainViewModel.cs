@@ -11,5 +11,16 @@ namespace MongoMS.CreateIndex.Addin.ViewModel
         {
             _collection = collection;
         }
+
+        public override string Header
+        {
+            get { return "New Index"; }
+        }
+
+        protected override void OK()
+        {
+            base.OK();
+            RaiseCloseRequest();
+        }
     }
 }

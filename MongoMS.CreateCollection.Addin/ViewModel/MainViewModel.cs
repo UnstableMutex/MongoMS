@@ -27,5 +27,10 @@ namespace MongoMS.CreateCollection.Addin.ViewModel
             _eventAggregator.GetEvent<PubSubEvent<CollectionAction>>().Publish(a);
             RaiseCloseRequest();
         }
+
+        public override string Header
+        {
+            get { return "New Collection"; }
+        }
     }
 }

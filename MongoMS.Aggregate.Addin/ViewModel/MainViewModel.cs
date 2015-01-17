@@ -8,5 +8,10 @@ namespace MongoMS.Aggregate.Addin.ViewModel
         {
             
         }
+
+        public override string Header
+        {
+            get { return "Aggregate"; }
+        }
     }
 }

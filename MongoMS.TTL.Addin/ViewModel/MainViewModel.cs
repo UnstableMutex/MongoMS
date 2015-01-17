@@ -16,5 +16,11 @@ namespace MongoMS.TTL.Addin.ViewModel
         {
             get { return "TTL"; }
         }
+
+        protected override void OK()
+        {
+            base.OK();
+            RaiseCloseRequest();
+        }
     }
 }

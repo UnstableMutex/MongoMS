@@ -42,5 +42,10 @@ namespace MongoMS.CreateDatabase.Addin.ViewModel
             RaiseCloseRequest();
            
         }
+
+        public override string Header
+        {
+            get { return "New DB"; }
+        }
     }
 }
