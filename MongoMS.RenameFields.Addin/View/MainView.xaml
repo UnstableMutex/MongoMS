@@ -5,7 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+    <DockPanel>
+        <Button DockPanel.Dock="Bottom" HorizontalAlignment="Right" Margin="10" Command="{Binding OKCommand}">OK</Button>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="103*" />
+                <ColumnDefinition Width="197*" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Старое имя" />
+            <Label Content="Новое имя" Grid.Row="1" />
+            <ComboBox ItemsSource="{Binding FieldNames}" Text="{Binding OldName}" IsEditable="True" Grid.Column="1" />
+            <ComboBox ItemsSource="{Binding FieldNames}" IsEditable="True" Grid.Column="1" Grid.Row="1"
+                      Text="{Binding NewName}" />
+
+        </Grid>
+    </DockPanel>
+
 </UserControl>
