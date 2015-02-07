@@ -3,13 +3,12 @@ using MongoMS.Common;
 
 namespace MongoMS.TTL.Addin.ViewModel
 {
-    public class MainViewModel:OKViewModel
+    public class MainViewModel:CollectionOKViewModel
     {
-        private readonly MongoCollection _collection;
-
-        public MainViewModel(MongoCollection collection)
+      
+        public MainViewModel(MongoCollection collection):base(collection)
         {
-            _collection = collection;
+           
         }
 
         public override string Header

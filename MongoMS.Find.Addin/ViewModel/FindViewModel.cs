@@ -3,18 +3,18 @@ using MongoMS.Common;
 
 namespace MongoMS.Find.Addin.ViewModel
 {
-    public class FindViewModel:OKViewModel
+    public class FindViewModel:CollectionOKViewModel
     {
-        private readonly MongoCollection _collection;
-
-        public FindViewModel(MongoCollection collection)
+       
+        public FindViewModel(MongoCollection collection):base(collection)
         {
-            _collection = collection;
+            
         }
 
         public override string Header
         {
             get { return "Find"; }
         }
+
     }
 }

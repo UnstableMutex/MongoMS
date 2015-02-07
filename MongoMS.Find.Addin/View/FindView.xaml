@@ -40,7 +40,7 @@
                 <Label DockPanel.Dock="Top">sort</Label>
                 <DockPanel Margin="0,1" DockPanel.Dock="Top">
                     <Button Command="{Binding AddFieldToSortCommand}" Content="{StaticResource PlusImage}" DockPanel.Dock="Right"/>
-                    <ComboBox Text="{Binding SelectedFieldToSort}" ItemsSource="{Binding FieldNames}" IsEditable="True" />
+                    <ComboBox ItemsSource="{Binding FieldNames}" IsEditable="True" />
                 </DockPanel>
                 <DockPanel>
 
@@ -85,14 +85,12 @@
                     </ListBox>
                 </DockPanel>
             </DockPanel>
-            <DockPanel Grid.Column="2" Margin="{StaticResource dpm}">
+            <DockPanel Grid.Row="0" Grid.Column="2" Margin="{StaticResource dpm}">
                 <Label DockPanel.Dock="Top">fields</Label>
                 <DockPanel Margin="0,1" DockPanel.Dock="Top">
-                    <Button Command="{Binding FieldsToView.SelectCommand}" Content="{StaticResource PlusImage}" DockPanel.Dock="Right">
-                      
-                    </Button>
-                    <ComboBox DataContext="{Binding FieldsToView}" Text="{Binding SourceSelected}" IsEditable="True"
-                              ItemsSource="{Binding Source}" />
+                    <Button Command="{Binding FieldsToView.SelectCommand}" Content="{StaticResource PlusImage}" DockPanel.Dock="Right"/>
+                    <ComboBox IsEditable="True"
+                              ItemsSource="{Binding FieldNames}" />
                 </DockPanel>
                 <ListBox DataContext="{Binding FieldsToView}" SelectedItem="{Binding SelectedSelected}"
                          ItemsSource="{Binding SelectedItems}">

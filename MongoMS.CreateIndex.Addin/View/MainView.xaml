@@ -22,8 +22,8 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Label>DBName</Label>
-            <TextBox Text="{Binding DatabaseName}" Grid.Column="1"/>
+            <Label>Field</Label>
+            <ComboBox ItemsSource="{Binding FieldNames}" IsEditable="True" Grid.Column="1"/>
 
         </Grid>
     </DockPanel>
