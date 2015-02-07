@@ -4,11 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-<<<<<<< HEAD
-    <ProjectGuid>{CA9345C8-F6AE-4120-AD60-0F36E4E06F83}</ProjectGuid>
-=======
     <ProjectGuid>{55827A14-6B1C-47C5-9ECC-9D96CD5EF05A}</ProjectGuid>
->>>>>>> origin/prismver
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MongoMS</RootNamespace>
@@ -39,61 +35,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-<<<<<<< HEAD
-  <PropertyGroup>
-    <ApplicationIcon>database_1.ico</ApplicationIcon>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="GalaSoft.MvvmLight, Version=5.0.2.32240, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MvvmLightLibs.5.0.2.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
-    </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.0.2.32242, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MvvmLightLibs.5.0.2.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
-    </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.0.2.32241, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\MvvmLightLibs.5.0.2.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Bson">
-      <HintPath>..\packages\mongocsharpdriver.1.9.2\lib\net35\MongoDB.Bson.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Driver">
-      <HintPath>..\packages\mongocsharpdriver.1.9.2\lib\net35\MongoDB.Driver.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Npgsql.2.2.3\lib\net45\Mono.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="MVVMTemplateSelection">
-      <HintPath>..\packages\MVVMTemplateSelection.0.4.7\lib\MVVMTemplateSelection.dll</HintPath>
-    </Reference>
-    <Reference Include="Npgsql, Version=2.2.3.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Npgsql.2.2.3\lib\net45\Npgsql.dll</HintPath>
-    </Reference>
-    <Reference Include="Oracle.ManagedDataAccess">
-      <HintPath>..\packages\odp.net.managed.121.1.2\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit">
-      <HintPath>..\packages\WPFToolkit.DataVisualization.3.5.50211.1\lib\System.Windows.Controls.DataVisualization.Toolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Controls.Input.Toolkit">
-      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Input.Toolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Controls.Layout.Toolkit">
-      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmLightLibs.5.0.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
-=======
   <ItemGroup>
     <Reference Include="Microsoft.Practices.Prism.Composition, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -148,7 +89,6 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
->>>>>>> origin/prismver
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -160,230 +100,16 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-<<<<<<< HEAD
-    <Reference Include="WpfControls_Extended, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WPFControls.Extended.1.0.0\lib\WpfControls_Extended.dll</HintPath>
-    </Reference>
-    <Reference Include="WPFToolkit">
-      <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\WPFToolkit.dll</HintPath>
-    </Reference>
-=======
->>>>>>> origin/prismver
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-<<<<<<< HEAD
-    <Compile Include="BsonDocumentValidator.cs" />
-    <Compile Include="CommandLevelAttribute.cs" />
-    <Compile Include="DirectionToScaleConverter.cs" />
-    <Compile Include="Extention\Ext.cs" />
-    <Compile Include="HeaderAttribute.cs" />
-    <Compile Include="HeaderConverter.cs" />
-    <Compile Include="ISaveable.cs" />
-    <Compile Include="Level.cs" />
-    <Compile Include="ObservableDictionary.cs" />
-    <Compile Include="OpenTabCommand.cs" />
-    <Compile Include="PairedObservableCollections.cs" />
-    <Compile Include="QRToStringConverter.cs" />
-    <Compile Include="SelectedEventArgs.cs" />
-    <Compile Include="TreeViewTemplateSelector.cs" />
-    <Compile Include="UnSelectedEventArgs.cs" />
-    <Compile Include="ViewModel\AddCollectionViewModel.cs" />
-    <Compile Include="ViewModel\AddDatabaseViewModel.cs" />
-    <Compile Include="ViewModel\AddDocumentViewModel.cs" />
-    <Compile Include="ViewModel\AddIndexViewModel.cs" />
-    <Compile Include="ViewModel\AggregateViewModel.cs" />
-    <Compile Include="ViewModel\Aggregate\AggregateStepViewModel.cs" />
-    <Compile Include="ViewModel\CollectionStatsViewModel.cs" />
-    <Compile Include="ViewModel\ConnectionsViewModel.cs" />
-    <Compile Include="ViewModel\CopyCollectionViewModel.cs" />
-    <Compile Include="ViewModel\DatabaseDetailsViewModel.cs" />
-    <Compile Include="ViewModel\DatabaseExplorerCollectionViewModel.cs" />
-    <Compile Include="ViewModel\DatabaseExplorerDatabaseViewModel.cs" />
-    <Compile Include="ViewModel\DatabaseExplorerServerViewModel.cs" />
-    <Compile Include="ViewModel\DatabaseExplorerTreeItemBase.cs" />
-    <Compile Include="ViewModel\DatabaseExplorerViewModel.cs" />
-    <Compile Include="ViewModel\EditRecordViewModel.cs" />
-    <Compile Include="ViewModel\ExportMSSQLViewModel.cs" />
-    <Compile Include="ViewModel\CollectionVMB.cs" />
-    <Compile Include="ViewModel\FindViewModel.cs" />
-    <Compile Include="ViewModel\ItemType.cs" />
-    <Compile Include="ViewModel\JoinSQLTablesViewModel.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\MakeCollectionCappedViewModel.cs" />
-    <Compile Include="ViewModel\MakeTTLViewModel.cs" />
-    <Compile Include="ViewModel\OKVMB.cs" />
-    <Compile Include="ViewModel\RenameFieldsViewModel.cs" />
-    <Compile Include="ViewModel\ServerOverViewViewModel.cs" />
-    <Compile Include="ViewModel\SettingsViewModel.cs" />
-    <Compile Include="View\AddCollectionView.xaml.cs">
-      <DependentUpon>AddCollectionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\AddDatabaseView.xaml.cs">
-      <DependentUpon>AddDatabaseView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\AddDocumentView.xaml.cs">
-      <DependentUpon>AddDocumentView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\AddIndexView.xaml.cs">
-      <DependentUpon>AddIndexView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\AggregateView.xaml.cs">
-      <DependentUpon>AggregateView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\bsonConverter.cs" />
-    <Compile Include="View\CollectionStatsView.xaml.cs">
-      <DependentUpon>CollectionStatsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ConnectionsView.xaml.cs">
-      <DependentUpon>ConnectionsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\CopyCollectionView.xaml.cs">
-      <DependentUpon>CopyCollectionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\CustomDataGrid.cs" />
-    <Compile Include="View\CustomTabControl.cs" />
-    <Compile Include="View\DatabaseDetailsView.xaml.cs">
-      <DependentUpon>DatabaseDetailsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\DatabaseExplorerView.xaml.cs">
-      <DependentUpon>DatabaseExplorerView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\EditRecordView.xaml.cs">
-      <DependentUpon>EditRecordView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ExportMSSQLView.xaml.cs">
-      <DependentUpon>ExportMSSQLView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\FindView.xaml.cs">
-      <DependentUpon>FindView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\JoinSQLTablesView.xaml.cs">
-      <DependentUpon>JoinSQLTablesView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\MakeCollectionCappedView.xaml.cs">
-      <DependentUpon>MakeCollectionCappedView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\MakeTTLView.xaml.cs">
-      <DependentUpon>MakeTTLView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\RenameFieldsView.xaml.cs">
-      <DependentUpon>RenameFieldsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ServerOverViewView.xaml.cs">
-      <DependentUpon>ServerOverViewView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\SettingsView.xaml.cs">
-      <DependentUpon>SettingsView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WindowPosition.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>WindowPosition.settings</DependentUpon>
-    </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-=======
->>>>>>> origin/prismver
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-<<<<<<< HEAD
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="View\AddCollectionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\AddDatabaseView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\AddDocumentView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\AddIndexView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\AggregateView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\CollectionStatsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ConnectionsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\CopyCollectionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\DatabaseDetailsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\DatabaseExplorerView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\EditRecordView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ExportMSSQLView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\FindView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\JoinSQLTablesView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\MainView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\MakeCollectionCappedView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\MakeTTLView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\RenameFieldsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ServerOverViewView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\SettingsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-=======
     <Compile Include="AppBootstrapper.cs" />
     <Compile Include="CloseTabbedViewAction.cs" />
     <Compile Include="Controls\LastTabSelectionTabControl.cs" />
@@ -391,7 +117,6 @@
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
->>>>>>> origin/prismver
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -417,48 +142,11 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-<<<<<<< HEAD
-    <None Include="WindowPosition.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>WindowPosition.Designer.cs</LastGenOutput>
-    </None>
-=======
->>>>>>> origin/prismver
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <ProjectReference Include="..\MongoMS.Common\MongoMS.Common.csproj">
-      <Project>{400ca46e-243f-4098-bc46-b6b50dfdf6f8}</Project>
-      <Name>MongoMS.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MVVMLight.Extras\MVVMLight.Extras.csproj">
-      <Project>{b14da0b4-3a24-428a-b013-72dbff3e66eb}</Project>
-      <Name>MVVMLight.Extras</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="database_1.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\table.png" />
-    <Resource Include="View\database.png" />
-    <Resource Include="View\plus.png" />
-    <Content Include="View\server.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\arrow_up.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Images\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\arrow_down.png" />
-=======
     <Page Include="Dictionary1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -473,7 +161,6 @@
       <Project>{1C05DC85-FE00-4BC1-A3C6-0D924F937362}</Project>
       <Name>MongoMS.Common</Name>
     </ProjectReference>
->>>>>>> origin/prismver
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
