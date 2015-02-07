@@ -4,8 +4,11 @@
 # User-specific files
 *.suo
 *.user
+<<<<<<< HEAD
 *.userosscache
 Thumbs.db
+=======
+>>>>>>> origin/prismver
 *.sln.docstates
 
 # Build results
@@ -182,4 +185,8 @@ UpgradeLog*.htm
 *.bim_*.settings
 
 # Microsoft Fakes
+<<<<<<< HEAD
 FakesAssemblies/
+=======
+FakesAssemblies/
+>>>>>>> origin/prismver
