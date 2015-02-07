@@ -1,0 +1,40 @@
+﻿<Window x:Class="MongoMS.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://www.codeplex.com/CompositeWPF"
+        xmlns:controls="clr-namespace:MongoMS.Controls"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:mongoMs="clr-namespace:MongoMS"
+        Title="Shell" Height="300" Width="300">
+    <DockPanel>
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar prism:RegionManager.RegionName="TopMenuRegion">
+            </ToolBar>
+        </ToolBarTray>
+        <DockPanel>
+            <ContentControl DockPanel.Dock="Left" prism:RegionManager.RegionName="ServerExplorerRegion"></ContentControl>
+            <controls:LastTabSelectionTabControl prism:RegionManager.RegionName="TabControlRegion"  DockPanel.Dock="Right">
+                <TabControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <mongoMs:HeaderTextBlock Margin="3"  VerticalAlignment="Center"
+                                       />
+                            <Button BorderThickness="0" VerticalAlignment="Center">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <mongoMs:CloseTabbedViewAction />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Canvas Width="14" Height="14">
+                                    <Rectangle RadiusX="3" RadiusY="3" Fill="Red" Width="14" Height="14" Stroke="Red" />
+                                    <Line X1="2" Y1="2" X2="12" Y2="12" Stroke="White" StrokeThickness="1" />
+                                    <Line X1="12" Y1="2" X2="2" Y2="12" Stroke="White" StrokeThickness="1" />
+                                </Canvas>
+                            </Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </TabControl.ItemTemplate>
+            </controls:LastTabSelectionTabControl>
+        </DockPanel>
+    </DockPanel>
+</Window>
