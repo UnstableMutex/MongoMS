@@ -22,6 +22,10 @@
             <ColumnDefinition Width="63*"/>
         </Grid.ColumnDefinitions>
 <Label> collname</Label>
-        <TextBox Text="{Binding CollectionName}" Grid.Column="1" />
+            <TextBox Text="{Binding CollectionName, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding OKCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
     </Grid></DockPanel>
 </UserControl>
