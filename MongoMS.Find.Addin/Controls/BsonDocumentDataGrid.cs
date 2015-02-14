@@ -44,7 +44,7 @@ namespace MongoMS.Find.Addin.Controls
             foreach (var fn in fieldNames)
             {
                 var column = new DataGridTextColumn();
-                column.Binding = new Binding("[\""+fn+"\"]");
+                column.Binding = new Binding("["+fn+"]");
                 column.Header = "asdads";
                 Columns.Add(column);
             }
