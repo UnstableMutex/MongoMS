@@ -107,7 +107,7 @@
         </Grid>
         <TabControl Grid.Row="1">
             <TabItem Name="ti" Header="table">
-                <controls:BsonDocumentDataGrid AutoGenerateColumns="True" IsTabStop="False"  x:Name="cdg"
+                <controls:BsonDocumentDataGrid AutoGenerateColumns="False" x:Name="cdg"
                                      ItemsSource="{Binding QueryResults}">
                     <DataGrid.ContextMenu>
                         <ContextMenu>
