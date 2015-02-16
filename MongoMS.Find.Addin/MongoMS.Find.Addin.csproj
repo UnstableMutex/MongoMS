@@ -98,6 +98,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\BsonDocumentDataGrid.cs" />
+    <Compile Include="Controls\dgConverter.cs" />
+    <Compile Include="Controls\ext.cs" />
     <Compile Include="FindAddin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\FindViewModel.cs" />
