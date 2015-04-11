@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.PubSubEvents;
+using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using MongoDB.Driver;
 using MongoMS.Common;
 using MongoMS.Common.Events;
+using MongoMS.GridFS.Addin.View;
 
 
 namespace MongoMS.GridFS.Addin
@@ -19,11 +21,13 @@ namespace MongoMS.GridFS.Addin
     {
          private readonly IUnityContainer _unity;
         private readonly IEventAggregator _eventAggregator;
+        private readonly IRegionManager _regionManager;
 
-        public GridFSAddin(IUnityContainer unity, IEventAggregator eventAggregator)
+        public GridFSAddin(IUnityContainer unity, IEventAggregator eventAggregator,IRegionManager regionManager)
         {
             _unity = unity;
             _eventAggregator = eventAggregator;
+            _regionManager = regionManager;
         }
 
         public void Initialize()
@@ -37,7 +41,7 @@ namespace MongoMS.GridFS.Addin
 
         private void ExecuteMethod(MongoDatabase obj)
         {
-           
+            _regionManager.AddToRegion(RegionNames.TabControlRegion, _unity.Resolve<GridFSView>(new ParameterOverride("database", obj)));
         }
     }
 }
