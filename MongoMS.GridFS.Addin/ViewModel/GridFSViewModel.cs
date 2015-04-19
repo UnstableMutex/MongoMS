@@ -77,7 +77,7 @@ namespace MongoMS.GridFS.Addin.ViewModel
             var file = a.GetData(DataFormats.FileDrop);
             var fn = file as string[];
             var uploadresult = _database.GridFS.Upload(fn[0]);
-
+            Files.Add(fn[0]);
         }
         public ObservableCollection<string> Files { get; private set; }
     }
