@@ -33,7 +33,6 @@ namespace MongoMS.GridFS.Addin.ViewModel
             Files = new ObservableCollection<GridFSFileViewModel>();
             foreach (MongoGridFSFileInfo fileInfo in fa)
             {
-                
                 Files.Add(new GridFSFileViewModel(fileInfo));
             }
 
@@ -72,14 +71,20 @@ namespace MongoMS.GridFS.Addin.ViewModel
                 dropInfo.Effects = DragDropEffects.None;
             }
         }
-
+        public string Key { get; set; }
+        string FileName { get; set; }
         void IDropTarget.Drop(IDropInfo dropInfo)
         {
             var a = dropInfo.Data as IDataObject;
             var file = a.GetData(DataFormats.FileDrop);
             var fn = file as string[];
-            var uploadresult = _database.GridFS.Upload(fn[0]);
-         
+            var f = fn[0];
+            Key = FileName = f;
+        }
+
+        void Upload()
+        {
+            var uploadresult = _database.GridFS.Upload(FileName,Key);
             Files.Add(new GridFSFileViewModel(uploadresult));
         }
         public ObservableCollection<GridFSFileViewModel> Files { get; private set; }
