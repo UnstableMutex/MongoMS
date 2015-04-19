@@ -37,10 +37,8 @@
                Command="{Binding AddCommand}"
                 HorizontalAlignment="Right" Padding="8,2" Margin="5" Grid.Row="1" Grid.Column="1">Добавить</Button>
         <Grid  Grid.Row="1" >
-            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Files}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding}"/>
-                </DataGrid.Columns>
+            <DataGrid ItemsSource="{Binding Files}">
+               
             </DataGrid>
         </Grid>
     </Grid>

@@ -12,6 +12,7 @@ using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Unity;
 using MongoDB.Driver;
+using MongoDB.Driver.GridFS;
 using MongoMS.Common;
 
 namespace MongoMS.GridFS.Addin.ViewModel
@@ -29,10 +30,11 @@ namespace MongoMS.GridFS.Addin.ViewModel
             _eventAggregator = eventAggregator;
             AddCommand = new DelegateCommand(Add, CanAdd);
             var fa = _database.GridFS.FindAll();
-            Files = new ObservableCollection<string>();
-            foreach (var fileInfo in fa)
+            Files = new ObservableCollection<GridFSFileViewModel>();
+            foreach (MongoGridFSFileInfo fileInfo in fa)
             {
-                Files.Add(fileInfo.Name);
+                
+                Files.Add(new GridFSFileViewModel(fileInfo));
             }
 
         }
@@ -77,8 +79,21 @@ namespace MongoMS.GridFS.Addin.ViewModel
             var file = a.GetData(DataFormats.FileDrop);
             var fn = file as string[];
             var uploadresult = _database.GridFS.Upload(fn[0]);
-            Files.Add(fn[0]);
+         
+            Files.Add(new GridFSFileViewModel(uploadresult));
         }
-        public ObservableCollection<string> Files { get; private set; }
+        public ObservableCollection<GridFSFileViewModel> Files { get; private set; }
+    }
+
+    public class GridFSFileViewModel
+    {
+        private readonly MongoGridFSFileInfo _fileInfo;
+
+        public GridFSFileViewModel(MongoGridFSFileInfo fileInfo)
+        {
+            _fileInfo = fileInfo;
+        }
+        public string Name { get { return _fileInfo.Name; } }
+        public DateTime CreateDate { get { return _fileInfo.UploadDate; } }
     }
 }
