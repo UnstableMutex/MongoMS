@@ -23,6 +23,9 @@ namespace MongoMS.GridFS.Addin.ViewModel
         private readonly MongoDatabase _database;
         private readonly IUnityContainer _unity;
         private readonly IEventAggregator _eventAggregator;
+        private string _key;
+        private GridFSFileViewModel _selectedFile;
+
         public GridFSViewModel(MongoDatabase database, IUnityContainer unity, IEventAggregator eventAggregator)
         {
             _database = database;
@@ -38,16 +41,13 @@ namespace MongoMS.GridFS.Addin.ViewModel
 
         }
 
-        public void AddFile(string fn)
-        {
-            _database.GridFS.Upload(fn);
-        }
+
 
         public ICommand AddCommand { get; private set; }
 
         private void Add()
         {
-
+            Upload();
         }
 
         bool CanAdd()
@@ -71,7 +71,13 @@ namespace MongoMS.GridFS.Addin.ViewModel
                 dropInfo.Effects = DragDropEffects.None;
             }
         }
-        public string Key { get; set; }
+
+        public string Key
+        {
+            get { return _key; }
+            set { SetProperty(ref _key, value); }
+        }
+
         string FileName { get; set; }
         void IDropTarget.Drop(IDropInfo dropInfo)
         {
@@ -84,10 +90,17 @@ namespace MongoMS.GridFS.Addin.ViewModel
 
         void Upload()
         {
-            var uploadresult = _database.GridFS.Upload(FileName,Key);
+            var uploadresult = _database.GridFS.Upload(FileName, Key);
             Files.Add(new GridFSFileViewModel(uploadresult));
+            Key = FileName = null;
         }
         public ObservableCollection<GridFSFileViewModel> Files { get; private set; }
+
+        public GridFSFileViewModel SelectedFile
+        {
+            get { return _selectedFile; }
+            set { SetProperty(ref _selectedFile, value); }
+        }
     }
 
     public class GridFSFileViewModel
