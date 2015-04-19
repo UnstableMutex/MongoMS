@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MongoMS.GridFS.Addin.ViewModel;
 
 namespace MongoMS.GridFS.Addin.View
 {
@@ -20,9 +21,10 @@ namespace MongoMS.GridFS.Addin.View
     /// </summary>
     public partial class GridFSView : UserControl
     {
-        public GridFSView()
+        public GridFSView(GridFSViewModel vm)
         {
             InitializeComponent();
+            DataContext = vm;
         }
     }
 }
